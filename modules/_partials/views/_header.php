@@ -46,7 +46,7 @@
   <div class="d-flex justify-content-between shadow-sm p-2">
       <div>
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-rounded btn-dark-green"><i class="fas fa-file-excel pr-2"></i>.XLSX</button>
+            <button type="button" onClick="fnExcelReport()" class="btn btn-rounded btn-dark-green"><i class="fas fa-file-excel pr-2"></i>.XLSX</button>
             <button type="button" class="btn btn-rounded btn-red"><i class="far fa-file-pdf pr-2"></i>.PDF</button>
             <button type="button" class="btn btn-rounded btn-indigo"><i class="fas fa-print pr-2"></i>.PRINT</button>
           </div>
