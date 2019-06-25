@@ -42,74 +42,89 @@
       </div>
   </nav>
   <!--/.Navbar-->
-  
-  <!-- Title -->
-  <div class="d-flex flex-row-reverse shadow-sm p-2">
-      <div class="form-row">
-          <div class="col-auto col-xs-12">
-              <select class="form-control custom-select-sm" id="selected-tahun" title="Tahun">
-                  <?php
-                    $tahun = date('Y') + 1;
-                    $month = date('m');
-                    for ($i = 2016; $i <= $tahun; $i++) { ?>
-                      <option value="<?php echo $i ?>" <?php if (date('Y') == $i) {
-                                                            echo "selected ";
-                                                        } ?>><?php echo $i ?></option>
-                  <?php } ?>
-              </select>
+
+  <div class="d-flex justify-content-between shadow-sm p-2">
+      <div>
+          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-rounded btn-dark-green"><i class="fas fa-file-excel pr-2"></i>.XLSX</button>
+            <button type="button" class="btn btn-rounded btn-red"><i class="far fa-file-pdf pr-2"></i>.PDF</button>
+            <button type="button" class="btn btn-rounded btn-indigo"><i class="fas fa-print pr-2"></i>.PRINT</button>
           </div>
-          <div class="col-auto col-xs-12">
-              <select id="selected-bulan" class="form-control custom-select-sm"" title=" Bulan">
-                  <option <?php if ($month == '01') {
-                                echo "selected ";
-                            } ?>value="01"> January</option>
-                  <option <?php if ($month == '02') {
-                                echo "selected ";
-                            } ?>value="02"> Febuary</option>
-                  <option <?php if ($month == '03') {
-                                echo "selected ";
-                            } ?>value="03"> March</option>
-                  <option <?php if ($month == '04') {
-                                echo "selected ";
-                            } ?>value="04"> April</option>
-                  <option <?php if ($month == '05') {
-                                echo "selected ";
-                            } ?>value="05"> May</option>
-                  <option <?php if ($month == '06') {
-                                echo "selected ";
-                            } ?>value="06"> June</option>
-                  <option <?php if ($month == '07') {
-                                echo "selected ";
-                            } ?>value="07"> July</option>
-                  <option <?php if ($month == '08') {
-                                echo "selected ";
-                            } ?>value="08"> August</option>
-                  <option <?php if ($month == '09') {
-                                echo "selected ";
-                            } ?>value="09"> September</option>
-                  <option <?php if ($month == '10') {
-                                echo "selected ";
-                            } ?>value="10"> October</option>
-                  <option <?php if ($month == '11') {
-                                echo "selected ";
-                            } ?>value="11"> November</option>
-                  <option <?php if ($month == '12') {
-                                echo "selected ";
-                            } ?>value="12"> December</option>
-              </select>
-          </div>
-          <div class="col-auto col-xs-12">
-              <select id="selected-group-region" class="form-control custom-select-sm" title=" Group Region">
-                  <option value="" selected>-- SELECT GROUP REGION --</option>
-                  <option value="1">West</option>
-                  <option value="2">Central</option>
-                  <option value="3">East</option>
-              </select>
-          </div>
-          <div class="col-auto col-xs-12">
-              <select id="selected-region" class="form-control custom-select-sm" title=" Region" data-style="btn-sm btn-default" data-width="100px">
-                  <option value="">-- SELECT REGION --</option>
-              </select>
+      </div>
+      <div class="">
+          <div class="form-row">
+              <div class="col-auto col-xs-12">
+                  <select id="selected-modul" class="form-control custom-select-sm" title=" Group Region">
+                      <option value="LBP">LBP</option>
+                      <option value="SAPKASBANK">KASBANK</option>
+                      <option value="SAPINV">INVENTORY</option>
+                  </select>
+              </div>
+              <div class="col-auto col-xs-12">
+                  <select class="form-control custom-select-sm" id="selected-tahun" title="Tahun">
+                      <?php
+                        $tahun = date('Y') + 1;
+                        $month = date('m');
+                        for ($i = 2016; $i <= $tahun; $i++) { ?>
+                          <option value="<?php echo $i ?>" <?php if (date('Y') == $i) {
+                                                                echo "selected ";
+                                                            } ?>><?php echo $i ?></option>
+                      <?php } ?>
+                  </select>
+              </div>
+              <div class="col-auto col-xs-12">
+                  <select id="selected-bulan" class="form-control custom-select-sm"" title=" Bulan">
+                      <option <?php if ($month == '01') {
+                                    echo "selected ";
+                                } ?>value="01"> January</option>
+                      <option <?php if ($month == '02') {
+                                    echo "selected ";
+                                } ?>value="02"> Febuary</option>
+                      <option <?php if ($month == '03') {
+                                    echo "selected ";
+                                } ?>value="03"> March</option>
+                      <option <?php if ($month == '04') {
+                                    echo "selected ";
+                                } ?>value="04"> April</option>
+                      <option <?php if ($month == '05') {
+                                    echo "selected ";
+                                } ?>value="05"> May</option>
+                      <option <?php if ($month == '06') {
+                                    echo "selected ";
+                                } ?>value="06"> June</option>
+                      <option <?php if ($month == '07') {
+                                    echo "selected ";
+                                } ?>value="07"> July</option>
+                      <option <?php if ($month == '08') {
+                                    echo "selected ";
+                                } ?>value="08"> August</option>
+                      <option <?php if ($month == '09') {
+                                    echo "selected ";
+                                } ?>value="09"> September</option>
+                      <option <?php if ($month == '10') {
+                                    echo "selected ";
+                                } ?>value="10"> October</option>
+                      <option <?php if ($month == '11') {
+                                    echo "selected ";
+                                } ?>value="11"> November</option>
+                      <option <?php if ($month == '12') {
+                                    echo "selected ";
+                                } ?>value="12"> December</option>
+                  </select>
+              </div>
+              <div class="col-auto col-xs-12">
+                  <select id="selected-group-region" class="form-control custom-select-sm" title=" Group Region">
+                      <option value="" selected>-- SELECT GROUP REGION --</option>
+                      <option value="1">West</option>
+                      <option value="2">Central</option>
+                      <option value="3">East</option>
+                  </select>
+              </div>
+              <div class="col-auto col-xs-12">
+                  <select id="selected-region" class="form-control custom-select-sm" title=" Region" data-style="btn-sm btn-default" data-width="100px">
+                      <option value="">-- SELECT REGION --</option>
+                  </select>
+              </div>
           </div>
       </div>
   </div>
