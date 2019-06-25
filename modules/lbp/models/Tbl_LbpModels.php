@@ -14,10 +14,11 @@ class Tbl_LbpModels extends CI_Model
     }
     private function _get_datatables_query()
     {
-        $bln                  = $this->input->post('bulan');
-        $thn                  = $this->input->post('tahun');
-        $grup_region          = $this->input->post('grup_region');
-        $region               = $this->input->post('region');
+        $bln         = $this->input->post('bulan');
+        $thn         = $this->input->post('tahun');
+        $grup_region = $this->input->post('grup_region');
+        $region      = $this->input->post('region');
+        $modul       = $this->input->post('modul');
         //? show antoher field 
             $select_table_coloumn = "MAX(odate.prevdate) prevdate, MAX(odate.next_date)as next, d.KD_DEPO as kode_site,
             CASE
@@ -73,7 +74,7 @@ class Tbl_LbpModels extends CI_Model
                     year(a.module_date) as tahun,
                     day(a.module_date) as tgl,
                     module_flag as STAT
-                FROM rmodule_monitor a WHERE month(a.module_date) = '$bln' AND a.module_name = 'LBP' AND year(a.module_date) = '$thn'
+                FROM rmodule_monitor a WHERE month(a.module_date) = '$bln' AND a.module_name = '$modul' AND year(a.module_date) = '$thn'
                 ) AS a", "on a.kode_site = d.KD_DEPO", "LEFT")
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.status", "A")
@@ -89,7 +90,7 @@ class Tbl_LbpModels extends CI_Model
                         year(a.module_date) as tahun,
                         day(a.module_date) as tgl,
                         module_flag as STAT
-                    FROM rmodule_monitor a WHERE month(a.module_date) = '$bln' AND a.module_name = 'LBP' AND year(a.module_date) = '$thn'
+                    FROM rmodule_monitor a WHERE month(a.module_date) = '$bln' AND a.module_name = '$modul' AND year(a.module_date) = '$thn'
                     ) AS a", "on a.kode_site = d.KD_DEPO", "LEFT")
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.KD_GREG", "$grup_region")
@@ -105,7 +106,7 @@ class Tbl_LbpModels extends CI_Model
                         year(a.module_date) as tahun,
                         day(a.module_date) as tgl,
                         module_flag as STAT
-                    FROM rmodule_monitor a WHERE month(a.module_date) = '$bln' AND a.module_name = 'LBP' AND year(a.module_date) = '$thn'
+                    FROM rmodule_monitor a WHERE month(a.module_date) = '$bln' AND a.module_name = '$modul' AND year(a.module_date) = '$thn'
                     ) AS a", "on a.kode_site = d.KD_DEPO", "LEFT")
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.KD_REG", "$region")

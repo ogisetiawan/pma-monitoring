@@ -65,6 +65,7 @@ $month = date('m');
                     data.tahun = $("#selected-tahun").val();
                     data.bulan = $("#selected-bulan").val();
                     data.grup_region = $("#selected-group-region").val();
+                    data.modul = $("#selected-modul").val();
                     data.region = $("#selected-region").val();
                 }
             },
@@ -101,6 +102,9 @@ $month = date('m');
             let reg = $('select[id="selected-region"] option:selected').text();
             const d = new Date(bln);
             $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " Zone " + greg + " Region " + reg);
+            tables.ajax.reload();
+        });
+        $('#selected-modul').on('change', function() {
             tables.ajax.reload();
         });
 
