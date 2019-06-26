@@ -31,7 +31,7 @@ $month = date('m');
                         $date_calendar = 28;
                     }
                     for ($i = 1; $i <= $date_calendar; $i++) {
-                        echo "<th w data-col-width='100'>" . $i . "</th>";
+                        echo "<th class='date_selector'>" . $i . "</th>";
                     }
                     ?>
                 </tr>
@@ -114,8 +114,9 @@ $month = date('m');
             //? InitComplete
             "initComplete": function(settings) {
                 //? setTooltip
-                for (i = 7; i <= 36; ++i) {
+                for (i = 1; i <= 30; ++i) {
                     $('#table-monitoring thead th:nth-child('+i+')').each(function() {
+                    // $('#table-monitoring thead .date_selector:nth-of-type('+i+')').each(function() {
                         var $td = $(this);
                         //? postAjax
                         $.post("<?= site_url('get_status_dots/') ?>" + i, function(data) {

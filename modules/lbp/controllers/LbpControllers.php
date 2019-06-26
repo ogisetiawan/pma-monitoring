@@ -108,6 +108,26 @@ class LbpControllers extends MY_Controller
 		}
 	}
 	
+	public function get_status_dots()
+	{
+		$this->load->database();
+		$tgl = $this->uri->segment('2');
+		$query = $this->db->query("SELECT module_id, module_date,
+		(SELECT count(*)
+		FROM rmodule_monitor
+		WHERE module_name = 'LBP' 
+		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m %d')) as data_upload, 
+		(select COUNT(*) from rdepo where status_system = 'SCYLLA' AND status ='A')-(SELECT count(*)
+		FROM rmodule_monitor
+		WHERE module_name = 'LBP' 
+		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m %d')) as sisa_data_upload
+		FROM rmodule_monitor
+		WHERE module_name = 'LBP' 
+		AND DATE_FORMAT(module_date, '%Y %m') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m')
+		")->row('data_upload');
+		echo json_encode($query);
+	}
+
 	public function noted()
 	{
 		for ($i = 1; $i <= 3; $i++) {

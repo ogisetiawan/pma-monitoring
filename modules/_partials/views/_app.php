@@ -27,6 +27,7 @@
             text-align: center;
             padding: 12px 8px 12px 8px;
             vertical-align: middle;
+            cursor: help;
         }
 
         table tbody tr td {
