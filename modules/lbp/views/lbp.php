@@ -41,10 +41,6 @@ $month = date('m');
         </table>
     </div>
 </main>
-<!--  -->
-<button type="button" class="btn btn-primary" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
-    Tooltip with HTML
-</button>
 <!-- Main JS -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
@@ -71,9 +67,6 @@ $month = date('m');
         ];
         const d = new Date();
         $('.title').html("Monitoring LBP " + monthNames[d.getMonth()]);
-        //! InitTooltip
-        // $('[data-toggle="tooltip"]').attr('title', 'NEW_TITLE').tooltip();
-        $('[data-toggle="tooltip"]').tooltip();
         //! Init Datatables
         let tables = $('#table-monitoring').DataTable({
             //? Order
@@ -124,11 +117,15 @@ $month = date('m');
                 for (i = 7; i <= 36; ++i) {
                     $('#table-monitoring thead th:nth-child('+i+')').each(function() {
                         var $td = $(this);
-                        $.post("<?= site_url('') ?>"+month, myData);
                         //? postAjax
-                        $td.attr('data-toggle', "tooltip");
-                        $td.attr('data-html', "true");
-                        $td.attr('title', $td.text());
+                        $.post("<?= site_url('get_status_dots/') ?>" + i, function(data) {
+                            let datas = $.parseJSON(data);
+                            console.log(data);
+                            $td.attr('data-toggle', "tooltip");
+                            $td.attr('title', "DONE : "+datas+" of 296");
+                            $td.attr('data-html', "true");
+                            $('[data-toggle="tooltip"]').tooltip();
+                        });
                     });
                 };
 
