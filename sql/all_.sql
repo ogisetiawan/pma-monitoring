@@ -59,3 +59,4 @@ SELECT max(odate.prevdate) prevdate, max(odate.next_date)as next, d.KD_DEPO as k
         AND d.status_system = 'SCYLLA'
 		  GROUP BY d.KD_DEPO, a.bulan, a.tahun
         limit 0, 10
+        
