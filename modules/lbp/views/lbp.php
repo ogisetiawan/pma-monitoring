@@ -3,9 +3,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $tahun = date('Y') + 1;
 $month = date('m');
 ?>
-<main class="container-fluid mt-4 pt-2 mb-5 pb-3">
+
+<section class="text-center mt-4">
+    <h4 class="font-medium font-weight-light text-uppercase">
+        <span class="bq-reds pl-1">
+            Monitoring LBP - June 2019
+        </span>
+    </h4>
+</section>
+<main class="container-fluid mt-2 pt-2 mb-5 pb-3">
     <div class="table-responsive">
-        <table class="table nowrap compact table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring">
+        <table class="table display table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring">
             <thead class="custom-ogi shadow-light text-uppercase">
                 <tr>
                     <th>No</th>
@@ -33,14 +41,18 @@ $month = date('m');
         </table>
     </div>
 </main>
-
+<!--  -->
+<button type="button" class="btn btn-primary" data-toggle="tooltip" data-html="true" title="<em>Tooltip</em> <u>with</u> <b>HTML</b>">
+    Tooltip with HTML
+</button>
 <!-- Main JS -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- Plugin -->
 <script type="text/javascript" src="<?= base_url('assets/js/addons/datatables.min.js') ?>"></script>
-<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.19/datatables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -59,20 +71,30 @@ $month = date('m');
         ];
         const d = new Date();
         $('.title').html("Monitoring LBP " + monthNames[d.getMonth()]);
-
+        //! InitTooltip
+        // $('[data-toggle="tooltip"]').attr('title', 'NEW_TITLE').tooltip();
+        $('[data-toggle="tooltip"]').tooltip();
         //! Init Datatables
         let tables = $('#table-monitoring').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "deferRender": true,
-            "autoWidth": false,
+            //? Order
             "order": [],
-            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-            // "dom": "Bfrtip",
-            "buttons": [
-                'copyHtml5',
-                'excelHtml5',
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
             ],
+            //? ProcessingLoader
+            "language": {
+                // "processing": '<div class="spinner-grow fast" role="status"><span class="sr-only">Loading...</span></div>',
+            },
+            //? FixedColumn
+            // "scrollY": "300px",
+            // "scrollX": "300px",
+            // "scrollCollapse": true,
+            // "paging": false,
+            // "fixedColumns": {
+            //     leftColumns: 2,
+            // },
+            //? ServerSide
             "ajax": {
                 "url": "<?= site_url('table_monitoring') ?>",
                 "type": "POST",
@@ -84,16 +106,40 @@ $month = date('m');
                     data.region = $("#selected-region").val();
                 }
             },
+            "processing": true,
+            "serverSide": true,
+            "deferRender": true,
+            "autoWidth": false,
+            //? custom
             "columnDefs": [{
                 "targets": '_all',
                 "orderable": false,
 
                 // "targets": '_all',
                 // "searchable": false
-            }, ]
+            }, ],
+            //? InitComplete
+            "initComplete": function(settings) {
+                //? setTooltip
+                for (i = 7; i <= 36; ++i) {
+                    $('#table-monitoring thead th:nth-child('+i+')').each(function() {
+                        var $td = $(this);
+                        $.post("<?= site_url('') ?>"+month, myData);
+                        //? postAjax
+                        $td.attr('data-toggle', "tooltip");
+                        $td.attr('data-html', "true");
+                        $td.attr('title', $td.text());
+                    });
+                };
+
+                /* Apply the tooltips */
+                $('#table-monitoring thead th[title]').tooltip({
+                    "container": 'body'
+                });
+            }
         });
 
-        //! SelectedDatatables
+        //! SelectedEventDropdown
         $('#selected-tahun').on('change', function() {
             tables.ajax.reload();
         });
@@ -122,8 +168,7 @@ $month = date('m');
         $('#selected-modul').on('change', function() {
             tables.ajax.reload();
         });
-
-        //! OnChangesGrupRegion
+        //! SelectedEventDropdown getData
         $('#selected-group-region').on('change', function() {
             select_gregion = $("#selected-group-region").val();
             $.ajax({
@@ -136,9 +181,8 @@ $month = date('m');
                 }
             });
         });
-
     });
-
+    // ! EventReport
     function fnExcelReport() {
         var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
         var textRange;

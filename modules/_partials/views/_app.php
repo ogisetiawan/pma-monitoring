@@ -12,16 +12,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Plugins -->
     <link href="<?= base_url('assets/css/addons/datatables.min.css') ?>" rel="stylesheet">
-    <link href="<?= base_url('assets/css/addons/datatables-select.min.css') ?>" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
     <!-- Style CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
     <style>
-        .teal.accent-3 {
-            background-color: #cb240f !important;
-        }
-
         table thead tr th {
             font-size: 11px;
             font-weight: 500;
@@ -51,6 +46,28 @@
             font-size: 43px;
         }
 
+        h1.cs-header-title {
+            margin-top: auto;
+            font-weight: 600;
+            font-size: 40px;
+        }
+
+
+        table.table-hover tbody tr:hover {
+            cursor: pointer;
+            background: none;
+            transition: .3s;
+            box-shadow: 0px -15px 15px -15px rgba(0, 0, 0, .2) inset, 0px 15px 15px -15px rgba(0, 0, 0, .2) inset;
+        }
+
+        .custom-ogi {
+            box-shadow: 0px -15px 15px -15px rgba(0, 0, 0, .2) inset, 0px 15px 15px -15px rgba(0, 0, 0, .2) inset;
+        }
+
+        .bq-reds {
+            border-left: 3.5px solid #d92713 !important;
+        }
+
         .red-pma {
             padding: 0px 0;
             background: #cc0000;
@@ -61,21 +78,10 @@
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc0000', endColorstr='#f05454', GradientType=1);
         }
 
-        h1.cs-header-title {
-            margin-top: auto;
-            font-weight: 600;
-            font-size: 40px;
+        .teal.accent-3 {
+            background-color: #cb240f !important;
         }
 
-        .custom-ogi {
-            box-shadow: 0px -15px 15px -15px rgba(0, 0, 0, .2) inset, 0px 15px 15px -15px rgba(0, 0, 0, .2) inset;
-        }
-
-        table.table-hover tbody tr:hover {
-            cursor: pointer;
-            background:none;
-            transition: .3s;
-            box-shadow: 0px -15px 15px -15px rgba(0, 0, 0, .2) inset, 0px 15px 15px -15px rgba(0, 0, 0, .2) inset;
-        }
+        /* Loader */
     </style>
 </head>
