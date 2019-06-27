@@ -47,7 +47,7 @@ class MonitoringControllers extends MY_Controller
 
 	public function index()
 	{
-		$this->meta_data($meta, 'PMA Monitoring - LBP');
+		$this->meta_data($meta, 'Dashboard Monitoring - Pinus Merah Abadi');
 		$this->template('monitoring', $meta);
 	}
 
