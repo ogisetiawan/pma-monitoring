@@ -12,7 +12,7 @@
           </button>
 
           <!-- Links -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size:13px">
+          <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size:13px">
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item active">
                       <a class="nav-link waves-effect waves-light" href="#">
@@ -28,16 +28,16 @@
                       <a class="nav-link waves-effect waves-light" href="#">
                           <i class="fas fa-box"></i> INVENTORY</a>
                   </li>
-                  <!-- <li class="nav-item dropdown">
+                  <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="fas fa-user"></i> USER </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
                             <a class="dropdown-item waves-effect waves-light" href="#">My account</a>
                             <a class="dropdown-item waves-effect waves-light" href="#">Log out</a>
                         </div>
-                    </li> -->
+                    </li>
               </ul>
-          </div>
+          </div> -->
       </div>
   </nav>
   <!--/.Navbar-->
@@ -60,19 +60,11 @@
                   </select>
               </div>
               <div class="col-auto col-xs-12">
-                  <select class="form-control custom-select-sm" id="selected-tahun" title="Tahun">
-                      <?php
-                        $tahun = date('Y') + 1;
-                        $month = date('m');
-                        for ($i = 2016; $i <= $tahun; $i++) { ?>
-                          <option value="<?php echo $i ?>" <?php if (date('Y') == $i) {
-                                                                echo "selected ";
-                                                            } ?>><?php echo $i ?></option>
-                      <?php } ?>
-                  </select>
-              </div>
-              <div class="col-auto col-xs-12">
                   <select id="selected-bulan" class="form-control custom-select-sm"" title=" Bulan">
+                      <?php
+                          $tahun = date('Y') + 1;
+                          $month = date('m');
+                      ?>
                       <option <?php if ($month == '01') {
                                     echo "selected ";
                                 } ?>value="01"> January</option>
@@ -112,6 +104,17 @@
                   </select>
               </div>
               <div class="col-auto col-xs-12">
+                  <select class="form-control custom-select-sm" id="selected-tahun" title="Tahun">
+                      <?php
+                        for ($i = 2016; $i <= $tahun; $i++) { ?>
+                          <option value="<?php echo $i ?>" <?php if (date('Y') == $i) {
+                                                                echo "selected ";
+                                                            } ?>><?php echo $i ?></option>
+                      <?php } ?>
+                  </select>
+              </div>
+              
+              <div class="col-auto col-xs-12">
                   <select id="selected-group-region" class="form-control custom-select-sm" title=" Group Region">
                       <option value="" selected>-- SELECT GROUP REGION --</option>
                       <option value="1">West</option>
@@ -127,3 +130,9 @@
           </div>
       </div>
   </div>
+  <section class="text-center mt-4">
+    <h4 class="font-medium font-weight-light text-uppercase">
+        <span class="bq-reds pl-1 title">
+        </span>
+    </h4>
+</section>

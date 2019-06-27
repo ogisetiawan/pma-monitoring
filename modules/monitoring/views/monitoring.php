@@ -3,13 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $tahun = date('Y') + 1;
 $month = date('m');
 ?>
-<section class="text-center mt-4">
-    <h4 class="font-medium font-weight-light text-uppercase">
-        <span class="bq-reds pl-1">
-            Monitoring LBP - June 2019
-        </span>
-    </h4>
-</section>
 <!-- Loader SpinKit -->
 <div id="overlay" class="overlay">
     <div class="spinner show">
@@ -20,7 +13,6 @@ $month = date('m');
     <div class="rect5"></div>
     </div>
 </div>
-
 <main class="container-fluid mt-2 pt-2 mb-5 pb-3">
     <div class="table-responsive">
         <table class="table display table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring">
@@ -79,37 +71,106 @@ $month = date('m');
             "July", "August", "September", "October", "November", "December"
         ];
         const d = new Date();
-        $('.title').html("Monitoring LBP " + monthNames[d.getMonth()]);
+        const y = new Date().getFullYear();
+        $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] +" "+ y) ;
 
         //! SelectedEventDropdown ChangeTitle
         $('#selected-modul').on('change', function() {
+            let modules = $(this).val();
+            let bln     = $('#selected-bulan').val();
+            const d     = new Date(bln);
+            let year    = $('#selected-tahun').val();
+            
+            // 
+            if(modules == 'LBP'){
+                modules = 'LBP';
+            }else if(modules == 'SAPKASBANK'){
+                modules = 'KASBANK';
+            }else{
+                modules = 'INVENTORY';
+            }
+            
+            $('.title').html("Monitoring "+ modules +" "+ monthNames[d.getMonth()] +" "+ year) ;
             $('#table-monitoring').DataTable().clear().destroy();
             initTable();
-            // tables.ajax.reload();
-        });
-        $('#selected-tahun').on('change', function() {
-            $('#table-monitoring').ajax.reload();
         });
         $('#selected-bulan').on('change', function() {
-            let bln = $(this).val();
-            const d = new Date(bln);
-            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()]);
-            tables.ajax.reload();
+            let modules = $('#selected-modul').val();
+            let bln     = $(this).val();
+            const d     = new Date(bln);
+            let year    = $('#selected-tahun').val();
+            
+            // 
+            if(modules == 'LBP'){
+                modules = 'LBP';
+            }else if(modules == 'SAPKASBANK'){
+                modules = 'KASBANK';
+            }else{
+                modules = 'INVENTORY';
+            }
+            
+            $('.title').html("Monitoring "+ modules +" "+ monthNames[d.getMonth()] +" "+ year) ;
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable();
         });
+
+        $('#selected-tahun').on('change', function() {
+            let modules = $('#selected-modul').val();
+            let bln     = $('#selected-bulan').val();
+            const d     = new Date(bln);
+            let year    = $(this).val();
+            
+            // 
+            if(modules == 'LBP'){
+                modules = 'LBP';
+            }else if(modules == 'SAPKASBANK'){
+                modules = 'KASBANK';
+            }else{
+                modules = 'INVENTORY';
+            }
+            
+            $('.title').html("Monitoring "+ modules +" "+ monthNames[d.getMonth()] +" "+ year) ;
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable();
+        });
+
         $('#selected-group-region').on('change', function() {
-            let bln = $('#selected-bulan').val();
-            let greg = $('select[id="selected-group-region"] option:selected').text();
-            const d = new Date(bln);
-            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " Zone " + greg);
-            tables.ajax.reload();
+            let modules = $('#selected-modul').val();
+            let bln     = $('#selected-bulan').val();
+            const d     = new Date(bln);
+            let year    = $('#selected-tahun').val();
+            
+            // 
+            if(modules == 'LBP'){
+                modules = 'LBP';
+            }else if(modules == 'SAPKASBANK'){
+                modules = 'KASBANK';
+            }else{
+                modules = 'INVENTORY';
+            }
+            
+            $('.title').html("Monitoring "+ modules +" "+ monthNames[d.getMonth()] +" "+ year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable();
         });
         $('#selected-region').on('change', function() {
-            let bln = $('#selected-bulan').val();
-            let greg = $('select[id="selected-group-region"] option:selected').text();
-            let reg = $('select[id="selected-region"] option:selected').text();
-            const d = new Date(bln);
-            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " Zone " + greg + " Region " + reg);
-            tables.ajax.reload();
+            let modules = $('#selected-modul').val();
+            let bln     = $('#selected-bulan').val();
+            const d     = new Date(bln);
+            let year    = $('#selected-tahun').val();
+            
+            // 
+            if(modules == 'LBP'){
+                modules = 'LBP';
+            }else if(modules == 'SAPKASBANK'){
+                modules = 'KASBANK';
+            }else{
+                modules = 'INVENTORY';
+            }
+            
+            $('.title').html("Monitoring "+ modules +" "+ monthNames[d.getMonth()] +" "+ year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable();
         });
 
         //! SelectedEventDropdown getData
