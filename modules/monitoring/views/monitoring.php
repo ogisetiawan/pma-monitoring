@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $tahun = date('Y') + 1;
 $month = date('m');
 ?>
-
 <section class="text-center mt-4">
     <h4 class="font-medium font-weight-light text-uppercase">
         <span class="bq-reds pl-1">
@@ -11,6 +10,17 @@ $month = date('m');
         </span>
     </h4>
 </section>
+<!-- Loader SpinKit -->
+<div id="overlay" class="overlay">
+    <div class="spinner show">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    </div>
+</div>
+
 <main class="container-fluid mt-2 pt-2 mb-5 pb-3">
     <div class="table-responsive">
         <table class="table display table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring">
@@ -118,6 +128,7 @@ $month = date('m');
     });
     //! Init Datatables
     function initTable() {
+        $("#overlay").show();
         return $('#table-monitoring').DataTable({
             //? Order
             "order": [],
@@ -128,6 +139,7 @@ $month = date('m');
             //? ProcessingLoader
             "language": {
                 // "processing": '<div class="spinner-grow fast" role="status"><span class="sr-only">Loading...</span></div>',
+                "processing": false,
             },
             //? FixedColumn
             // "scrollY": "300px",
@@ -164,6 +176,7 @@ $month = date('m');
             }, ],
             //? InitComplete
             "initComplete": function(settings) {
+                $("#overlay").hide();
                 var modules = $("#selected-modul").val();
                 //? setTooltip
                 let i = 1;
@@ -172,8 +185,8 @@ $month = date('m');
                         var $td = $(this);
                         //? postAjax
                         $.post("<?= site_url('get_status_dots/') ?>" + i + "/" + modules, function(data) {
-                            let datas  = $.parseJSON(data);
-                            var done   = datas[0].data_done;
+                            let datas = $.parseJSON(data);
+                            var done = datas[0].data_done;
                             var undone = datas[0].data_undone;
                             $('[data-toggle="tooltip"]').tooltip('dispose')
                             $td.attr('data-toggle', "tooltip");
