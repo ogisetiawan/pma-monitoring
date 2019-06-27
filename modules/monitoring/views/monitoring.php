@@ -30,8 +30,9 @@ $month = date('m');
                     } else {
                         $date_calendar = 28;
                     }
-                    for ($i = 1; $i <= $date_calendar; $i++) {
-                        echo '<th data-placement="top" data-html="true" class="date_selector"><b style="color: #212529; text-decoration-style: dotted;text-decoration-color: #d3250f;text-decoration-line: underline;">' . $i . '</b></th>';
+
+                    for ($i = 1; $i <= 30; $i++) {
+                        echo '<th data-placement="top" data-html="true" class="date_selector"><b style="color: #d3250f; text-decoration-style: dotted;text-decoration-color: #d3250f;text-decoration-line: underline;">' . $i . '</b></th>';
                     }
                     ?>
                 </tr>
@@ -62,13 +63,62 @@ $month = date('m');
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
 <script>
     $(document).ready(function() {
+        // ! callFunct DatatablesRetive
+        initTable();
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
         const d = new Date();
         $('.title').html("Monitoring LBP " + monthNames[d.getMonth()]);
-        //! Init Datatables
-        let tables = $('#table-monitoring').DataTable({
+
+        //! SelectedEventDropdown ChangeTitle
+        $('#selected-modul').on('change', function() {
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable();
+            // tables.ajax.reload();
+        });
+        $('#selected-tahun').on('change', function() {
+            $('#table-monitoring').ajax.reload();
+        });
+        $('#selected-bulan').on('change', function() {
+            let bln = $(this).val();
+            const d = new Date(bln);
+            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()]);
+            tables.ajax.reload();
+        });
+        $('#selected-group-region').on('change', function() {
+            let bln = $('#selected-bulan').val();
+            let greg = $('select[id="selected-group-region"] option:selected').text();
+            const d = new Date(bln);
+            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " Zone " + greg);
+            tables.ajax.reload();
+        });
+        $('#selected-region').on('change', function() {
+            let bln = $('#selected-bulan').val();
+            let greg = $('select[id="selected-group-region"] option:selected').text();
+            let reg = $('select[id="selected-region"] option:selected').text();
+            const d = new Date(bln);
+            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " Zone " + greg + " Region " + reg);
+            tables.ajax.reload();
+        });
+
+        //! SelectedEventDropdown getData
+        $('#selected-group-region').on('change', function() {
+            select_gregion = $("#selected-group-region").val();
+            $.ajax({
+                url: "<?= site_url('search_region') ?>",
+                type: 'POST',
+                data: "grup_region=" + select_gregion,
+                success: function(data) {
+                    $("#selected-region").html(data);
+                    console.log(data);
+                }
+            });
+        });
+    });
+    //! Init Datatables
+    function initTable() {
+        return $('#table-monitoring').DataTable({
             //? Order
             "order": [],
             "lengthMenu": [
@@ -103,7 +153,8 @@ $month = date('m');
             "serverSide": true,
             "deferRender": true,
             "autoWidth": false,
-            //? custom
+            "retrieve": true,
+            //? customColoumn
             "columnDefs": [{
                 "targets": '_all',
                 "orderable": false,
@@ -113,19 +164,21 @@ $month = date('m');
             }, ],
             //? InitComplete
             "initComplete": function(settings) {
+                var modules = $("#selected-modul").val();
                 //? setTooltip
-                let i;
-                for (i = 1; i <= 30; ++i) {
-                    $( "#table-monitoring thead .date_selector" ).eq(i-1).each(function() {
+                let i = 1;
+                for (i; i <= 30; ++i) {
+                    $("#table-monitoring thead .date_selector").eq(i - 1).each(function() {
                         var $td = $(this);
                         //? postAjax
-                        $.post("<?= site_url('get_status_dots/') ?>" + i, function(data) {
-                            let datas = $.parseJSON(data);
-                            console.log(data);
-                            $('[data-toggle="tooltip"]').tooltip();
+                        $.post("<?= site_url('get_status_dots/') ?>" + i + "/" + modules, function(data) {
+                            let datas  = $.parseJSON(data);
+                            var done   = datas[0].data_done;
+                            var undone = datas[0].data_undone;
+                            $('[data-toggle="tooltip"]').tooltip('dispose')
                             $td.attr('data-toggle', "tooltip");
-                            $td.attr('title', "DONE : "+datas+" of 296");
-                            // $td.attr('title', "SUCCESS : "+datas+" <br> WAIT : 296");
+                            $td.attr('title', "DONE : " + done + " <br> UNDONE : " + undone);
+                            $('[data-toggle="tooltip"]').tooltip();
                         });
                     });
                 };
@@ -136,50 +189,7 @@ $month = date('m');
                 });
             }
         });
-
-        //! SelectedEventDropdown
-        $('#selected-tahun').on('change', function() {
-            tables.ajax.reload();
-        });
-        $('#selected-bulan').on('change', function() {
-            // $('#table-monitoring').DataTable().clear().destroy(); //destroy table
-            let bln = $(this).val();
-            const d = new Date(bln);
-            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()]);
-            tables.ajax.reload();
-        });
-        $('#selected-group-region').on('change', function() {
-            let bln = $('#selected-bulan').val();
-            let greg = $('select[id="selected-group-region"] option:selected').text();
-            const d = new Date(bln);
-            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " Zone " + greg);
-            tables.ajax.reload();
-        });
-        $('#selected-region').on('change', function() {
-            let bln = $('#selected-bulan').val();
-            let greg = $('select[id="selected-group-region"] option:selected').text();
-            let reg = $('select[id="selected-region"] option:selected').text();
-            const d = new Date(bln);
-            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " Zone " + greg + " Region " + reg);
-            tables.ajax.reload();
-        });
-        $('#selected-modul').on('change', function() {
-            tables.ajax.reload();
-        });
-        //! SelectedEventDropdown getData
-        $('#selected-group-region').on('change', function() {
-            select_gregion = $("#selected-group-region").val();
-            $.ajax({
-                url: "<?= site_url('search_region') ?>",
-                type: 'POST',
-                data: "grup_region=" + select_gregion,
-                success: function(data) {
-                    $("#selected-region").html(data);
-                    console.log(data);
-                }
-            });
-        });
-    });
+    }
     // ! EventReport
     function fnExcelReport() {
         var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";

@@ -112,20 +112,21 @@ class MonitoringControllers extends MY_Controller
 	{
 		//! get count status dots /date
 		$this->load->database();
-		$tgl = $this->uri->segment('2');
-		$query = $this->db->query("SELECT module_id, module_date,
+		$tgl    = $this->uri->segment('2');
+		$module = $this->uri->segment('3');
+		$query  = $this->db->query("SELECT module_id, module_date,
 		(SELECT count(*)
 		FROM rmodule_monitor
-		WHERE module_name = 'LBP' 
-		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m %d')) as data_upload, 
+		WHERE module_name = '$module' 
+		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m %d')) as data_done, 
 		(select COUNT(*) from rdepo where status_system = 'SCYLLA' AND status ='A')-(SELECT count(*)
 		FROM rmodule_monitor
-		WHERE module_name = 'LBP' 
-		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m %d')) as sisa_data_upload
+		WHERE module_name = '$module' 
+		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m %d')) as data_undone
 		FROM rmodule_monitor
-		WHERE module_name = 'LBP' 
+		WHERE module_name = '$module' 
 		AND DATE_FORMAT(module_date, '%Y %m') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m')
-		")->row('data_upload');
+		")->result();
 		echo json_encode($query);
 	}
 }

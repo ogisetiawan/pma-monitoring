@@ -7,4 +7,4 @@ $route['translate_uri_dashes']                         = FALSE;
 
 $route['table_monitoring']                             = 'monitoring/MonitoringControllers/table_monitoring';
 $route['search_region']                                = 'monitoring/MonitoringControllers/search_region';
-$route['get_status_dots/(:num)']                       = 'monitoring/MonitoringControllers/get_status_dots';
+$route['get_status_dots/(:num)/(:any)']                       = 'monitoring/MonitoringControllers/get_status_dots';
