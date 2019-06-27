@@ -113,7 +113,6 @@ $month = date('m');
             $('#table-monitoring').DataTable().clear().destroy();
             initTable();
         });
-
         $('#selected-tahun').on('change', function() {
             let modules = $('#selected-modul').val();
             let bln     = $('#selected-bulan').val();
@@ -139,6 +138,7 @@ $month = date('m');
             let bln     = $('#selected-bulan').val();
             const d     = new Date(bln);
             let year    = $('#selected-tahun').val();
+            select_gregion = $("#selected-group-region").val();
             
             // 
             if(modules == 'LBP'){
@@ -149,6 +149,17 @@ $month = date('m');
                 modules = 'INVENTORY';
             }
             
+            //! getDataRegion by GroupRegion
+            $.ajax({
+                url: "<?= site_url('search_region') ?>",
+                type: 'POST',
+                data: "grup_region=" + select_gregion,
+                success: function(data) {
+                    $("#selected-region").html(data);
+                    console.log(data);
+                }
+            });
+
             $('.title').html("Monitoring "+ modules +" "+ monthNames[d.getMonth()] +" "+ year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable();
@@ -171,20 +182,6 @@ $month = date('m');
             $('.title').html("Monitoring "+ modules +" "+ monthNames[d.getMonth()] +" "+ year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable();
-        });
-
-        //! SelectedEventDropdown getData
-        $('#selected-group-region').on('change', function() {
-            select_gregion = $("#selected-group-region").val();
-            $.ajax({
-                url: "<?= site_url('search_region') ?>",
-                type: 'POST',
-                data: "grup_region=" + select_gregion,
-                success: function(data) {
-                    $("#selected-region").html(data);
-                    console.log(data);
-                }
-            });
         });
     });
     //! Init Datatables
@@ -215,11 +212,11 @@ $month = date('m');
                 "url": "<?= site_url('table_monitoring') ?>",
                 "type": "POST",
                 "data": function(data) {
-                    data.tahun = $("#selected-tahun").val();
-                    data.bulan = $("#selected-bulan").val();
+                    data.tahun       = $("#selected-tahun").val();
+                    data.bulan       = $("#selected-bulan").val();
                     data.grup_region = $("#selected-group-region").val();
-                    data.modul = $("#selected-modul").val();
-                    data.region = $("#selected-region").val();
+                    data.modul       = $("#selected-modul").val();
+                    data.region      = $("#selected-region").val();
                 }
             },
             "processing": true,
@@ -239,15 +236,17 @@ $month = date('m');
             "initComplete": function(settings) {
                 $("#overlay").hide();
                 var modules = $("#selected-modul").val();
+                var month   = $("#selected-bulan").val();
+                var year    = $("#selected-tahun").val();
                 //? setTooltip
                 let i = 1;
                 for (i; i <= 30; ++i) {
                     $("#table-monitoring thead .date_selector").eq(i - 1).each(function() {
                         var $td = $(this);
                         //? postAjax
-                        $.post("<?= site_url('get_status_dots/') ?>" + i + "/" + modules, function(data) {
-                            let datas = $.parseJSON(data);
-                            var done = datas[0].data_done;
+                        $.post("<?= site_url('get_status_dots/') ?>" + i + "/" + modules + "/" +month+ "/" +year, function(data) {
+                            let datas  = $.parseJSON(data);
+                            var done   = datas[0].data_done;
                             var undone = datas[0].data_undone;
                             $('[data-toggle="tooltip"]').tooltip('dispose')
                             $td.attr('data-toggle', "tooltip");
