@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Tbl_LbpModels extends CI_Model
+class Tbl_MonitoringModels extends CI_Model
 {
     var $table = 'rdepo as d';
     var $column_order = array(null, 'kode_site', 'area');

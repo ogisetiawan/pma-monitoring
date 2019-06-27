@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class LbpControllers extends MY_Controller
+class MonitoringControllers extends MY_Controller
 {
 	public function __construct()
 	{
@@ -45,16 +45,16 @@ class LbpControllers extends MY_Controller
 		}
 	}
 
-	public function lbp()
+	public function index()
 	{
 		$this->meta_data($meta, 'PMA Monitoring - LBP');
-		$this->template('lbp', $meta);
+		$this->template('monitoring', $meta);
 	}
 
 	public function table_monitoring()
 	{
-		$this->load->model('Tbl_LbpModels');
-		$query           = $this->Tbl_LbpModels->get_datatables();
+		$this->load->model('Tbl_MonitoringModels');
+		$query           = $this->Tbl_MonitoringModels->get_datatables();
 		$month 		     = date("m");
 		$data            = array();
 		$no              = $_POST['start'];
@@ -92,8 +92,8 @@ class LbpControllers extends MY_Controller
 		}
 		$output = array(
 			"draw"            => $_POST['draw'],
-			"recordsTotal"    => $this->Tbl_LbpModels->count_all(),
-			"recordsFiltered" => $this->Tbl_LbpModels->count_filtered(),
+			"recordsTotal"    => $this->Tbl_MonitoringModels->count_all(),
+			"recordsFiltered" => $this->Tbl_MonitoringModels->count_filtered(),
 			"data"            => $data,
 		);
 		echo json_encode($output);
@@ -110,6 +110,7 @@ class LbpControllers extends MY_Controller
 	
 	public function get_status_dots()
 	{
+		//! get count status dots /date
 		$this->load->database();
 		$tgl = $this->uri->segment('2');
 		$query = $this->db->query("SELECT module_id, module_date,
@@ -126,18 +127,5 @@ class LbpControllers extends MY_Controller
 		AND DATE_FORMAT(module_date, '%Y %m') = DATE_FORMAT('2019-06-".$tgl."', '%Y %m')
 		")->row('data_upload');
 		echo json_encode($query);
-	}
-
-	public function noted()
-	{
-		for ($i = 1; $i <= 3; $i++) {
-			if (${"a$i"} == '') {
-				echo '1';
-				echo "<br>";
-			} else {
-				echo 'KOSONH';
-				echo "<br>";
-			}
-		}
 	}
 }
