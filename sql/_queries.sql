@@ -36,11 +36,11 @@ SELECT module_id, module_date,
 (SELECT count(*)
 FROM rmodule_monitor
 WHERE module_name = 'LBP' 
-AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-7', '%Y %m %d')) as data_upload, 
+AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-1', '%Y %m %d')) as data_upload, 
 (select COUNT(*) from rdepo where status_system = 'SCYLLA' AND status ='A')-(SELECT count(*)
 FROM rmodule_monitor
 WHERE module_name = 'LBP' 
-AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-7', '%Y %m %d')) as sisa_data_upload
+AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('2019-06-1', '%Y %m %d')) as sisa_data_upload
 FROM rmodule_monitor
 WHERE module_name = 'LBP' 
-AND DATE_FORMAT(module_date, '%Y %m') = DATE_FORMAT('2019-06-7', '%Y %m')
+AND DATE_FORMAT(module_date, '%Y %m') = DATE_FORMAT('2019-06-1', '%Y %m')
