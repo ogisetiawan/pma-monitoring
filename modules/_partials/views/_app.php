@@ -82,7 +82,5 @@
         .teal.accent-3 {
             background-color: #cb240f !important;
         }
-
-        /* Loader */
     </style>
 </head>

@@ -31,7 +31,7 @@ $month = date('m');
                         $date_calendar = 28;
                     }
                     for ($i = 1; $i <= $date_calendar; $i++) {
-                        echo "<th class='date_selector'>" . $i . "</th>";
+                        echo '<th data-placement="top" data-html="true" class="date_selector"><b style="color: #212529; text-decoration-style: dotted;text-decoration-color: #d3250f;text-decoration-line: underline;">' . $i . '</b></th>';
                     }
                     ?>
                 </tr>
@@ -122,10 +122,10 @@ $month = date('m');
                         $.post("<?= site_url('get_status_dots/') ?>" + i, function(data) {
                             let datas = $.parseJSON(data);
                             console.log(data);
+                            $('[data-toggle="tooltip"]').tooltip();
                             $td.attr('data-toggle', "tooltip");
                             $td.attr('title', "DONE : "+datas+" of 296");
-                            $td.attr('data-html', "true");
-                            $('[data-toggle="tooltip"]').tooltip();
+                            // $td.attr('title', "SUCCESS : "+datas+" <br> WAIT : 296");
                         });
                     });
                 };

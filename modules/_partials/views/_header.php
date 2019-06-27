@@ -3,8 +3,7 @@
       <div class="container-fluid">
           <!-- Brand -->
           <a class="navbar-brand waves-effect" href="<?= site_url('portal') ?>" target="_blank" style="font-weight:600">
-              <!-- <img src="http://192.168.35.160/portal/monitoring/img/blowing.gif" height="30" alt="mdb logo"> -->
-              <img src="http://192.168.35.160/pma_dev/kpi/assets/login/img/pma3.png" height="50" alt="mdb logo">PINUS MERAH ABADI, PT
+              <img src="http://192.168.35.160/portal/monitoring/img/blowing.gif" height="30" alt="mdb logo">
           </a>
 
           <!-- Collapse -->
