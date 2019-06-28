@@ -5,8 +5,8 @@
     <meta name="description" content="Monitoring PMA">
     <meta name="robot" content="noindex, nofollow">
     <meta name="keywords" content="Monitoring PMA">
-    <meta name="keywords" content="Monitoring PMA">
     <title><?= $title ?></title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('assets/img/pma.ico') ?>">
     <!-- Main CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -109,7 +109,7 @@
         }
 
         .spinner>div {
-            background-color: #FEF3FE;
+            background-color: #FFFFFF;
             height: 100%;
             width: 6px;
             display: inline-block;

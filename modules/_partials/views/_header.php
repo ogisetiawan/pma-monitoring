@@ -41,6 +41,7 @@
                       <option value="LBP">LBP</option>
                       <option value="SAPKASBANK">KASBANK</option>
                       <option value="SAPINV">INVENTORY</option>
+                      <option value="PTPR">CLAIM</option>
                   </select>
               </div>
               <div class="col-auto col-xs-12">
