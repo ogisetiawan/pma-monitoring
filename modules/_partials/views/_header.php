@@ -101,7 +101,7 @@
 
               <div class="col-auto col-xs-12">
                   <select id="selected-group-region" class="form-control custom-select-sm" title=" Group Region">
-                      <option selected>-- SELECT GROUP REGION --</option>
+                      <option value="" selected>-- SELECT GROUP REGION --</option>
                       <option value="1">West</option>
                       <option value="2">Central</option>
                       <option value="3">East</option>
@@ -109,7 +109,7 @@
               </div>
               <div class="col-auto col-xs-12">
                   <select id="selected-region" class="form-control custom-select-sm" title=" Region" data-style="btn-sm btn-default" data-width="100px">
-                      <option selected >-- SELECT REGION --</option>
+                      <option value="">-- SELECT REGION --</option>
                   </select>
               </div>
           </div>
