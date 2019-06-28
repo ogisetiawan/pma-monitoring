@@ -14,7 +14,7 @@ $month = date('m');
     </div>
 </div>
 <main class="container-fluid mt-2 pt-2 mb-5 pb-3">
-    <div class="table-responsive">
+    <div id="responsive" class="">
         <table class="table display table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring">
             <thead class="custom-ogi shadow-light text-uppercase">
                 <tr>
@@ -64,8 +64,8 @@ $month = date('m');
 <!-- JS-Page -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
 <script>
-     //! Init Datatables
-     function initTable() {
+    //! Init Datatables
+    function initTable() {
         $("#overlay").show();
         return $('#table-monitoring').DataTable({
             //? Order
@@ -174,103 +174,131 @@ $month = date('m');
             sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
         return (sa);
     }
-    
-    function statusModules(modules, month, year) {
+    // ! passByRefrencee
+    function changeTitle(modules, month, year) {
         if (modules == 'LBP') {
             modules = 'LBP';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
         } else if (modules == 'SAPKASBANK') {
             modules = 'KASBANK';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
-        } else if (modules == 'SAPINV'){
+        } else if (modules == 'SAPINV') {
             modules = 'INVENTORY';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
-        }else{
+        } else {
             modules = 'CLAIM';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
         }
     }
+
     $(document).ready(function() {
         // ! callFunct DatatablesRetive
-        initTable();
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-        const d = new Date();
-        const y = new Date().getFullYear();
-        $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " " + y);
+            initTable();
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            const d = new Date();
+            const y = new Date().getFullYear();
+            $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " " + y);
 
         //! SelectedEventDropdown ChangeTitle
-        $('#selected-modul').on('change', function() {
-            let modules = $(this).val();
-            let bln = $('#selected-bulan').val();
-            const d = new Date(bln);
-            let year = $('#selected-tahun').val();
+            $('#selected-modul').on('change', function() {
+                let modules = $(this).val();
+                let bln = $('#selected-bulan').val();
+                const d = new Date(bln);
+                let year = $('#selected-tahun').val();
 
-            statusModules(modules, monthNames[d.getMonth()], year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
-        });
-        $('#selected-bulan').on('change', function() {
-            let modules = $('#selected-modul').val();
-            let bln = $(this).val();
-            const d = new Date(bln);
-            let year = $('#selected-tahun').val();
-
-            statusModules(modules, monthNames[d.getMonth()], year);
-
-            $('.title').html("Monitoring " + modules + " " + monthNames[d.getMonth()] + " " + year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
-        });
-        $('#selected-tahun').on('change', function() {
-            let modules = $('#selected-modul').val();
-            let bln = $('#selected-bulan').val();
-            const d = new Date(bln);
-            let year = $(this).val();
-
-            statusModules(modules, monthNames[d.getMonth()], year);
-            
-            $('.title').html("Monitoring " + modules + " " + monthNames[d.getMonth()] + " " + year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
-        });
-
-        $('#selected-group-region').on('change', function() {
-            let modules = $('#selected-modul').val();
-            let bln = $('#selected-bulan').val();
-            const d = new Date(bln);
-            let year = $('#selected-tahun').val();
-            select_gregion = $("#selected-group-region").val();
-
-            statusModules(modules, monthNames[d.getMonth()], year);
-
-            //! getDataRegion by GroupRegion
-            $.ajax({
-                url: "<?= site_url('search_region') ?>",
-                type: 'POST',
-                data: "grup_region=" + select_gregion,
-                success: function(data) {
-                    $("#selected-region").html(data);
-                    console.log(data);
-                }
+                changeTitle(modules, monthNames[d.getMonth()], year);
+                $('#table-monitoring').DataTable().clear().destroy();
+                initTable();
             });
+            $('#selected-bulan').on('change', function() {
+                let modules = $('#selected-modul').val();
+                let bln = $(this).val();
+                const d = new Date(bln);
+                let year = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring " + modules + " " + monthNames[d.getMonth()] + " " + year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
+                changeTitle(modules, monthNames[d.getMonth()], year);
+
+                $('.title').html("Monitoring " + modules + " " + monthNames[d.getMonth()] + " " + year);
+                $('#table-monitoring').DataTable().clear().destroy();
+                initTable();
+            });
+            $('#selected-tahun').on('change', function() {
+                let modules = $('#selected-modul').val();
+                let bln = $('#selected-bulan').val();
+                const d = new Date(bln);
+                let year = $(this).val();
+
+                changeTitle(modules, monthNames[d.getMonth()], year);
+
+                $('.title').html("Monitoring " + modules + " " + monthNames[d.getMonth()] + " " + year);
+                $('#table-monitoring').DataTable().clear().destroy();
+                initTable();
+            });
+            $('#selected-group-region').on('change', function() {
+                let modules = $('#selected-modul').val();
+                let bln = $('#selected-bulan').val();
+                const d = new Date(bln);
+                let year = $('#selected-tahun').val();
+                select_gregion = $("#selected-group-region").val();
+
+                changeTitle(modules, monthNames[d.getMonth()], year);
+
+                //! getDataRegion by GroupRegion
+                $.ajax({
+                    url: "<?= site_url('search_region') ?>",
+                    type: 'POST',
+                    data: "grup_region=" + select_gregion,
+                    success: function(data) {
+                        $("#selected-region").html(data);
+                        console.log(data);
+                    }
+                });
+
+                $('.title').html("Monitoring " + modules + " " + monthNames[d.getMonth()] + " " + year);
+                $('#table-monitoring').DataTable().clear().destroy();
+                initTable();
+            });
+            $('#selected-region').on('change', function() {
+                let modules = $('#selected-modul').val();
+                let bln = $('#selected-bulan').val();
+                const d = new Date(bln);
+                let year = $('#selected-tahun').val();
+
+                changeTitle(modules);
+
+                $('.title').html("Monitoring " + modules + " " + monthNames[d.getMonth()] + " " + year);
+                $('#table-monitoring').DataTable().clear().destroy();
+                initTable();
+            });
+    });
+
+    //! windowResize
+    var delay = (function() {
+        var timer = 0;
+        return function(callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+    $(function() {
+        var pause = 100;
+        // will only process code within delay(function() { ... }) every 100ms.
+        $(window).resize(function() {
+            delay(function() {
+                $('#responsive').removeClass('table-responsive');
+                var width = $(window).width();
+                if (width >= 768 && width <= 959) {
+                    // code for tablet view
+                } else if (width >= 480 && width <= 767) {
+                    $('#responsive').addClass('table-responsive');
+                    // code for mobile landscape
+                } else if (width <= 479) {
+                    // code for mobile portrait
+                }
+            }, pause);
         });
-        $('#selected-region').on('change', function() {
-            let modules = $('#selected-modul').val();
-            let bln = $('#selected-bulan').val();
-            const d = new Date(bln);
-            let year = $('#selected-tahun').val();
-
-            statusModules(modules);
-
-            $('.title').html("Monitoring " + modules + " " + monthNames[d.getMonth()] + " " + year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
-        });
+        $(window).resize();
     });
 </script>
