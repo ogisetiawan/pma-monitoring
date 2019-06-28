@@ -44,7 +44,7 @@
                   </select>
               </div>
               <div class="col-auto col-xs-12">
-                  <select id="selected-bulan" class="form-control custom-select-sm"" title=" Bulan">
+                  <select id="selected-bulan" class="form-control custom-select-sm" title=" Bulan">
                       <?php
                         $tahun = date('Y') + 1;
                         $month = date('m');
@@ -116,7 +116,7 @@
   </div>
   <section class="text-center mt-4">
       <h4 class="font-medium font-weight-light text-uppercase">
-          <span class="bq-reds pl-1 title">
+          <span class="bq-reds pl-1 test2 title">
           </span>
       </h4>
   </section>

@@ -84,7 +84,7 @@
         .teal.accent-3 {
             background-color: #cb240f !important;
         }
-        
+
         .overlay {
             position: fixed;
             display: block;
@@ -164,6 +164,12 @@
                 transform: scaleY(1.0);
                 -webkit-transform: scaleY(1.0);
             }
+        }
+
+        .test2 {
+            font-family: "Trebuchet MS", sans-serif;
+            letter-spacing: -2px;
+            text-transform: uppercase;
         }
     </style>
 </head>

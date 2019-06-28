@@ -43,74 +43,30 @@
         <!-- Grid row -->
         <div class="row mt-3 dark-grey-text">
             <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+            <div class="col-md-12 col-lg-6 col-xl-7 mb-4">
                 <!-- Content -->
-                <h6 class="text-uppercase font-weight-bold">PINUS MERAHA ABADI, PT</h6>
+                <h6 class="text-uppercase font-weight-bold">PINUS MERAH ABADI</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                    consectetur
-                    adipisicing elit.</p>
+                <p>PT. Pinus Merah Abadi is a fast national company which is engaged and has capability in the area of sales & distribusi management with nation wide network, covering either traditional and modern channel. PT. Pinus Merah Abadi has a number of branches to serve directly a hundred thousands registered outlets all around Indonesia.
+                    <br>
+                    Therefore, during a certain period, PMA obtains great achievement in sales growth, fast spreading distribution.
+                </p>
             </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Products</h6>
-                <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a class="dark-grey-text" href="#!">MDBootstrap</a>
-                </p>
-                <p>
-                    <a class="dark-grey-text" href="#!">MDWordPress</a>
-                </p>
-                <p>
-                    <a class="dark-grey-text" href="#!">BrandFlow</a>
-                </p>
-                <p>
-                    <a class="dark-grey-text" href="#!">Bootstrap Angular</a>
-                </p>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-
-                <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
-                <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a class="dark-grey-text" href="#!">Your Account</a>
-                </p>
-                <p>
-                    <a class="dark-grey-text" href="#!">Become an Affiliate</a>
-                </p>
-                <p>
-                    <a class="dark-grey-text" href="#!">Shipping Rates</a>
-                </p>
-                <p>
-                    <a class="dark-grey-text" href="#!">Help</a>
-                </p>
-
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
+            <div class="col-md-12 col-lg-6 col-xl-5 mb-4">
                 <!-- Links -->
                 <h6 class="text-uppercase font-weight-bold">Contact</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+                    <i class="fas fa-home mr-3"></i> Jl. K.H. Hasyim Ashari No.149
+                    Kel. Poris Plawad Utara, Kec. Cipondoh, Tangerang – Banten 15148</p>
                 <p>
-                    <i class="fas fa-envelope mr-3"></i> info@example.com</p>
+                    <i class="fas fa-envelope mr-3"></i>cs@pinusmerahabadi.co.id /cs02@pinusmerahabadi.co.id</p>
                 <p>
-                    <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                    <i class="fas fa-phone mr-3"></i> 021- 55711499</p>
                 <p>
-                    <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-
             </div>
             <!-- Grid column -->
 
@@ -121,10 +77,9 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <div class="footer-copyright text-center text-black-50 py-3">© 2018 Copyright:
-        <a class="dark-grey-text" href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+    <div class="footer-copyright text-center text-black-50 py-3">Copyright © 2019
+        <a class="dark-grey-text" href="http://pinusmerahabadi.co.id/"> PT Pinus Merah Abadi.</a>
     </div>
     <!-- Copyright -->
-
 </footer>
 <!-- Footer -->
