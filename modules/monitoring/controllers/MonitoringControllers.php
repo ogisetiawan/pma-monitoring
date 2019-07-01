@@ -84,7 +84,7 @@ class MonitoringControllers extends MY_Controller
 			}
 			
 			//? looping cretae variable date
-			for ($i = 1; $i <= $date_calendar; $i++) {
+			for ($i = 1; $i <= 31; $i++) {
 				$row[] = $val->{"tanggal_$i"};
 			}
 

@@ -33,7 +33,7 @@ $month = date('m');
                         $date_calendar = 28;
                     }
 
-                    for ($i = 1; $i <= 30; $i++) {
+                    for ($i = 1; $i <= 31; $i++) {
                         echo '<th data-placement="top" data-html="true" class="date_selector"><b style="color: #d3250f; text-decoration-style: dotted;text-decoration-color: #d3250f;text-decoration-line: underline;">' . $i . '</b></th>';
                     }
                     ?>
@@ -65,29 +65,7 @@ $month = date('m');
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
 <script>
     //! initDatatables
-    function initTable($month) {
-        var coloumnDate;
-        const d = new Date();
-        if ($month == '01' || $month == '03' || $month == '05' || $month == '07' || $month == '08' || $month == '10' || $month == '12') {
-            //? monthDate31
-            coloumnDate = 36;
-            alert($month);
-        } else if ($month == '04' || $month == '06' || $month == '09' || $month == '11') {
-            //? monthDate30
-            coloumnDate = 35;
-            alert($month);
-        } else if ($month == '02') {
-            //? monthDate28 || Febuary
-            coloumnDate = 33;
-            alert($month);
-        } else {
-            //? thisMonth
-            const montNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-            const d          = new Date();
-            coloumnDate      = 0;
-            alert(montNumber[d.getMonth()]);
-        }
-        // alert(coloumnDate);
+    function initTable() {
         $("#overlay").show();
         return $('#table-monitoring').DataTable({
             //? Order
@@ -133,9 +111,8 @@ $month = date('m');
                 // "targets": '_all',
                 // "searchable": false
             }, {
-                "targets": [coloumnDate],
-                // "targets": [36],
-                "visible": false,
+                // "targets": [coloumnDate],
+                // "visible": false,
             }],
             //? InitComplete
             "initComplete": function(settings) {
@@ -171,6 +148,48 @@ $month = date('m');
             }
         });
     }
+    // ! passByRefrencee ColoumnDynamic
+    function dynamicColoumnTable($month){
+        var coloumnDate;
+        const d = new Date();
+        if ($month == '01' || $month == '03' || $month == '05' || $month == '07' || $month == '08' || $month == '10' || $month == '12') {
+            //? monthDate31
+            coloumnDate = 'NULL';
+            $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
+        } else if ($month == '04' || $month == '06' || $month == '09' || $month == '11') {
+            //? monthDate30
+            coloumnDate = '35,36';
+            $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
+        } else if ($month == '02') {
+            //? monthDate28 || Febuary
+            coloumnDate = '34,35,36';
+            $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
+        }
+    }
+    // ! passByRefrencee titleDisplay
+    function changeTitle(modules, month, year, bln) {
+        if (modules == 'LBP') {
+            modules = 'LBP';
+            $('.title').html("Monitoring " + modules + " " + month + " " + year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable(bln);
+        } else if (modules == 'SAPKASBANK') {
+            modules = 'KASBANK';
+            $('.title').html("Monitoring " + modules + " " + month + " " + year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable(bln);
+        } else if (modules == 'SAPINV') {
+            modules = 'INVENTORY';
+            $('.title').html("Monitoring " + modules + " " + month + " " + year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable(bln);
+        } else {
+            modules = 'TPR PROMO';
+            $('.title').html("Monitoring " + modules + " " + month + " " + year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable(bln);
+        }
+    }
     // ! eventReport
     function fnExcelReport() {
         var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
@@ -202,41 +221,20 @@ $month = date('m');
             sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
         return (sa);
     }
-    // ! passByRefrencee
-    function changeTitle(modules, month, year, bln) {
-        if (modules == 'LBP') {
-            modules = 'LBP';
-            $('.title').html("Monitoring " + modules + " " + month + " " + year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable(bln);
-        } else if (modules == 'SAPKASBANK') {
-            modules = 'KASBANK';
-            $('.title').html("Monitoring " + modules + " " + month + " " + year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable(bln);
-        } else if (modules == 'SAPINV') {
-            modules = 'INVENTORY';
-            $('.title').html("Monitoring " + modules + " " + month + " " + year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable(bln);
-        } else {
-            modules = 'TPR PROMO';
-            $('.title').html("Monitoring " + modules + " " + month + " " + year);
-            $('#table-monitoring').DataTable().clear().destroy();
-            initTable(bln);
-        }
-    }
 
     // ! onEventDocument
     $(document).ready(function() {
-        // ! callFunct DatatablesRetive
-        initTable();
+        //? initVar
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
+        const montNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         const d = new Date();
         const y = new Date().getFullYear();
         $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " " + y);
+        // ! callFunct DatatablesRetive and DynamicColoumn
+        initTable();
+        dynamicColoumnTable(montNumber[d.getMonth()]);
 
         //! SelectedEventDropdown ChangeTitle
         $('#selected-modul').on('change', function() {
@@ -246,13 +244,16 @@ $month = date('m');
             let year = $('#selected-tahun').val();
 
             changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            dynamicColoumnTable(montNumber[d.getMonth()]);
         });
         $('#selected-bulan').on('change', function() {
             let modules = $('#selected-modul').val();
             let bln = $(this).val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
+
             changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            dynamicColoumnTable(montNumber[d.getMonth()]);
         });
         $('#selected-tahun').on('change', function() {
             let modules = $('#selected-modul').val();
@@ -261,6 +262,7 @@ $month = date('m');
             let year = $(this).val();
 
             changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            dynamicColoumnTable(montNumber[d.getMonth()]);
         });
 
         $('#selected-group-region').on('change', function() {
@@ -272,6 +274,7 @@ $month = date('m');
             let select_gregion = $(this).val();
 
             changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            dynamicColoumnTable(montNumber[d.getMonth()]);
             //! getDataRegion by groupRegion
             $.ajax({
                 url: "<?= site_url('search_region') ?>",
@@ -290,6 +293,7 @@ $month = date('m');
             let year = $('#selected-tahun').val();
 
             changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            dynamicColoumnTable(montNumber[d.getMonth()]);
         });
     });
 
