@@ -124,13 +124,16 @@ $month = date('m');
                         var $td = $(this);
                         //? postAjax
                         $.post("<?= site_url('get_status_dots/') ?>" + i + "/" + modules + "/" + month + "/" + year, function(data) {
-                            let datas = $.parseJSON(data);
-                            var done = datas[0].data_done;
-                            var undone = datas[0].data_undone;
                             $('[data-toggle="tooltip"]').tooltip('dispose')
-                            $td.attr('data-toggle', "tooltip");
-                            $td.attr('title', "DONE : " + done + " <br> UNDONE : " + undone);
-                            $('[data-toggle="tooltip"]').tooltip();
+                            let datas = $.parseJSON(data);
+                            if (!datas.length == '0') {
+                                let datas  = $.parseJSON(data);
+                                var done   = datas[0].data_done;
+                                var undone = datas[0].data_undone;
+                                $td.attr('data-toggle', "tooltip");
+                                $td.attr('title', "DONE : " + done + " <br> UNDONE : " + undone);
+                                $('[data-toggle="tooltip"]').tooltip();
+                            }
                         });
                     });
                 };
@@ -191,7 +194,7 @@ $month = date('m');
             $('#table-monitoring').DataTable().clear().destroy();
             initTable();
         } else {
-            modules = 'CLAIM';
+            modules = 'TPR PROMO';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable();

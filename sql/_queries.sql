@@ -31,7 +31,7 @@ FROM rpromo_tpr_Daily
 LIMIT 100
 
 
---- *** count per tanggal **** ---
+--- *** DOTS / DATE **** ---
 SELECT module_id, module_date,
 (
 SELECT COUNT(*)
