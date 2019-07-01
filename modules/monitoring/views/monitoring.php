@@ -64,8 +64,30 @@ $month = date('m');
 <!-- JS-Page -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
 <script>
-    //! Init Datatables
-    function initTable() {
+    //! initDatatables
+    function initTable($month) {
+        var coloumnDate;
+        const d = new Date();
+        if ($month == '01' || $month == '03' || $month == '05' || $month == '07' || $month == '08' || $month == '10' || $month == '12') {
+            //? monthDate31
+            coloumnDate = 36;
+            alert($month);
+        } else if ($month == '04' || $month == '06' || $month == '09' || $month == '11') {
+            //? monthDate30
+            coloumnDate = 35;
+            alert($month);
+        } else if ($month == '02') {
+            //? monthDate28 || Febuary
+            coloumnDate = 33;
+            alert($month);
+        } else {
+            //? thisMonth
+            const montNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+            const d          = new Date();
+            coloumnDate      = 0;
+            alert(montNumber[d.getMonth()]);
+        }
+        // alert(coloumnDate);
         $("#overlay").show();
         return $('#table-monitoring').DataTable({
             //? Order
@@ -110,7 +132,11 @@ $month = date('m');
 
                 // "targets": '_all',
                 // "searchable": false
-            }, ],
+            }, {
+                "targets": [coloumnDate],
+                // "targets": [36],
+                "visible": false,
+            }],
             //? InitComplete
             "initComplete": function(settings) {
                 $("#overlay").hide();
@@ -127,8 +153,8 @@ $month = date('m');
                             $('[data-toggle="tooltip"]').tooltip('dispose')
                             let datas = $.parseJSON(data);
                             if (!datas.length == '0') {
-                                let datas  = $.parseJSON(data);
-                                var done   = datas[0].data_done;
+                                let datas = $.parseJSON(data);
+                                var done = datas[0].data_done;
                                 var undone = datas[0].data_undone;
                                 $td.attr('data-toggle', "tooltip");
                                 $td.attr('title', "DONE : " + done + " <br> UNDONE : " + undone);
@@ -145,7 +171,7 @@ $month = date('m');
             }
         });
     }
-    // ! EventReport
+    // ! eventReport
     function fnExcelReport() {
         var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
         var textRange;
@@ -177,30 +203,31 @@ $month = date('m');
         return (sa);
     }
     // ! passByRefrencee
-    function changeTitle(modules, month, year) {
+    function changeTitle(modules, month, year, bln) {
         if (modules == 'LBP') {
             modules = 'LBP';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
+            initTable(bln);
         } else if (modules == 'SAPKASBANK') {
             modules = 'KASBANK';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
+            initTable(bln);
         } else if (modules == 'SAPINV') {
             modules = 'INVENTORY';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
+            initTable(bln);
         } else {
             modules = 'TPR PROMO';
             $('.title').html("Monitoring " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
-            initTable();
+            initTable(bln);
         }
     }
 
+    // ! onEventDocument
     $(document).ready(function() {
         // ! callFunct DatatablesRetive
         initTable();
@@ -218,15 +245,14 @@ $month = date('m');
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln);
         });
         $('#selected-bulan').on('change', function() {
             let modules = $('#selected-modul').val();
             let bln = $(this).val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
-
-            changeTitle(modules, monthNames[d.getMonth()], year);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln);
         });
         $('#selected-tahun').on('change', function() {
             let modules = $('#selected-modul').val();
@@ -234,7 +260,7 @@ $month = date('m');
             const d = new Date(bln);
             let year = $(this).val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln);
         });
 
         $('#selected-group-region').on('change', function() {
@@ -245,7 +271,7 @@ $month = date('m');
             let greg = $("#selected-group-region option:selected").text();
             let select_gregion = $(this).val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln);
             //! getDataRegion by groupRegion
             $.ajax({
                 url: "<?= site_url('search_region') ?>",
@@ -263,7 +289,7 @@ $month = date('m');
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln);
         });
     });
 
