@@ -17,7 +17,7 @@ class MonitoringControllers extends MY_Controller
 		$year  = date("Y");
 
 		//? looping in condition
-		for ($i = 1; $i <= 30; $i++) {
+		for ($i = 1; $i <= 31; $i++) {
 			if ($year . "-" . $month . "-" . $i >= $tgl_live_depo) {
 				if ($month == $monthPOST && $year == $yearPOST) { //! check month and year past?
 					if (${"tgl$i"} && $i <= $date) {
@@ -74,14 +74,6 @@ class MonitoringControllers extends MY_Controller
 			$row[]  = $val->area;
 			$row[]  = $val->divisi;
 			$row[]  = $val->status_system;
-
-			if ($month == '01' OR $month == '03' OR $month == '05' OR $month == '07' OR $month == '08' OR $month == '10' OR $month == '12'){
-				$date_calendar = 31;
-			}else if ($month == '04' OR $month == '06' OR $month == '09' or $month == '11') {
-				$date_calendar = 30;
-			}else{
-				$date_calendar = 28;
-			}
 			
 			//? looping cretae variable date
 			for ($i = 1; $i <= 31; $i++) {

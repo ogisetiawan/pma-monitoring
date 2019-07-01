@@ -25,14 +25,6 @@ $month = date('m');
                     <th>Div</th>
                     <th>System</th>
                     <?php
-                    if ($month == '01' or $month == '03' or $month == '05' or $month == '07' or $month == '08' or $month == '10' or $month == '12') {
-                        $date_calendar = 31;
-                    } else if ($month == '04' or $month == '06' or $month == '09' or $month == '11') {
-                        $date_calendar = 30;
-                    } else {
-                        $date_calendar = 28;
-                    }
-
                     for ($i = 1; $i <= 31; $i++) {
                         echo '<th data-placement="top" data-html="true" class="date_selector"><b style="color: #d3250f; text-decoration-style: dotted;text-decoration-color: #d3250f;text-decoration-line: underline;">' . $i . '</b></th>';
                     }
