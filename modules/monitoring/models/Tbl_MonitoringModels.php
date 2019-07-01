@@ -3,8 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Tbl_MonitoringModels extends CI_Model
 {
     var $table = 'rdepo as d';
-    var $column_order = array(null, 'kode_site', 'area');
-    var $column_search = array('kode_site');
+    var $column_order = array(null, 'kode_site', 'd.NM_DEPO');
+    var $column_search = array('kode_site', 'd.NM_DEPO');
     var $order = array('d.KD_DEPO' => 'asc');
 
     public function __construct()
