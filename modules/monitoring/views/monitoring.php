@@ -114,7 +114,7 @@ $month = date('m');
                 var year = $("#selected-tahun").val();
                 //? setTooltip
                 let i = 1;
-                for (i; i <= 30; ++i) {
+                for (i; i <= 31; ++i) {
                     $("#table-monitoring thead .date_selector").eq(i - 1).each(function() {
                         var $td = $(this);
                         //? postAjax
