@@ -16,10 +16,13 @@ class MonitoringControllers extends MY_Controller
 		$month = date("m");
 		$year  = date("Y");
 
-		//? looping in condition
+		//? variable looping in condition
 		for ($i = 1; $i <= 31; $i++) {
+			//! check depo sudah live?
 			if ($year . "-" . $month . "-" . $i >= $tgl_live_depo) {
-				if ($month == $monthPOST && $year == $yearPOST) { //! check month and year past?
+				//? check bulan dan tahun sudah berlalu 
+				if ($month == $monthPOST && $year == $yearPOST) {
+					//! jika ada value di variable dan $i kurang dari tgl sekarang
 					if (${"tgl$i"} && $i <= $date) {
 						${"tgl$i"} = '<p style="color: green;">&#8226;</p>';
 					} else if (!${"tgl$i"} && $i <= $date) {
@@ -58,22 +61,40 @@ class MonitoringControllers extends MY_Controller
 		$data      = array();
 		$monthPOST = $this->input->post('bulan');
 		$yearPOST  = $this->input->post('tahun');
-		$dayPOST   = date("d");
-		$date      = date_create("$yearPOST-$monthPOST-$dayPOST");
-		$tomorrow  = strtotime("-1 day");
-		$lasTrans  = date("d-M-Y", $tomorrow);
-		$nexTrans  = date_format($date, "d-M-Y");
+		$monthNow  = date("m");
+		$yearNow   = date("Y");
 
+		//! gua juga ga tau codingan dbawah ngapain, 
+		if ($monthNow == $monthPOST && $yearNow == $yearPOST) {
+			$dayPOST  = date("d");
+			$date     = date_create("$yearPOST-$monthPOST-$dayPOST");
+			$tomorrow = strtotime("-1 day");
+			$lasTrans = date("d-m-Y", $tomorrow);
+			$nexTrans = date_format($date, "d-m-Y");
+			$dateNow  = date("j", $tomorrow);
+		} else {
+			if ($monthPOST == '01' || $monthPOST == '03' || $monthPOST == '05' || $monthPOST == '07' || $monthPOST == '08' || $monthPOST == '10' || $monthPOST == '12') {
+				$dateMAX = 31;
+			} else if ($monthPOST == '04' || $monthPOST == '06' || $monthPOST == '09' || $monthPOST == '11') {
+				$dateMAX = 30;
+			}else{
+				$dateMAX = 28;
+			}
+			$dayPOST  = date("$dateMAX");
+			$tomorrow = strtotime("-1 day");
+			$lasTrans = date("$dateMAX-$monthPOST-$yearPOST", $tomorrow);
+			$nexTrans = '<p style="text-align:center;">-</p>';
+			$dateNow  = date("$dateMAX", $tomorrow);
+		}
 
 		foreach ($query as $val) {
 			//? 
-			$no_tgl = date("j", $tomorrow);
 			for ($i = 1; $i <= 31; $i++) {
-				if ($val->{"tanggal_$no_tgl"} == 'DONE') {
-					$status = '<span class="badge badge-pill badge-primary text-uppercase">Complete</span>';
+				if ($val->{"tanggal_$dateNow"} == 'DONE') {
+					$status   = '<span class = "badge badge-pill badge-primary text-uppercase">complete</span>';
 					break;
 				} else {
-					$status = '<span class="badge badge-pill badge-danger text-uppercase">Urgent</span>';
+					$status = '<span class="badge badge-pill badge-danger text-uppercase">urgent</span>';
 					break;
 				}
 			}
@@ -88,8 +109,8 @@ class MonitoringControllers extends MY_Controller
 			$row[]  = $val->area;
 			$row[]  = $val->divisi;
 			$row[]  = $val->status_system;
-			$row[]  = $nexTrans;
 			$row[]  = $lasTrans;
+			$row[]  = $nexTrans;
 			$row[]  = $status;
 
 			//? looping cretae variable date
@@ -119,7 +140,7 @@ class MonitoringControllers extends MY_Controller
 	}
 
 	public function get_status_dots()
-	{	
+	{
 		//! get count status dots /date
 		$this->load->database();
 		$tgl    = $this->uri->segment('2');

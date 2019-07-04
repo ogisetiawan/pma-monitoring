@@ -14,8 +14,8 @@ $month = date('m');
     </div>
 </div>
 <main class="container-fluid mt-2 pt-2 mb-5 pb-3">
-    <div id="responsive" class="table-responsive">
-        <table class="table display table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring">
+    <div id="responsive" class="">
+        <table class="table display table-responsive table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring" style="overflow-y: hidden;">
             <thead class="custom-ogi shadow-light text-uppercase">
                 <tr>
                     <!-- <th>No</th> -->
@@ -75,8 +75,7 @@ $month = date('m');
             },
             //? FixedColumn
             // "scrollY": "300px",
-            // "scrollX": "300px",
-            // "scrollCollapse": true,
+            // "scrollX": true,
             // "paging": false,
             // "fixedColumns": {
             //     leftColumns: 2,
@@ -157,7 +156,7 @@ $month = date('m');
             $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
         } else if ($month == '02') {
             //? monthDate28 || Febuary
-            coloumnDate = '37,38,39';
+            coloumnDate = '36,37,38,39';
             $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
         }
     }
