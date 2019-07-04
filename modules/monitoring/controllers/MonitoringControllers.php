@@ -28,15 +28,15 @@ class MonitoringControllers extends MY_Controller
 						${"tgl$i"} = '-';
 					}
 				} else {
-					if($month <= $monthPOST){
+					if ($month <= $monthPOST) {
 						${"tgl$i"} = '-';
-					}else{
+					} else {
 						if (${"tgl$i"}) {
 							$dots = 'green';
 						} else {
 							$dots = 'red';
 						}
-						${"tgl$i"} = '<p style="color: '.$dots.';">&#8226;</p>';
+						${"tgl$i"} = '<p style="color: ' . $dots . ';">&#8226;</p>';
 					}
 				}
 			} else {
@@ -54,27 +54,44 @@ class MonitoringControllers extends MY_Controller
 	public function table_monitoring()
 	{
 		$this->load->model('Tbl_MonitoringModels');
-		$query           = $this->Tbl_MonitoringModels->get_datatables();
-		$month 		     = date("m");
-		$data            = array();
-		$no              = $_POST['start'];
-        $monthPOST 		 = $this->input->post('bulan');
-		$yearPOST        = $this->input->post('tahun');
+		$query     = $this->Tbl_MonitoringModels->get_datatables();
+		$data      = array();
+		$monthPOST = $this->input->post('bulan');
+		$yearPOST  = $this->input->post('tahun');
+		$dayPOST   = date("d");
+		$date      = date_create("$yearPOST-$monthPOST-$dayPOST");
+		$tomorrow  = strtotime("-1 day");
+		$lasTrans  = date("d-M-Y", $tomorrow);
+		$nexTrans  = date_format($date, "d-M-Y");
+
 
 		foreach ($query as $val) {
-			//? parse tanggal to dots
+			//? 
+			$no_tgl = date("j", $tomorrow);
+			for ($i = 1; $i <= 31; $i++) {
+				if ($val->{"tanggal_$no_tgl"} == 'DONE') {
+					$status = '<span class="badge badge-pill badge-primary text-uppercase">Complete</span>';
+					break;
+				} else {
+					$status = '<span class="badge badge-pill badge-danger text-uppercase">Urgent</span>';
+					break;
+				}
+			}
+
+			//? parse data to dots_status
 			$this->dots($monthPOST, $yearPOST, $val->tanggal_live_depo, $val->tanggal_1, $val->tanggal_2, $val->tanggal_3, $val->tanggal_4, $val->tanggal_5, $val->tanggal_6, $val->tanggal_7, $val->tanggal_8, $val->tanggal_9, $val->tanggal_10, $val->tanggal_11, $val->tanggal_12, $val->tanggal_13, $val->tanggal_14, $val->tanggal_15, $val->tanggal_16, $val->tanggal_17, $val->tanggal_18, $val->tanggal_19, $val->tanggal_20, $val->tanggal_21, $val->tanggal_22, $val->tanggal_23, $val->tanggal_24, $val->tanggal_25, $val->tanggal_26, $val->tanggal_27, $val->tanggal_28, $val->tanggal_29, $val->tanggal_30, $val->tanggal_31);
 
 			//? table value
-			$no++;
 			$row    = array();
-			$row[]  = $no;
 			$row[]  = $val->kode_site;
 			$row[]  = $val->nama_site;
 			$row[]  = $val->area;
 			$row[]  = $val->divisi;
 			$row[]  = $val->status_system;
-			
+			$row[]  = $nexTrans;
+			$row[]  = $lasTrans;
+			$row[]  = $status;
+
 			//? looping cretae variable date
 			for ($i = 1; $i <= 31; $i++) {
 				$row[] = $val->{"tanggal_$i"};
@@ -91,17 +108,18 @@ class MonitoringControllers extends MY_Controller
 		echo json_encode($output);
 	}
 
-	public function search_region(){
+	public function search_region()
+	{
 		$greg = $this->input->post('grup_region');
 		$query = $this->db->query("SELECT * FROM rmstreg WHERE KD_GREG='$greg' order by NM_REG")->result();
 		echo "<option value=''>-- PILIH REGION --</option>";
 		foreach ($query as $value) {
-			echo "<option value=\"".$value->KD_REG."\" >".$value->NM_REG."</option>\n";
+			echo "<option value=\"" . $value->KD_REG . "\" >" . $value->NM_REG . "</option>\n";
 		}
 	}
-	
+
 	public function get_status_dots()
-	{
+	{	
 		//! get count status dots /date
 		$this->load->database();
 		$tgl    = $this->uri->segment('2');
@@ -112,14 +130,14 @@ class MonitoringControllers extends MY_Controller
 		(SELECT count(*)
 		FROM rmodule_monitor
 		WHERE module_name = '$module' 
-		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('".$tahun."-".$bulan."-".$tgl."', '%Y %m %d')) as data_done, 
+		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m %d')) as data_done, 
 		(select COUNT(*) from rdepo where status_system = 'SCYLLA' AND status ='A')-(SELECT count(*)
 		FROM rmodule_monitor
 		WHERE module_name = '$module' 
-		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('".$tahun."-".$bulan."-".$tgl."', '%Y %m %d')) as data_undone
+		AND DATE_FORMAT(module_date, '%Y %m %d') = DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m %d')) as data_undone
 		FROM rmodule_monitor
 		WHERE module_name = '$module' 
-		AND DATE_FORMAT(module_date, '%Y %m') = DATE_FORMAT('".$tahun."-".$bulan."-".$tgl."', '%Y %m')
+		AND DATE_FORMAT(module_date, '%Y %m') = DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m')
 		")->result();
 		echo json_encode($query);
 	}

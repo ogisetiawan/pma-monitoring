@@ -14,16 +14,19 @@ $month = date('m');
     </div>
 </div>
 <main class="container-fluid mt-2 pt-2 mb-5 pb-3">
-    <div id="responsive" class="">
+    <div id="responsive" class="table-responsive">
         <table class="table display table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring">
             <thead class="custom-ogi shadow-light text-uppercase">
                 <tr>
-                    <th>No</th>
-                    <th width="50px">Kode Depo</th>
-                    <th>Nama Distributor</th>
+                    <!-- <th>No</th> -->
+                    <th>Kode Depo</th>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nama&nbsp;Distributor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     <th>Area</th>
                     <th>Div</th>
                     <th>System</th>
+                    <th>Last<br>Transaction</th>
+                    <th>Next<br>Transaction</th>
+                    <th>Status</th>
                     <?php
                     for ($i = 1; $i <= 31; $i++) {
                         echo '<th data-placement="top" data-html="true" class="date_selector"><b style="color: #d3250f; text-decoration-style: dotted;text-decoration-color: #d3250f;text-decoration-line: underline;">' . $i . '</b></th>';
@@ -150,11 +153,11 @@ $month = date('m');
             $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
         } else if ($month == '04' || $month == '06' || $month == '09' || $month == '11') {
             //? monthDate30
-            coloumnDate = '35,36';
+            coloumnDate = '38,39';
             $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
         } else if ($month == '02') {
             //? monthDate28 || Febuary
-            coloumnDate = '34,35,36';
+            coloumnDate = '37,38,39';
             $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
         }
     }
@@ -290,30 +293,30 @@ $month = date('m');
     });
 
     //! windowResize
-    var delay = (function() {
-        var timer = 0;
-        return function(callback, ms) {
-            clearTimeout(timer);
-            timer = setTimeout(callback, ms);
-        };
-    })();
-    $(function() {
-        var pause = 100;
-        // will only process code within delay(function() { ... }) every 100ms.
-        $(window).resize(function() {
-            delay(function() {
-                $('#responsive').removeClass('table-responsive');
-                var width = $(window).width();
-                if (width >= 768 && width <= 959) {
-                    // code for tablet view
-                } else if (width >= 480 && width <= 767) {
-                    $('#responsive').addClass('table-responsive');
-                    // code for mobile landscape
-                } else if (width <= 479) {
-                    // code for mobile portrait
-                }
-            }, pause);
-        });
-        $(window).resize();
-    });
-</script>
+//     var delay = (function() {
+//         var timer = 0;
+//         return function(callback, ms) {
+//             clearTimeout(timer);
+//             timer = setTimeout(callback, ms);
+//         };
+//     })();
+//     $(function() {
+//         var pause = 100;
+//         // will only process code within delay(function() { ... }) every 100ms.
+//         $(window).resize(function() {
+//             delay(function() {
+//                 $('#responsive').removeClass('table-responsive');
+//                 var width = $(window).width();
+//                 if (width >= 768 && width <= 959) {
+//                     // code for tablet view
+//                 } else if (width >= 480 && width <= 767) {
+//                     $('#responsive').addClass('table-responsive');
+//                     // code for mobile landscape
+//                 } else if (width <= 479) {
+//                     // code for mobile portrait
+//                 }
+//             }, pause);
+//         });
+//         $(window).resize();
+//     });
+// </script>
