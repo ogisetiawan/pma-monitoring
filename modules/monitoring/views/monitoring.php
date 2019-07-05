@@ -139,7 +139,6 @@ $month = date('m');
                 $('#table-monitoring thead th[title]').tooltip({
                     "container": 'body'
                 });
-
                 //! COUNT STATUS
                 // console.log($(".data-monitoring td:nth-child(4):contains('GT')").length);
                 // var billable = 0;

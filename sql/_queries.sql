@@ -1,10 +1,10 @@
 --- *** CHECK TRANSACTION **** ---
 -- MODULE_ID 01 = LBP, 02 = SAPKASBANK, 03 = SAPINV
-SELECT *
+SELECT distinct(module_site), max(module_date)
 FROM rmodule_monitor
-WHERE module_name = 'SAPKASBANK' 
-AND module_id LIKE '%03-%' 
-AND DATE_FORMAT(MODULE_DATE, '%Y %m') = DATE_FORMAT('2019-05-01', '%Y %m');
+WHERE module_name = 'lbp' 
+AND DATE_FORMAT(MODULE_DATE, '%Y %m') = DATE_FORMAT('2019-05-01', '%Y %m')
+;
 -- sama
 SELECT a.module_site AS kode_site, a.module_name, MONTH(a.module_date) AS bulan, YEAR(a.module_date) AS tahun, DAY(a.module_date) AS tgl,module_flag AS STAT
 FROM rmodule_monitor a

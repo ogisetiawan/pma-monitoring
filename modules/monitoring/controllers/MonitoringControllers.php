@@ -65,44 +65,20 @@ class MonitoringControllers extends MY_Controller
 		$monthNow  = date("m");
 		$yearNow   = date("Y");
 
-		//! set data tanggal transaksi dan status scara dynamic 
-		if ($monthNow == $monthPOST && $yearNow == $yearPOST) {
-			$dayPOST  = date("d");
-			$date     = date_create("$yearPOST-$monthPOST-$dayPOST");
-			$tomorrow = strtotime("-1 day");
-			$lasTrans = date("d-m-Y", $tomorrow);
-			$nexTrans = date_format($date, "d-m-Y");
-			$dateNow  = date("j", $tomorrow);
-		} else {
-			if ($monthPOST == '01' || $monthPOST == '03' || $monthPOST == '05' || $monthPOST == '07' || $monthPOST == '08' || $monthPOST == '10' || $monthPOST == '12') {
-				$dateMAX = 31;
-			} else if ($monthPOST == '04' || $monthPOST == '06' || $monthPOST == '09' || $monthPOST == '11') {
-				$dateMAX = 30;
-			}else{
-				$dateMAX = 28;
-			}
-			$dayPOST  = date("$dateMAX");
-			$tomorrow = strtotime("-1 day");
-			$lasTrans = date("$dateMAX-$monthPOST-$yearPOST", $tomorrow);
-			$nexTrans = '<p style="text-align:center;">-</p>';
-			$dateNow  = date("$dateMAX", $tomorrow);
-		}
-
 		foreach ($query as $val) {
-			//? set status transaksi
-			for ($i = 1; $i <= 31; $i++) {
-				if ($val->{"tanggal_$dateNow"} == 'DONE') {
-					$status   = '<span class = "badge badge-pill badge-primary text-uppercase">complete</span>';
-					break;
-				} else {
-					$status = '<span class="badge badge-pill badge-danger text-uppercase">urgent</span>';
-					break;
-				}
-			}
-
 			//? parse data to convert dots_status_color
 			$this->dots($monthPOST, $yearPOST, $val->tanggal_live_depo, $val->tanggal_1, $val->tanggal_2, $val->tanggal_3, $val->tanggal_4, $val->tanggal_5, $val->tanggal_6, $val->tanggal_7, $val->tanggal_8, $val->tanggal_9, $val->tanggal_10, $val->tanggal_11, $val->tanggal_12, $val->tanggal_13, $val->tanggal_14, $val->tanggal_15, $val->tanggal_16, $val->tanggal_17, $val->tanggal_18, $val->tanggal_19, $val->tanggal_20, $val->tanggal_21, $val->tanggal_22, $val->tanggal_23, $val->tanggal_24, $val->tanggal_25, $val->tanggal_26, $val->tanggal_27, $val->tanggal_28, $val->tanggal_29, $val->tanggal_30, $val->tanggal_31);
-
+			//?
+			$status   = '<span class = "badge badge-pill badge-primary text-uppercase">urgent</span>';
+			if ($val->last_transaksi) {
+				$lasTrans  = date("d-m-Y", strtotime($val->last_transaksi));
+				$nexTrans  = date("d-m-Y", strtotime($lasTrans . "+1 days"));
+				$status   = '<span class = "badge badge-pill badge-primary text-uppercase">complete</span>';
+			} else {
+				$nexTrans = date("01-$monthPOST-$yearPOST");
+				$lasTrans = '<p style = "text-align: center;">-</p>';
+				$status   = '<span class = "badge badge-pill badge-danger text-uppercase">urgent</span>';
+			}
 			//? table value
 			$row    = array();
 			$row[]  = $val->kode_site;
@@ -162,5 +138,12 @@ class MonitoringControllers extends MY_Controller
 		AND DATE_FORMAT(module_date, '%Y %m') = DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m')
 		")->result();
 		echo json_encode($query);
+	}
+
+	public function test()
+	{
+		$lasTrans  = date("d-m-Y", strtotime('2019-01-01'));
+		$dateCheck = date("j", strtotime($lasTrans));
+		echo $dateCheck;
 	}
 }

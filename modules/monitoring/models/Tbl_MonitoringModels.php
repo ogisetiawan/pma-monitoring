@@ -21,6 +21,13 @@ class Tbl_MonitoringModels extends CI_Model
         $modul       = $this->input->post('modul');
         //? show antoher field 
             $select_table_coloumn = "MAX(odate.prevdate) prevdate, MAX(odate.next_date)as next, d.KD_DEPO as kode_site,
+            (
+                SELECT max(module_date)
+                FROM rmodule_monitor
+                WHERE module_name = '$modul'
+                AND module_site = kode_site
+                AND DATE_FORMAT(MODULE_DATE, '%Y %m') = DATE_FORMAT('$thn-$bln-01', '%Y %m')
+            ) as last_transaksi,
             CASE
                 WHEN d.sta01 = 'PMA' THEN 'PINUS MERAH ABADI, PT'
             ELSE d.NM_DEPO
