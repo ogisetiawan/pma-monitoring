@@ -20,8 +20,9 @@ class MonitoringControllers extends MY_Controller
 		for ($i = 1; $i <= 31; $i++) {
 			//! check depo sudah live?
 			if ($year . "-" . $month . "-" . $i >= $tgl_live_depo) {
-				//? check bulan dan tahun sudah berlalu 
+				//? check bulan dan tahun sudah berlalu?
 				if ($month == $monthPOST && $year == $yearPOST) {
+					//? add data  ke dalam variabel looping
 					//! jika ada value di variable dan $i kurang dari tgl sekarang
 					if (${"tgl$i"} && $i <= $date) {
 						${"tgl$i"} = '<p style="color: green;">&#8226;</p>';
@@ -64,7 +65,7 @@ class MonitoringControllers extends MY_Controller
 		$monthNow  = date("m");
 		$yearNow   = date("Y");
 
-		//! gua juga ga tau codingan dbawah ngapain, 
+		//! set data tanggal transaksi dan status scara dynamic 
 		if ($monthNow == $monthPOST && $yearNow == $yearPOST) {
 			$dayPOST  = date("d");
 			$date     = date_create("$yearPOST-$monthPOST-$dayPOST");
@@ -88,7 +89,7 @@ class MonitoringControllers extends MY_Controller
 		}
 
 		foreach ($query as $val) {
-			//? 
+			//? set status transaksi
 			for ($i = 1; $i <= 31; $i++) {
 				if ($val->{"tanggal_$dateNow"} == 'DONE') {
 					$status   = '<span class = "badge badge-pill badge-primary text-uppercase">complete</span>';
@@ -99,7 +100,7 @@ class MonitoringControllers extends MY_Controller
 				}
 			}
 
-			//? parse data to dots_status
+			//? parse data to convert dots_status_color
 			$this->dots($monthPOST, $yearPOST, $val->tanggal_live_depo, $val->tanggal_1, $val->tanggal_2, $val->tanggal_3, $val->tanggal_4, $val->tanggal_5, $val->tanggal_6, $val->tanggal_7, $val->tanggal_8, $val->tanggal_9, $val->tanggal_10, $val->tanggal_11, $val->tanggal_12, $val->tanggal_13, $val->tanggal_14, $val->tanggal_15, $val->tanggal_16, $val->tanggal_17, $val->tanggal_18, $val->tanggal_19, $val->tanggal_20, $val->tanggal_21, $val->tanggal_22, $val->tanggal_23, $val->tanggal_24, $val->tanggal_25, $val->tanggal_26, $val->tanggal_27, $val->tanggal_28, $val->tanggal_29, $val->tanggal_30, $val->tanggal_31);
 
 			//? table value
@@ -133,7 +134,7 @@ class MonitoringControllers extends MY_Controller
 	{
 		$greg = $this->input->post('grup_region');
 		$query = $this->db->query("SELECT * FROM rmstreg WHERE KD_GREG='$greg' order by NM_REG")->result();
-		echo "<option value=''>-- PILIH REGION --</option>";
+		echo "<option value=''>-- SELECT REGION --</option>";
 		foreach ($query as $value) {
 			echo "<option value=\"" . $value->KD_REG . "\" >" . $value->NM_REG . "</option>\n";
 		}

@@ -34,7 +34,7 @@ $month = date('m');
                     ?>
                 </tr>
             </thead>
-            <tbody class="text-center">
+            <tbody class="text-center data-monitoring">
             </tbody>
         </table>
     </div>
@@ -139,11 +139,23 @@ $month = date('m');
                 $('#table-monitoring thead th[title]').tooltip({
                     "container": 'body'
                 });
+
+                //! COUNT STATUS
+                // console.log($(".data-monitoring td:nth-child(4):contains('GT')").length);
+                // var billable = 0;
+                // let table = $('#table-monitoring').DataTable();
+                // var rowCount = table.rows()[0].length;
+                // for (var row = 0; row < rowCount; row++) {
+                //     if (table.cells(row, 3).data().indexOf('GT') > -1) {
+                //         billable++;
+                //     }
+                // }
+                // alert(billable + ' total');
             }
         });
     }
     // ! passByRefrencee ColoumnDynamic
-    function dynamicColoumnTable($month){
+    function dynamicColoumnTable($month) {
         var coloumnDate;
         const d = new Date();
         if ($month == '01' || $month == '03' || $month == '05' || $month == '07' || $month == '08' || $month == '10' || $month == '12') {
@@ -230,6 +242,8 @@ $month = date('m');
         initTable();
         dynamicColoumnTable(montNumber[d.getMonth()]);
 
+
+
         //! SelectedEventDropdown ChangeTitle
         $('#selected-modul').on('change', function() {
             let modules = $(this).val();
@@ -256,7 +270,8 @@ $month = date('m');
             let year = $(this).val();
 
             changeTitle(modules, monthNames[d.getMonth()], year, bln);
-            dynamicColoumnTable(montNumber[d.getMonth()]);
+            dynamicColoumnTable(montNumber[d.getMonth()])
+
         });
 
         $('#selected-group-region').on('change', function() {
@@ -292,30 +307,31 @@ $month = date('m');
     });
 
     //! windowResize
-//     var delay = (function() {
-//         var timer = 0;
-//         return function(callback, ms) {
-//             clearTimeout(timer);
-//             timer = setTimeout(callback, ms);
-//         };
-//     })();
-//     $(function() {
-//         var pause = 100;
-//         // will only process code within delay(function() { ... }) every 100ms.
-//         $(window).resize(function() {
-//             delay(function() {
-//                 $('#responsive').removeClass('table-responsive');
-//                 var width = $(window).width();
-//                 if (width >= 768 && width <= 959) {
-//                     // code for tablet view
-//                 } else if (width >= 480 && width <= 767) {
-//                     $('#responsive').addClass('table-responsive');
-//                     // code for mobile landscape
-//                 } else if (width <= 479) {
-//                     // code for mobile portrait
-//                 }
-//             }, pause);
-//         });
-//         $(window).resize();
-//     });
-// </script>
+    //     var delay = (function() {
+    //         var timer = 0;
+    //         return function(callback, ms) {
+    //             clearTimeout(timer);
+    //             timer = setTimeout(callback, ms);
+    //         };
+    //     })();
+    //     $(function() {
+    //         var pause = 100;
+    //         // will only process code within delay(function() { ... }) every 100ms.
+    //         $(window).resize(function() {
+    //             delay(function() {
+    //                 $('#responsive').removeClass('table-responsive');
+    //                 var width = $(window).width();
+    //                 if (width >= 768 && width <= 959) {
+    //                     // code for tablet view
+    //                 } else if (width >= 480 && width <= 767) {
+    //                     $('#responsive').addClass('table-responsive');
+    //                     // code for mobile landscape
+    //                 } else if (width <= 479) {
+    //                     // code for mobile portrait
+    //                 }
+    //             }, pause);
+    //         });
+    //         $(window).resize();
+    //     });
+    // 
+</script>
