@@ -124,8 +124,8 @@ $month = date('m');
                 <tr>
                     <?php
                     for ($i = 1; $i <= 31; $i++) {
-                        echo '<th class="text-center" style="font-size:8px;">Penjualan</th>';
-                        echo '<th class="text-center" style="font-size:8px;">Retur</th>';
+                        echo '<th class="text-center" style="font-size:8px; color: #f9ca00;">Penjualan</th>';
+                        echo '<th class="text-center" style="font-size:8px; color: #1E74FF;">Retur</th>';
                     }
                     ?>
                 </tr>
