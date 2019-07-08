@@ -22,8 +22,8 @@ class SalesDaillyControllers extends MY_Controller
 			if ($year . "-" . $month . "-" . $i >= $tgl_live_depo) {
 				//? check bulan dan tahun sudah berlalu?
 				if ($month == $monthPOST && $year == $yearPOST) {
-					//? add data  ke dalam variabel looping
-					//! jika ada value di variable dan $i kurang dari tgl sekarang
+					//! add data  ke dalam variabel looping
+					//? jika ada value di variable dan $i kurang dari tgl sekarang
 					if (${"tgl$i"} && $i <= $date) {
 						${"penjualan$i"} = number_format(empty(${"penjualan$i"}) ? "0" : ${"penjualan$i"});
 						${"retur$i"} = number_format(empty(${"retur$i"}) ? "0" : ${"retur$i"});
@@ -34,11 +34,14 @@ class SalesDaillyControllers extends MY_Controller
 						${"penjualan$i"} = '<p style="text-align:center; font-size:12px;">-</p>';
 						${"retur$i"} = '<p style="text-align:center; font-size:12px;">-</p>';
 					}
+				//? bulan dan tahun sudah berlalu
 				} else {
+					//? bulan skrg kurang dari bulan post
 					if ($month <= $monthPOST) {
 						${"penjualan$i"} = '<p style="text-align:center;">-</p>';
 						${"retur$i"} = '<p style="text-align:center;">-</p>';
 					} else {
+					//? periode sekarang						
 						if (${"tgl$i"}) {
 							${"penjualan$i"} = number_format(empty(${"penjualan$i"}) ? "0" : ${"penjualan$i"});
 							${"retur$i"} = number_format(empty(${"retur$i"}) ? "0" : ${"retur$i"});

@@ -147,10 +147,11 @@ class MonitoringControllers extends MY_Controller
 		for ($i=1; $i <31 ; $i++) {
 			$x++;
 			$x = str_pad($x,2,"0",STR_PAD_LEFT);
-			echo "<pre>";
-			echo '$row[]  = number_format(empty($val->penjualan_'.$i.') ? "0" : $val->penjualan_'.$i.');';
-			echo "<br>";
-			echo '$row[]  = number_format(empty($val->retur_'.$i.') ? "0" : $val->retur_'.$i.');';
+			// echo "<pre>";
+			// echo '$val->tanggal_'.$i.', $val->penjualan_'.$i.', $val->retur_'.$i.', ';
+			echo '&$tgl'.$i.', &$penjualan'.$i.', &$retur'.$i.', ';
+			// echo '$row[]  = number_format(empty($val->penjualan_'.$i.') ? "0" : $val->penjualan_'.$i.');';
+			// echo '$row[]  = number_format(empty($val->retur_'.$i.') ? "0" : $val->retur_'.$i.');';
 
 			// echo "<pre>";
 			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN 'DONE' END),'') AS tanggal_$i,";
@@ -159,11 +160,6 @@ class MonitoringControllers extends MY_Controller
 			// echo "<br>";
 			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN a.retur END),'') as retur_$i,";
 			
-			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN 'DONE' END),'') AS tanggal_$i,";
-			// echo "<br>";
-			// echo "(SELECT (PENJ-POT_PENJ) AS penjualan FROM Sum_SLS_BYDEPO_DAILY WHERE DAY(INV_DATE) = '$x' AND MONTH(INV_DATE) = '06' AND YEAR(INV_DATE) = '2019' AND KD_DEPO = kode_site) AS penjualan_$i,";
-			// echo "<br>";
-			// echo "(SELECT (RETUR+POT_RET) AS retur FROM Sum_SLS_BYDEPO_DAILY WHERE DAY(INV_DATE) = '$x' AND MONTH(INV_DATE) = '06' AND YEAR(INV_DATE) = '2019 AND KD_DEPO = kode_site') AS retur_$i,";
 		}
 		
 	}
