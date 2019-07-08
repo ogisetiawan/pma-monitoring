@@ -24,10 +24,6 @@ $month = date('m');
                 </div>
                 <div class="col-auto col-xs-12">
                     <select id="selected-bulan" class="form-control custom-select-sm" title=" Bulan">
-                        <?php
-                        $tahun = date('Y') + 1;
-                        $month = date('m');
-                        ?>
                         <option <?php if ($month == '01') {
                                     echo "selected ";
                                 } ?>value="01"> January</option>
@@ -340,8 +336,6 @@ $month = date('m');
         // ! callFunct DatatablesRetive and DynamicColoumn
         initTable();
         dynamicColoumnTable(montNumber[d.getMonth()]);
-
-
 
         //! SelectedEventDropdown ChangeTitle
         $('#selected-modul').on('change', function() {
