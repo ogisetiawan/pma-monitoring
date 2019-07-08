@@ -10,7 +10,7 @@ class SalesDaillyControllers extends MY_Controller
 		$this->load->database();
 	}
 
-	private function dots(&$monthPOST, &$yearPOST, &$tgl_live_depo, &$tgl1, &$tgl2, &$tgl3, &$tgl4, &$tgl5, &$tgl6, &$tgl7, &$tgl8, &$tgl9, &$tgl10, &$tgl11, &$tgl12, &$tgl13, &$tgl14, &$tgl15, &$tgl16, &$tgl17, &$tgl18, &$tgl19, &$tgl20, &$tgl21, &$tgl22, &$tgl23, &$tgl24, &$tgl25, &$tgl26, &$tgl27, &$tgl28, &$tgl29, &$tgl30, &$tgl31)
+	private function dots(&$monthPOST, &$yearPOST, &$tgl_live_depo, &$tgl1, &$penjualan1, &$retur1, &$tgl2, &$penjualan2, &$retur2, &$tgl3, &$penjualan3, &$retur3, &$tgl4, &$penjualan4, &$retur4, &$tgl5, &$penjualan5, &$retur5, &$tgl6, &$penjualan6, &$retur6, &$tgl7, &$penjualan7, &$retur7, &$tgl8, &$penjualan8, &$retur8, &$tgl9, &$penjualan9, &$retur9, &$tgl10, &$penjualan10, &$retur10, &$tgl11, &$penjualan11, &$retur11, &$tgl12, &$penjualan12, &$retur12, &$tgl13, &$penjualan13, &$retur13, &$tgl14, &$penjualan14, &$retur14, &$tgl15, &$penjualan15, &$retur15, &$tgl16, &$penjualan16, &$retur16, &$tgl17, &$penjualan17, &$retur17, &$tgl18, &$penjualan18, &$retur18, &$tgl19, &$penjualan19, &$retur19, &$tgl20, &$penjualan20, &$retur20, &$tgl21, &$penjualan21, &$retur21, &$tgl22, &$penjualan22, &$retur22, &$tgl23, &$penjualan23, &$retur23, &$tgl24, &$penjualan24, &$retur24, &$tgl25, &$penjualan25, &$retur25, &$tgl26, &$penjualan26, &$retur26, &$tgl27, &$penjualan27, &$retur27, &$tgl28, &$penjualan28, &$retur28, &$tgl29, &$penjualan29, &$retur29, &$tgl30, &$penjualan30, &$retur30, &$tgl31, &$penjualan31, &$retur31)
 	{
 		$date  = date("d");
 		$month = date("m");
@@ -25,26 +25,32 @@ class SalesDaillyControllers extends MY_Controller
 					//? add data  ke dalam variabel looping
 					//! jika ada value di variable dan $i kurang dari tgl sekarang
 					if (${"tgl$i"} && $i <= $date) {
-						${"tgl$i"} = '<p style="color: green;">&#8226;</p>';
+						${"penjualan$i"} = number_format(empty(${"penjualan$i"}) ? "0" : ${"penjualan$i"});
+						${"retur$i"} = number_format(empty(${"retur$i"}) ? "0" : ${"retur$i"});
 					} else if (!${"tgl$i"} && $i <= $date) {
-						${"tgl$i"} = '<p style="color: red;">&#8226;</p>';
+						${"penjualan$i"} = '<p style="color: red;">&#8226;</p>';
+						${"retur$i"} = '<p style="color: red;">&#8226;</p>';
 					} else {
-						${"tgl$i"} = '-';
+						${"penjualan$i"} = '<p style="text-align:center; font-size:12px;">-</p>';
+						${"retur$i"} = '<p style="text-align:center; font-size:12px;">-</p>';
 					}
 				} else {
 					if ($month <= $monthPOST) {
-						${"tgl$i"} = '-';
+						${"penjualan$i"} = '<p style="text-align:center;">-</p>';
+						${"retur$i"} = '<p style="text-align:center;">-</p>';
 					} else {
 						if (${"tgl$i"}) {
-							$dots = 'green';
+							${"penjualan$i"} = number_format(empty(${"penjualan$i"}) ? "0" : ${"penjualan$i"});
+							${"retur$i"} = number_format(empty(${"retur$i"}) ? "0" : ${"retur$i"});
 						} else {
-							$dots = 'red';
+							${"penjualan$i"} = '<p style="color: red;">&#8226;</p>';
+							${"retur$i"} = '<p style="color: red;">&#8226;</p>';
 						}
-						${"tgl$i"} = '<p style="color: ' . $dots . ';">&#8226;</p>';
 					}
 				}
 			} else {
-				${"tgl$i"} = '<p style="text-align:center;">-</p>';
+				${"penjualan$i"} = '<p style="text-align:center;">-</p>';
+				${"retur$i"} = '<p style="text-align:center;">-</p>';
 			}
 		}
 	}
@@ -73,69 +79,78 @@ class SalesDaillyControllers extends MY_Controller
 			$row[]  = $val->area;
 			$row[]  = $val->divisi;
 			$row[]  = $val->status_system;
-			
-			$row[]  = number_format(empty($val->penjualan_1) ? "0" : $val->penjualan_1);
-			$row[]  = number_format(empty($val->retur_1) ? "0" : $val->retur_1);
-			$row[]  = number_format(empty($val->penjualan_2) ? "0" : $val->penjualan_2);
-			$row[]  = number_format(empty($val->retur_2) ? "0" : $val->retur_2);
-			$row[]  = number_format(empty($val->penjualan_3) ? "0" : $val->penjualan_3);
-			$row[]  = number_format(empty($val->retur_3) ? "0" : $val->retur_3);
-			$row[]  = number_format(empty($val->penjualan_4) ? "0" : $val->penjualan_4);
-			$row[]  = number_format(empty($val->retur_4) ? "0" : $val->retur_4);
-			$row[]  = number_format(empty($val->penjualan_5) ? "0" : $val->penjualan_5);
-			$row[]  = number_format(empty($val->retur_5) ? "0" : $val->retur_5);
-			$row[]  = number_format(empty($val->penjualan_6) ? "0" : $val->penjualan_6);
-			$row[]  = number_format(empty($val->retur_6) ? "0" : $val->retur_6);
-			$row[]  = number_format(empty($val->penjualan_7) ? "0" : $val->penjualan_7);
-			$row[]  = number_format(empty($val->retur_7) ? "0" : $val->retur_7);
-			$row[]  = number_format(empty($val->penjualan_8) ? "0" : $val->penjualan_8);
-			$row[]  = number_format(empty($val->retur_8) ? "0" : $val->retur_8);
-			$row[]  = number_format(empty($val->penjualan_9) ? "0" : $val->penjualan_9);
-			$row[]  = number_format(empty($val->retur_9) ? "0" : $val->retur_9);
-			$row[]  = number_format(empty($val->penjualan_10) ? "0" : $val->penjualan_10);
-			$row[]  = number_format(empty($val->retur_10) ? "0" : $val->retur_10);
-			$row[]  = number_format(empty($val->penjualan_11) ? "0" : $val->penjualan_11);
-			$row[]  = number_format(empty($val->retur_11) ? "0" : $val->retur_11);
-			$row[]  = number_format(empty($val->penjualan_12) ? "0" : $val->penjualan_12);
-			$row[]  = number_format(empty($val->retur_12) ? "0" : $val->retur_12);
-			$row[]  = number_format(empty($val->penjualan_13) ? "0" : $val->penjualan_13);
-			$row[]  = number_format(empty($val->retur_13) ? "0" : $val->retur_13);
-			$row[]  = number_format(empty($val->penjualan_14) ? "0" : $val->penjualan_14);
-			$row[]  = number_format(empty($val->retur_14) ? "0" : $val->retur_14);
-			$row[]  = number_format(empty($val->penjualan_15) ? "0" : $val->penjualan_15);
-			$row[]  = number_format(empty($val->retur_15) ? "0" : $val->retur_15);
-			$row[]  = number_format(empty($val->penjualan_16) ? "0" : $val->penjualan_16);
-			$row[]  = number_format(empty($val->retur_16) ? "0" : $val->retur_16);
-			$row[]  = number_format(empty($val->penjualan_17) ? "0" : $val->penjualan_17);
-			$row[]  = number_format(empty($val->retur_17) ? "0" : $val->retur_17);
-			$row[]  = number_format(empty($val->penjualan_18) ? "0" : $val->penjualan_18);
-			$row[]  = number_format(empty($val->retur_18) ? "0" : $val->retur_18);
-			$row[]  = number_format(empty($val->penjualan_19) ? "0" : $val->penjualan_19);
-			$row[]  = number_format(empty($val->retur_19) ? "0" : $val->retur_19);
-			$row[]  = number_format(empty($val->penjualan_20) ? "0" : $val->penjualan_20);
-			$row[]  = number_format(empty($val->retur_20) ? "0" : $val->retur_20);
-			$row[]  = number_format(empty($val->penjualan_21) ? "0" : $val->penjualan_21);
-			$row[]  = number_format(empty($val->retur_21) ? "0" : $val->retur_21);
-			$row[]  = number_format(empty($val->penjualan_22) ? "0" : $val->penjualan_22);
-			$row[]  = number_format(empty($val->retur_22) ? "0" : $val->retur_22);
-			$row[]  = number_format(empty($val->penjualan_23) ? "0" : $val->penjualan_23);
-			$row[]  = number_format(empty($val->retur_23) ? "0" : $val->retur_23);
-			$row[]  = number_format(empty($val->penjualan_24) ? "0" : $val->penjualan_24);
-			$row[]  = number_format(empty($val->retur_24) ? "0" : $val->retur_24);
-			$row[]  = number_format(empty($val->penjualan_25) ? "0" : $val->penjualan_25);
-			$row[]  = number_format(empty($val->retur_25) ? "0" : $val->retur_25);
-			$row[]  = number_format(empty($val->penjualan_26) ? "0" : $val->penjualan_26);
-			$row[]  = number_format(empty($val->retur_26) ? "0" : $val->retur_26);
-			$row[]  = number_format(empty($val->penjualan_27) ? "0" : $val->penjualan_27);
-			$row[]  = number_format(empty($val->retur_27) ? "0" : $val->retur_27);
-			$row[]  = number_format(empty($val->penjualan_28) ? "0" : $val->penjualan_28);
-			$row[]  = number_format(empty($val->retur_28) ? "0" : $val->retur_28);
-			$row[]  = number_format(empty($val->penjualan_29) ? "0" : $val->penjualan_29);
-			$row[]  = number_format(empty($val->retur_29) ? "0" : $val->retur_29);
-			$row[]  = number_format(empty($val->penjualan_30) ? "0" : $val->penjualan_30);
-			$row[]  = number_format(empty($val->retur_30) ? "0" : $val->retur_30);
-			$row[]  = number_format(empty($val->penjualan_31) ? "0" : $val->penjualan_31);
-			$row[]  = number_format(empty($val->retur_31) ? "0" : $val->retur_31);
+
+			//? parse data to convert dots_status_color
+			$this->dots($monthPOST, $yearPOST, $val->tanggal_live_depo, $val->tanggal_1, $val->penjualan_1, $val->retur_1, $val->tanggal_2, $val->penjualan_2, $val->retur_2, $val->tanggal_3, $val->penjualan_3, $val->retur_3, $val->tanggal_4, $val->penjualan_4, $val->retur_4, $val->tanggal_5, $val->penjualan_5, $val->retur_5, $val->tanggal_6, $val->penjualan_6, $val->retur_6, $val->tanggal_7, $val->penjualan_7, $val->retur_7, $val->tanggal_8, $val->penjualan_8, $val->retur_8, $val->tanggal_9, $val->penjualan_9, $val->retur_9, $val->tanggal_10, $val->penjualan_10, $val->retur_10, $val->tanggal_11, $val->penjualan_11, $val->retur_11, $val->tanggal_12, $val->penjualan_12, $val->retur_12, $val->tanggal_13, $val->penjualan_13, $val->retur_13, $val->tanggal_14, $val->penjualan_14, $val->retur_14, $val->tanggal_15, $val->penjualan_15, $val->retur_15, $val->tanggal_16, $val->penjualan_16, $val->retur_16, $val->tanggal_17, $val->penjualan_17, $val->retur_17, $val->tanggal_18, $val->penjualan_18, $val->retur_18, $val->tanggal_19, $val->penjualan_19, $val->retur_19, $val->tanggal_20, $val->penjualan_20, $val->retur_20, $val->tanggal_21, $val->penjualan_21, $val->retur_21, $val->tanggal_22, $val->penjualan_22, $val->retur_22, $val->tanggal_23, $val->penjualan_23, $val->retur_23, $val->tanggal_24, $val->penjualan_24, $val->retur_24, $val->tanggal_25, $val->penjualan_25, $val->retur_25, $val->tanggal_26, $val->penjualan_26, $val->retur_26, $val->tanggal_27, $val->penjualan_27, $val->retur_27, $val->tanggal_28, $val->penjualan_28, $val->retur_28, $val->tanggal_29, $val->penjualan_29, $val->retur_29, $val->tanggal_30, $val->penjualan_30, $val->retur_30,  $val->tanggal_31, $val->penjualan_31, $val->retur_31);
+
+			for ($i = 1; $i <= 31; $i++) {
+				$row[] = $val->{"penjualan_$i"};
+				$row[] = $val->{"retur_$i"};
+			}
+
+
+			// $row[]  = number_format(empty($val->penjualan_1) ? "0" : $val->penjualan_1);
+			// $row[]  = number_format(empty($val->retur_1) ? "0" : $val->retur_1);
+			// $row[]  = number_format(empty($val->penjualan_2) ? "0" : $val->penjualan_2);
+			// $row[]  = number_format(empty($val->retur_2) ? "0" : $val->retur_2);
+			// $row[]  = number_format(empty($val->penjualan_3) ? "0" : $val->penjualan_3);
+			// $row[]  = number_format(empty($val->retur_3) ? "0" : $val->retur_3);
+			// $row[]  = number_format(empty($val->penjualan_4) ? "0" : $val->penjualan_4);
+			// $row[]  = number_format(empty($val->retur_4) ? "0" : $val->retur_4);
+			// $row[]  = number_format(empty($val->penjualan_5) ? "0" : $val->penjualan_5);
+			// $row[]  = number_format(empty($val->retur_5) ? "0" : $val->retur_5);
+			// $row[]  = number_format(empty($val->penjualan_6) ? "0" : $val->penjualan_6);
+			// $row[]  = number_format(empty($val->retur_6) ? "0" : $val->retur_6);
+			// $row[]  = number_format(empty($val->penjualan_7) ? "0" : $val->penjualan_7);
+			// $row[]  = number_format(empty($val->retur_7) ? "0" : $val->retur_7);
+			// $row[]  = number_format(empty($val->penjualan_8) ? "0" : $val->penjualan_8);
+			// $row[]  = number_format(empty($val->retur_8) ? "0" : $val->retur_8);
+			// $row[]  = number_format(empty($val->penjualan_9) ? "0" : $val->penjualan_9);
+			// $row[]  = number_format(empty($val->retur_9) ? "0" : $val->retur_9);
+			// $row[]  = number_format(empty($val->penjualan_10) ? "0" : $val->penjualan_10);
+			// $row[]  = number_format(empty($val->retur_10) ? "0" : $val->retur_10);
+			// $row[]  = number_format(empty($val->penjualan_11) ? "0" : $val->penjualan_11);
+			// $row[]  = number_format(empty($val->retur_11) ? "0" : $val->retur_11);
+			// $row[]  = number_format(empty($val->penjualan_12) ? "0" : $val->penjualan_12);
+			// $row[]  = number_format(empty($val->retur_12) ? "0" : $val->retur_12);
+			// $row[]  = number_format(empty($val->penjualan_13) ? "0" : $val->penjualan_13);
+			// $row[]  = number_format(empty($val->retur_13) ? "0" : $val->retur_13);
+			// $row[]  = number_format(empty($val->penjualan_14) ? "0" : $val->penjualan_14);
+			// $row[]  = number_format(empty($val->retur_14) ? "0" : $val->retur_14);
+			// $row[]  = number_format(empty($val->penjualan_15) ? "0" : $val->penjualan_15);
+			// $row[]  = number_format(empty($val->retur_15) ? "0" : $val->retur_15);
+			// $row[]  = number_format(empty($val->penjualan_16) ? "0" : $val->penjualan_16);
+			// $row[]  = number_format(empty($val->retur_16) ? "0" : $val->retur_16);
+			// $row[]  = number_format(empty($val->penjualan_17) ? "0" : $val->penjualan_17);
+			// $row[]  = number_format(empty($val->retur_17) ? "0" : $val->retur_17);
+			// $row[]  = number_format(empty($val->penjualan_18) ? "0" : $val->penjualan_18);
+			// $row[]  = number_format(empty($val->retur_18) ? "0" : $val->retur_18);
+			// $row[]  = number_format(empty($val->penjualan_19) ? "0" : $val->penjualan_19);
+			// $row[]  = number_format(empty($val->retur_19) ? "0" : $val->retur_19);
+			// $row[]  = number_format(empty($val->penjualan_20) ? "0" : $val->penjualan_20);
+			// $row[]  = number_format(empty($val->retur_20) ? "0" : $val->retur_20);
+			// $row[]  = number_format(empty($val->penjualan_21) ? "0" : $val->penjualan_21);
+			// $row[]  = number_format(empty($val->retur_21) ? "0" : $val->retur_21);
+			// $row[]  = number_format(empty($val->penjualan_22) ? "0" : $val->penjualan_22);
+			// $row[]  = number_format(empty($val->retur_22) ? "0" : $val->retur_22);
+			// $row[]  = number_format(empty($val->penjualan_23) ? "0" : $val->penjualan_23);
+			// $row[]  = number_format(empty($val->retur_23) ? "0" : $val->retur_23);
+			// $row[]  = number_format(empty($val->penjualan_24) ? "0" : $val->penjualan_24);
+			// $row[]  = number_format(empty($val->retur_24) ? "0" : $val->retur_24);
+			// $row[]  = number_format(empty($val->penjualan_25) ? "0" : $val->penjualan_25);
+			// $row[]  = number_format(empty($val->retur_25) ? "0" : $val->retur_25);
+			// $row[]  = number_format(empty($val->penjualan_26) ? "0" : $val->penjualan_26);
+			// $row[]  = number_format(empty($val->retur_26) ? "0" : $val->retur_26);
+			// $row[]  = number_format(empty($val->penjualan_27) ? "0" : $val->penjualan_27);
+			// $row[]  = number_format(empty($val->retur_27) ? "0" : $val->retur_27);
+			// $row[]  = number_format(empty($val->penjualan_28) ? "0" : $val->penjualan_28);
+			// $row[]  = number_format(empty($val->retur_28) ? "0" : $val->retur_28);
+			// $row[]  = number_format(empty($val->penjualan_29) ? "0" : $val->penjualan_29);
+			// $row[]  = number_format(empty($val->retur_29) ? "0" : $val->retur_29);
+			// $row[]  = number_format(empty($val->penjualan_30) ? "0" : $val->penjualan_30);
+			// $row[]  = number_format(empty($val->retur_30) ? "0" : $val->retur_30);
+			// $row[]  = number_format(empty($val->penjualan_31) ? "0" : $val->penjualan_31);
+			// $row[]  = number_format(empty($val->retur_31) ? "0" : $val->retur_31);
 
 			$data[] = $row;
 		}
