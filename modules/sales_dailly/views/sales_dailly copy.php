@@ -16,10 +16,6 @@ $month = date('m');
         <div class="form-row">
             <div class="col-auto col-xs-12">
                 <select id="selected-bulan" class="form-control custom-select-sm" title=" Bulan">
-                    <?php
-                    $tahun = date('Y') + 1;
-                    $month = date('m');
-                    ?>
                     <option <?php if ($month == '01') {
                                 echo "selected ";
                             } ?>value="01"> January</option>
@@ -61,7 +57,7 @@ $month = date('m');
             <div class="col-auto col-xs-12">
                 <select class="form-control custom-select-sm" id="selected-tahun" title="Tahun">
                     <?php
-                    for ($i = 2016; $i <= $tahun; $i++) { ?>
+                    for ($i = 2018; $i <= $tahun; $i++) { ?>
                         <option value="<?php echo $i ?>" <?php if (date('Y') == $i) {
                                                                 echo "selected ";
                                                             } ?>><?php echo $i ?></option>
@@ -71,7 +67,7 @@ $month = date('m');
 
             <div class="col-auto col-xs-12">
                 <select id="selected-group-region" class="form-control custom-select-sm" title=" Group Region">
-                    <option value="" selected>-- SELECT GROUP REGION --</option>
+                    <option value="" >-- SELECT GROUP REGION --</option>
                     <option value="1">West</option>
                     <option value="2">Central</option>
                     <option value="3">East</option>
@@ -109,7 +105,6 @@ $month = date('m');
         <table class="table display table-responsive table-hover table-bordered table-height" cellspacing="0" width="100%" id="table-monitoring" style="overflow-y: hidden;">
             <thead class="custom-ogi shadow-light text-uppercase">
                 <tr>
-                    <!-- <th>No</th> -->
                     <th rowspan="2">Kode Depo</th>
                     <th rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nama&nbsp;Distributor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     <th rowspan="2">Area</th>
@@ -117,7 +112,7 @@ $month = date('m');
                     <th rowspan="2">System</th>
                     <?php
                     for ($i = 1; $i <= 31; $i++) {
-                        echo '<th colspan="2" data-placement="top" data-html="true" class="date_selector"><b style="color: #d3250f; text-decoration-style: dotted;text-decoration-color: #d3250f;text-decoration-line: underline;">' . $i . ' June 2019</b></th>';
+                        echo '<th colspan="2" data-placement="top" data-html="true" class="date_selector"><b style="color: #d3250f; text-decoration-style: dotted;text-decoration-color: #d3250f;text-decoration-line: underline;">' . $i . ' '.date('M').' '.date('y').'</b></th>';
                     }
                     ?>
                 </tr>
@@ -230,7 +225,7 @@ $month = date('m');
             }
         });
     }
-    // ! passByRefrencee ColoumnDynamic
+    // ! passByRefrencee ColoumnDynamic {HIDDEN KOLOM}
     function dynamicColoumnTable($month) {
         var coloumnDate;
         if ($month == '01' || $month == '03' || $month == '05' || $month == '07' || $month == '08' || $month == '10' || $month == '12') {
@@ -239,11 +234,11 @@ $month = date('m');
             $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
         } else if ($month == '04' || $month == '06' || $month == '09' || $month == '11') {
             //? monthDate30
-            coloumnDate = '35,36';
+            coloumnDate = '65,66';
             $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
         } else if ($month == '02') {
             //? monthDate28 || Febuary
-            coloumnDate = '33,34,35,36';
+            coloumnDate = '61,62,63,64,65,66';
             $('#table-monitoring').DataTable().columns([coloumnDate]).visible(false);
         }
     }
@@ -292,7 +287,7 @@ $month = date('m');
         $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + y);
         // ! callFunct DatatablesRetive and DynamicColoumn
         initTable();
-        // dynamicColoumnTable(montNumber[d.getMonth()]);
+        dynamicColoumnTable(montNumber[d.getMonth()]);
 
         // ! onEventChange
         $('#selected-bulan').on('change', function() {
@@ -312,23 +307,24 @@ $month = date('m');
             let year = $(this).val();
 
             $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + year);
+            $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicColoumnTable(montNumber[d.getMonth()]);
         });
 
         $('#selected-group-region').on('change', function() {
-            let modules = $('#selected-modul').val();
-            let bln = $('#selected-bulan').val();
-            const d = new Date(bln);
-            let year = $('#selected-tahun').val();
-            let greg = $("#selected-group-region option:selected").text();
             let select_gregion = $(this).val();
+            let bln     = $('#selected-bulan').val();
+            const d     = new Date(bln);
+            let year    = $('#selected-tahun').val();
 
             $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable(bln);
             dynamicColoumnTable(montNumber[d.getMonth()]);
-            //! getDataRegion by groupRegion
+            // //! getDataRegion by groupRegion
             $.ajax({
-                url: "<?= site_url('search_region_sales') ?>",
+                url: "<?= site_url('search_region') ?>",
                 type: 'POST',
                 data: "grup_region=" + select_gregion,
                 success: function(data) {
@@ -344,6 +340,8 @@ $month = date('m');
             let year = $('#selected-tahun').val();
 
             $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable(bln);
             dynamicColoumnTable(montNumber[d.getMonth()]);
         });
     });

@@ -31,15 +31,15 @@ class SalesDaillyControllers extends MY_Controller
 						${"penjualan$i"} = '<p style="color: red;">&#8226;</p>';
 						${"retur$i"} = '<p style="color: red;">&#8226;</p>';
 					} else {
-						${"penjualan$i"} = '<p style="text-align:center; font-size:12px;">-</p>';
-						${"retur$i"} = '<p style="text-align:center; font-size:12px;">-</p>';
+						${"penjualan$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
+						${"retur$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
 					}
 				//? bulan dan tahun sudah berlalu
 				} else {
 					//? bulan skrg kurang dari bulan post
 					if ($month <= $monthPOST) {
-						${"penjualan$i"} = '<p style="text-align:center;">-</p>';
-						${"retur$i"} = '<p style="text-align:center;">-</p>';
+						${"penjualan$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
+						${"retur$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
 					} else {
 					//? periode sekarang						
 						if (${"tgl$i"}) {
@@ -52,8 +52,8 @@ class SalesDaillyControllers extends MY_Controller
 					}
 				}
 			} else {
-				${"penjualan$i"} = '<p style="text-align:center;">-</p>';
-				${"retur$i"} = '<p style="text-align:center;">-</p>';
+				${"penjualan$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
+				${"retur$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
 			}
 		}
 	}
