@@ -68,7 +68,8 @@ class MonitoringControllers extends MY_Controller
 		foreach ($query as $val) {
 			//? parse data to convert dots_status_color
 			$this->dots($monthPOST, $yearPOST, $val->tanggal_live_depo, $val->tanggal_1, $val->tanggal_2, $val->tanggal_3, $val->tanggal_4, $val->tanggal_5, $val->tanggal_6, $val->tanggal_7, $val->tanggal_8, $val->tanggal_9, $val->tanggal_10, $val->tanggal_11, $val->tanggal_12, $val->tanggal_13, $val->tanggal_14, $val->tanggal_15, $val->tanggal_16, $val->tanggal_17, $val->tanggal_18, $val->tanggal_19, $val->tanggal_20, $val->tanggal_21, $val->tanggal_22, $val->tanggal_23, $val->tanggal_24, $val->tanggal_25, $val->tanggal_26, $val->tanggal_27, $val->tanggal_28, $val->tanggal_29, $val->tanggal_30, $val->tanggal_31);
-			//?
+			
+			//? dynamical status last transaction
 			$status   = '<span class = "badge badge-pill badge-primary text-uppercase">urgent</span>';
 			if ($val->last_transaksi) {
 				$lasTrans  = date("d-m-Y", strtotime($val->last_transaksi));
@@ -142,8 +143,28 @@ class MonitoringControllers extends MY_Controller
 
 	public function test()
 	{
-		$lasTrans  = date("d-m-Y", strtotime('2019-01-01'));
-		$dateCheck = date("j", strtotime($lasTrans));
-		echo $dateCheck;
+		$x = "00";
+		for ($i=1; $i <31 ; $i++) {
+			$x++;
+			$x = str_pad($x,2,"0",STR_PAD_LEFT);
+			echo "<pre>";
+			echo '$row[]  = number_format(empty($val->penjualan_'.$i.') ? "0" : $val->penjualan_'.$i.');';
+			echo "<br>";
+			echo '$row[]  = number_format(empty($val->retur_'.$i.') ? "0" : $val->retur_'.$i.');';
+
+			// echo "<pre>";
+			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN 'DONE' END),'') AS tanggal_$i,";
+			// echo "<br>";
+			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN a.sales END),'') as penjualan_$i,";
+			// echo "<br>";
+			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN a.retur END),'') as retur_$i,";
+			
+			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN 'DONE' END),'') AS tanggal_$i,";
+			// echo "<br>";
+			// echo "(SELECT (PENJ-POT_PENJ) AS penjualan FROM Sum_SLS_BYDEPO_DAILY WHERE DAY(INV_DATE) = '$x' AND MONTH(INV_DATE) = '06' AND YEAR(INV_DATE) = '2019' AND KD_DEPO = kode_site) AS penjualan_$i,";
+			// echo "<br>";
+			// echo "(SELECT (RETUR+POT_RET) AS retur FROM Sum_SLS_BYDEPO_DAILY WHERE DAY(INV_DATE) = '$x' AND MONTH(INV_DATE) = '06' AND YEAR(INV_DATE) = '2019 AND KD_DEPO = kode_site') AS retur_$i,";
+		}
+		
 	}
 }
