@@ -188,29 +188,29 @@ $month = date('m');
                 var year = $("#selected-tahun").val();
                 //? setTooltip
                 let i = 1;
-                // for (i; i <= 31; ++i) {
-                //     $("#table-monitoring thead .date_selector").eq(i - 1).each(function() {
-                //         var $td = $(this);
-                //         //? postAjax
-                //         $.post("<?= site_url('get_status_dots_sales/') ?>" + i + "/" + month + "/" + year, function(data) {
-                //             $('[data-toggle="tooltip"]').tooltip('dispose')
-                //             let datas = $.parseJSON(data);
-                //             if (!datas.length == '0') {
-                //                 let datas = $.parseJSON(data);
-                //                 var done = datas[0].data_done;
-                //                 var undone = datas[0].data_undone;
-                //                 $td.attr('data-toggle', "tooltip");
-                //                 $td.attr('title', "DONE : " + done + " <br> UNDONE : " + undone);
-                //                 $('[data-toggle="tooltip"]').tooltip();
-                //             }
-                //         });
-                //     });
-                // };
+                for (i; i <= 31; ++i) {
+                    $("#table-monitoring thead .date_selector").eq(i - 1).each(function() {
+                        var $td = $(this);
+                       //? postAjax
+                        $.post("<?= site_url('get_status_dots_sales/') ?>" + i + "/" + month + "/" + year, function(data) {
+                            $('[data-toggle="tooltip"]').tooltip('dispose')
+                            let datas = $.parseJSON(data);
+                            if (!datas.length == '0') {
+                                let datas = $.parseJSON(data);
+                                var done = datas[0].data_done;
+                                var undone = datas[0].data_undone;
+                                $td.attr('data-toggle', "tooltip");
+                                $td.attr('title', "DONE : " + done + " <br> UNDONE : " + undone);
+                                $('[data-toggle="tooltip"]').tooltip();
+                            }
+                        });
+                    });
+                };
 
                 /* Apply the tooltips */
-                // $('#table-monitoring thead th[title]').tooltip({
-                //     "container": 'body'
-                // });
+                $('#table-monitoring thead th[title]').tooltip({
+                    "container": 'body'
+                });
                 //! COUNT STATUS
                 // console.log($(".data-monitoring td:nth-child(4):contains('GT')").length);
                 // var billable = 0;
