@@ -122,7 +122,7 @@ SELECT max(odate.prevdate) prevdate, max(odate.next_date)as next, d.KD_DEPO as k
 					FROM Sum_SLS_BYDEPO_DAILY AS a
 					WHERE MONTH(a.INV_DATE) = '06' AND YEAR(a.INV_DATE) = '2019') AS a ON a.kode_site = d.KD_DEPO
 				LEFT JOIN rops_date AS odate ON odate.depo = d.KD_DEPO
-				# ALL
+				-- ALL
 				WHERE d.status = 'A' AND d.status_system = 'SCYLLA'
 				GROUP BY d.KD_DEPO, a.bulan, a.tahun
 				LIMIT 0, 100;

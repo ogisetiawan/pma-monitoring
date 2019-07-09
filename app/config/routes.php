@@ -14,4 +14,4 @@ $route['test']                                         = 'monitoring/MonitoringC
 // ! SALES_DAILLY
 $route['sales_dailly']                                       = 'sales_dailly/SalesDaillyControllers';
 $route['table_monitoring_sales']                             = 'sales_dailly/SalesDaillyControllers/table_monitoring';
-$route['get_status_dots_sales/(:num)/(:any)/(:any)']  = 'sales_dailly/SalesDaillyControllers/get_status_dots';
+$route['get_status_dots_sales/(:num)/(:any)/(:any)']         = 'sales_dailly/SalesDaillyControllers/get_status_dots';
