@@ -25,7 +25,7 @@
                           <i class="fas fa-box-open"></i> Sales Dailly</a>
                   </li>
                   <a id="navbar-static-login" class="btn btn-outline-light btn-sm" data-toggle="modal" style="border-radius:16px" data-target="#modalLogin">
-                       Log In&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
+                      Log In&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
                   </a>
                   <a id="navbar-static-login" class="btn btn-outline-light btn-sm" data-toggle="modal" style="border-radius:16px" data-target="#modalAdmin">
                       Log Out&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
@@ -105,28 +105,25 @@
                   <!-- Material form register -->
                   <form>
                       <p class="h4 mb-4"><i class="fas fa-users animated rotateIn mr-2"></i>Hi, Admin</p>
+                      <label for="select-depo" class="text-uppercase">Depo</label>
                       <div class="form-group">
-                          <label for="inputAddress" class="text-uppercase">Depo</label>
-                          <select class="browser-default form-control custom-select-sm" id="inputGroupSelect01">
-                              <option selected>-- SELECT DEPO --</option>
+                          <select class="tail-select" id="select-depo" name="lblDepo" multiple placeholder="Select an reason">
                               <option value="1">One</option>
                               <option value="2">Two</option>
                               <option value="3">Three</option>
                           </select>
                       </div>
+                      <label for="select-reason" class="text-uppercase">Reason</label>
                       <div class="form-group">
-                          <label for="inputAddress" class="text-uppercase">Reason</label>
-                          <select class="browser-default form-control custom-select-sm" id="inputGroupSelect01">
-                              <option selected>-- SELECT REASON --</option>
+                          <select class="tail-select" id="select-reason" name="lblReason" multiple placeholder="Select an reason">
                               <option value="1">One</option>
                               <option value="2">Two</option>
                               <option value="3">Three</option>
                           </select>
                       </div>
+                      <label for="select-modul" class="text-uppercase">Modul</label>
                       <div class="form-group">
-                          <label for="inputAddress" class="text-uppercase">Modul</label>
-                          <select class="browser-default form-control custom-select-sm" id="inputGroupSelect01">
-                              <option selected>-- SELECT MODUL --</option>
+                          <select class="tail-select" id="select-modul" name="lblModul" multiple placeholder="Select an modul">
                               <option value="1">One</option>
                               <option value="2">Two</option>
                               <option value="3">Three</option>
@@ -155,4 +152,3 @@
       </div>
   </div>
   <!-- Modalpool:AdminDashboard-->
-  

@@ -20,4 +20,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/css/default/tail.select-light.css" rel="stylesheet">
     <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
+    <style>
+        .tail-select .select-dropdown {
+            position: relative;
+        }
+    </style>
 </head>
