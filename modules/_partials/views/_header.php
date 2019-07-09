@@ -107,7 +107,7 @@
                       <p class="h4 mb-4"><i class="fas fa-users animated rotateIn mr-2"></i>Hi, Admin</p>
                       <label for="select-depo" class="text-uppercase">Depo</label>
                       <div class="form-group">
-                          <select class="tail-select" id="select-depo" name="lblDepo" multiple placeholder="Select an reason">
+                          <select class="tail-select-multiple" id="select-depo" name="lblDepo" multiple placeholder="Select an reason">
                               <option value="1">One</option>
                               <option value="2">Two</option>
                               <option value="3">Three</option>
@@ -115,7 +115,7 @@
                       </div>
                       <label for="select-reason" class="text-uppercase">Reason</label>
                       <div class="form-group">
-                          <select class="tail-select" id="select-reason" name="lblReason" multiple placeholder="Select an reason">
+                          <select class="tail-select-single" id="select-reason" name="lblReason" multiple placeholder="Select an reason">
                               <option value="1">One</option>
                               <option value="2">Two</option>
                               <option value="3">Three</option>
@@ -123,7 +123,7 @@
                       </div>
                       <label for="select-modul" class="text-uppercase">Modul</label>
                       <div class="form-group">
-                          <select class="tail-select" id="select-modul" name="lblModul" multiple placeholder="Select an modul">
+                          <select class="tail-select-single" id="select-modul" name="lblModul" multiple placeholder="Select an modul">
                               <option value="1">One</option>
                               <option value="2">Two</option>
                               <option value="3">Three</option>

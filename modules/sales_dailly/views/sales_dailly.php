@@ -141,12 +141,20 @@ $month = date('m');
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function() {
-        tail.select(".tail-select", {
+        tail.select(".tail-select-multiple", {
             animate: true,
             search: true,
             searchFocus: true,
             searchMarked: true,
-            searchDisabled: true,
+            multiple: true,
+            width: "100%",
+        });
+        tail.select(".tail-select-single", {
+            animate: true,
+            search: true,
+            searchFocus: true,
+            searchMarked: true,
+            multiple: false,
             width: "100%",
         });
     });
