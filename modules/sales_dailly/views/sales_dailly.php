@@ -136,8 +136,15 @@ $month = date('m');
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- Plugin -->
 <script type="text/javascript" src="<?= base_url('assets/js/addons/datatables.min.js') ?>"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/js/tail.select.js"></script>
 <!-- JS-Page -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        tail.select(".select", {
+            /* Your Options */ });
+    });
+</script>
 <script>
     //! initDatatables
     function initTable() {
