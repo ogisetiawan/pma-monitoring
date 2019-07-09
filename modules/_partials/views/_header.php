@@ -16,17 +16,19 @@
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item active">
                       <a class="nav-link" href="<?= site_url(); ?>">
-                      <i class="fas fa-desktop"></i> Monitoring
+                          <i class="fas fa-desktop"></i> Monitoring
                           <span class="sr-only">(current)</span>
                       </a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="<?= site_url('sales_dailly'); ?>">
-                      <i class="fas fa-box-open"></i> Sales Dailly</a>
+                          <i class="fas fa-box-open"></i> Sales Dailly</a>
                   </li>
                   <a id="navbar-static-login" class="btn btn-outline-light btn-sm" data-toggle="modal" style="border-radius:16px" data-target="#modalLogin">
-                      Log In
-                      <i class="fas fa-sign-in-alt"></i>
+                       Log In&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
+                  </a>
+                  <a id="navbar-static-login" class="btn btn-outline-light btn-sm" data-toggle="modal" style="border-radius:16px" data-target="#modalAdmin">
+                      Log Out&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
                   </a>
               </ul>
           </div>
@@ -34,7 +36,7 @@
   </nav>
   <!--/.Navbar-->
 
-  <!-- Modal: modalPoll -->
+  <!-- Modalpool:LoginForm-->
   <div class="modal fade right" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLogin" aria-hidden="true" data-backdrop="false">
       <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
           <div class="modal-content">
@@ -76,8 +78,8 @@
                           </div>
                       </div>
                       <div class="text-center mt-4">
-                          <button class="btn btn-sm btn-danger text-uppercase" type="submit">Login</button>
                           <button class="btn btn-sm btn-cyan text-uppercase" data-dismiss="modal" type="submit">Cancel</button>
+                          <button class="btn btn-sm btn-danger text-uppercase" type="submit">Login</button>
                       </div>
                   </form>
                   <!-- Material form register -->
@@ -85,4 +87,72 @@
           </div>
       </div>
   </div>
-  <!-- Modal: modalPoll -->
+  <!-- Modalpool:LoginForm-->
+
+  <!-- Modalpool:AdminDashboard-->
+  <div class="modal fade right" id="modalAdmin" tabindex="-1" role="dialog" aria-labelledby="modalAdmin" aria-hidden="true" data-backdrop="false">
+      <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+          <div class="modal-content">
+              <!--Header-->
+              <div class="modal-header" style="background: -webkit-linear-gradient(right, #f05454 0%, #cc0000 65%);">
+                  <p class="heading lead text-uppercase">Administrator Monitoring</p>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true" class="white-text">×</span>
+                  </button>
+              </div>
+              <!--Body-->
+              <div class="modal-body">
+                  <!-- Material form register -->
+                  <form>
+                      <p class="h4 mb-4"><i class="fas fa-users animated rotateIn mr-2"></i>Hi, Admin</p>
+                      <div class="form-group">
+                          <label for="inputAddress" class="text-uppercase">Depo</label>
+                          <select class="browser-default form-control custom-select-sm" id="inputGroupSelect01">
+                              <option selected>-- SELECT DEPO --</option>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputAddress" class="text-uppercase">Reason</label>
+                          <select class="browser-default form-control custom-select-sm" id="inputGroupSelect01">
+                              <option selected>-- SELECT REASON --</option>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputAddress" class="text-uppercase">Modul</label>
+                          <select class="browser-default form-control custom-select-sm" id="inputGroupSelect01">
+                              <option selected>-- SELECT MODUL --</option>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputAddress" class="text-uppercase">TRANSACTION DATE</label>
+                          <input type="date" id="inputMDEx" class="form-control form-control-sm">
+                      </div>
+                      <div class="form-group">
+                          <label for="inputAddress" class="text-uppercase">Form No Sales </label>
+                          <div class="input-group input-group-sm">
+                              <div class="custom-file">
+                                  <input type="file" class="custom-file-input input-xs" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                  <label class="custom-file-label" for="inputGroupFile01">Choose file..</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="text-center mt-4">
+                          <button type="button" class="btn btn-sm btn-danger btn-block">SUBMIT</button>
+                      </div>
+                  </form>
+                  <!-- Material form register -->
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Modalpool:AdminDashboard-->
+  

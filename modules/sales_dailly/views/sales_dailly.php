@@ -305,7 +305,7 @@ $month = date('m');
             let bln = $(this).val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
-            
+
             $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
