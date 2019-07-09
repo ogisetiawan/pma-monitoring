@@ -61,8 +61,7 @@ class SalesDaillyControllers extends MY_Controller
 	public function index()
 	{
 		$this->meta_data($meta, 'Monitoring Sales Dailly - Pinus Merah Abadi');
-		// $this->template('sales_dailly', $meta);
-		$this->template('sales_dailly copy', $meta);
+		$this->template('sales_dailly', $meta);
 	}
 
 	public function table_monitoring()
