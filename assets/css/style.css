@@ -165,6 +165,9 @@ div.dataTables_wrapper
 .pagination .page-item.active .page-link {
   background-color: #d02813;
 }
+.tail-select .select-dropdown {
+  position: relative;
+}
 @media (max-width: 767px) {
   .navbar-nav .dropdown-menu {
       position: static !important;

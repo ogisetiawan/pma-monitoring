@@ -9,8 +9,8 @@ class MY_Controller extends MX_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->keyword     = 'Nabati, Pinus Merah Abadi, Kaldu Sari Nabati';
-		$this->description = 'Monitoring';
+		$this->keyword     = 'Portal Monitoring Pinus Merah Abadi';
+		$this->description = 'Web Portal Monitoring - Pinus Merah Abadi';
 	}
 	public function meta_data(&$meta, $title)
 	{
