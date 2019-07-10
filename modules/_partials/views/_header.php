@@ -38,7 +38,7 @@
                               <i class="fas fa-user"></i> Admin </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink-4">
                               <a data-toggle="modal" data-target="#modalAdmin" class="dropdown-item"><i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Form Request</a>
-                              <a data-toggle="modal" data-target="#modalAdmin" class="dropdown-item"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Log Out</a>
+                              <a href="<?= site_url('logout') ?>" class="dropdown-item"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Log Out</a>
                           </div>
                       </li>
                   <?php
@@ -122,25 +122,28 @@
                       <label for="select-depo" class="text-uppercase">Depo</label>
                       <div class="form-group">
                           <select class="tail-select-multiple" id="select-depo" name="lblDepo" multiple placeholder="Select an reason">
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
+                              <?php
+                                foreach ($get_depo as $value) {
+                                    echo "<option value='" . $value->KD_DEPO . "'>" . $value->KD_DEPO  . " - " . $value->NM_DEPO  . "</option>";
+                                }
+                                ?>
                           </select>
                       </div>
                       <label for="select-reason" class="text-uppercase">Reason</label>
                       <div class="form-group">
                           <select class="tail-select-single" id="select-reason" name="lblReason" multiple placeholder="Select an reason">
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
+                              <option value="NOSALES">NOSALES</option>
+                              <option value="DONE">DONE</option>
+                              <option value="HOLIDAY">HOLIDAY</option>
                           </select>
                       </div>
                       <label for="select-modul" class="text-uppercase">Modul</label>
                       <div class="form-group">
                           <select class="tail-select-single" id="select-modul" name="lblModul" multiple placeholder="Select an modul">
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
+                              <option value="LBP">LBP</option>
+                              <option value="SAPKASBANK">KASBANK</option>
+                              <option value="SAPINV">INVENTORY</option>
+                              <option value="PTPR">TPR PROMO</option>
                           </select>
                       </div>
                       <div class="form-group">
