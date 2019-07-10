@@ -32,4 +32,29 @@
     <!-- Plugin -->
     <script type="text/javascript" src="<?= base_url('assets/js/addons/datatables.min.js') ?>"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/js/tail.select.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#form-login").submit(function(e) {
+                var serializedData = $(this).serialize();
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "<?= site_url('checkLogin') ?>",
+                    data: serializedData,
+                    dataType: "JSON",
+                    cache: false,
+                    success: function(respone) {
+                        if (respone == 1) {
+                            alert('Berhasil Login.. Mengarahkan');
+                            window.location.href = "<?= site_url('') ?>";
+                        } else {
+                            alert('User tidak ditemukan');
+                        }
+                    },
+                });
+            });
+        });
+    </script>
 </head>

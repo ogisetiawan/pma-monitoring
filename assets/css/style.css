@@ -165,3 +165,21 @@ div.dataTables_wrapper
 .pagination .page-item.active .page-link {
   background-color: #d02813;
 }
+@media (max-width: 767px) {
+  .navbar-nav .dropdown-menu {
+      position: static !important;
+      float: none;
+      background: transparent;
+      border-color: transparent;
+  }
+
+  .navbar .dropdown-menu a {
+      padding: 0;
+      padding-left: 30px;
+      color: #fff;
+      font-size: 12px;
+      -webkit-transition: .35s;
+      -o-transition: .35s;
+      transition: .35s;
+  }
+}
