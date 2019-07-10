@@ -24,11 +24,16 @@
                       <a class="nav-link" href="<?= site_url('sales_dailly'); ?>">
                           <i class="fas fa-box-open"></i> Sales Dailly</a>
                   </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-user"></i> Admin </a>
+                      <div class="dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                          <a data-toggle="modal" data-target="#modalAdmin" class="dropdown-item"><i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Form Request</a>
+                          <a data-toggle="modal" data-target="#modalAdmin" class="dropdown-item"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Log Out</a>
+                      </div>
+                  </li>
                   <a id="navbar-static-login" class="btn btn-outline-light btn-sm" data-toggle="modal" style="border-radius:16px" data-target="#modalLogin">
                       Log In&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
-                  </a>
-                  <a id="navbar-static-login" class="btn btn-outline-light btn-sm" data-toggle="modal" style="border-radius:16px" data-target="#modalAdmin">
-                      Log Out&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
                   </a>
               </ul>
           </div>
