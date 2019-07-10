@@ -3,7 +3,7 @@
       <div class="container-fluid">
           <!-- Brand -->
           <a class="navbar-brand waves-effect" href="<?= site_url('') ?>" style="font-weight:600">
-              <img src="http://192.168.35.160/portal/monitoring_old/img/blowing.gif" height="30" alt="Pinus Merah Abadi">
+              <img src="<?= site_url('assets/img/blowing.gif') ?>" height="30" alt="Pinus Merah Abadi">
           </a>
 
           <!-- Collapse -->
@@ -24,17 +24,26 @@
                       <a class="nav-link" href="<?= site_url('sales_dailly'); ?>">
                           <i class="fas fa-box-open"></i> Sales Dailly</a>
                   </li>
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-user"></i> Admin </a>
-                      <div class="dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                          <a data-toggle="modal" data-target="#modalAdmin" class="dropdown-item"><i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Form Request</a>
-                          <a data-toggle="modal" data-target="#modalAdmin" class="dropdown-item"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Log Out</a>
-                      </div>
-                  </li>
-                  <a id="navbar-static-login" class="btn btn-outline-light btn-sm" data-toggle="modal" style="border-radius:16px" data-target="#modalLogin">
-                      Log In&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
-                  </a>
+                  <?php
+                    if (!$this->session->userdata('logged_monitoring')) {
+                        ?>
+                      <a id="navbar-static-login" class="btn btn-outline-light btn-sm" data-toggle="modal" style="border-radius:16px" data-target="#modalLogin">
+                          Log In&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i>
+                      </a>
+                  <?php
+                    } else {
+                        ?>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-user"></i> Admin </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink-4">
+                              <a data-toggle="modal" data-target="#modalAdmin" class="dropdown-item"><i class="fas fa-file-invoice"></i>&nbsp;&nbsp;Form Request</a>
+                              <a data-toggle="modal" data-target="#modalAdmin" class="dropdown-item"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Log Out</a>
+                          </div>
+                      </li>
+                  <?php
+                    }
+                    ?>
               </ul>
           </div>
       </div>
@@ -56,18 +65,18 @@
               <!--Body-->
               <div class="modal-body">
                   <!-- Material form register -->
-                  <form>
+                  <form id="form-login" name="form_login" autocomplete="off">
                       <!-- Material outline input with prefix-->
                       <p class="h4 mb-4"><i class="fas fa-sign-in-alt animated rotateIn mr-2"></i>Login Form</p>
                       <div class="md-form md-outline">
-                          <i class="fas fa-envelope prefix grey-text"></i>
-                          <input type="text" id="inputIconEx1" class="form-control">
-                          <label for="inputIconEx1" data-error="wrong" data-success="right">E-mail address</label>
+                          <i class="fas fa-users prefix grey-text"></i>
+                          <input type="text" name="username" id="inputIconEx1" class="form-control">
+                          <label for="inputIconEx1" data-error="wrong" data-success="right">Username</label>
                       </div>
                       <div class="md-form md-outline">
                           <i class="fas fa-lock prefix grey-text"></i>
-                          <input type="password" id="inputValidationEx2" class="form-control validate">
-                          <label for="inputValidationEx2" data-error="wrong" data-success="right">Your password</label>
+                          <input type="password" name="pass" id="inputValidationEx2" class="form-control validate">
+                          <label for="inputValidationEx2" data-error="wrong" data-success="right">Password</label>
                       </div>
                       <div class="d-flex justify-content-around">
                           <div>
@@ -83,7 +92,7 @@
                           </div>
                       </div>
                       <div class="text-center mt-4">
-                          <button class="btn btn-sm btn-cyan text-uppercase" data-dismiss="modal" type="submit">Cancel</button>
+                          <button class="btn btn-sm btn-cyan text-uppercase" data-dismiss="modal">Cancel</button>
                           <button class="btn btn-sm btn-danger text-uppercase" type="submit">Login</button>
                       </div>
                   </form>
@@ -100,7 +109,7 @@
           <div class="modal-content">
               <!--Header-->
               <div class="modal-header" style="background: -webkit-linear-gradient(right, #f05454 0%, #cc0000 65%);">
-                  <p class="heading lead text-uppercase">Administrator Monitoring</p>
+                  <p class="heading lead text-uppercase">FORM REQUEST</p>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true" class="white-text">×</span>
                   </button>
