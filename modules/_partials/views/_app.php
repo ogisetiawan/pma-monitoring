@@ -25,4 +25,33 @@
             position: relative;
         }
     </style>
+    <!-- Main JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Plugin -->
+    <script type="text/javascript" src="<?= base_url('assets/js/addons/datatables.min.js') ?>"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/js/tail.select.js"></script>
+    <!-- JS-Page -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            tail.select(".tail-select-multiple", {
+                animate: true,
+                search: true,
+                searchFocus: true,
+                searchMarked: true,
+                multiple: true,
+                width: "100%",
+            });
+            tail.select(".tail-select-single", {
+                animate: true,
+                search: true,
+                searchFocus: true,
+                searchMarked: true,
+                multiple: false,
+                width: "100%",
+            });
+        });
+    </script>
 </head>
