@@ -62,19 +62,23 @@ class MonitoringControllers extends MY_Controller
 		$data      = array();
 		$monthPOST = $this->input->post('bulan');
 		$yearPOST  = $this->input->post('tahun');
-		$monthNow  = date("m");
-		$yearNow   = date("Y");
+		$today     = date('d-m-Y');
+		$yesteday  = date("d-m-Y", strtotime($today . "-1 days"));
 
 		foreach ($query as $val) {
 			//? parse data to convert dots_status_color
 			$this->dots($monthPOST, $yearPOST, $val->tanggal_live_depo, $val->tanggal_1, $val->tanggal_2, $val->tanggal_3, $val->tanggal_4, $val->tanggal_5, $val->tanggal_6, $val->tanggal_7, $val->tanggal_8, $val->tanggal_9, $val->tanggal_10, $val->tanggal_11, $val->tanggal_12, $val->tanggal_13, $val->tanggal_14, $val->tanggal_15, $val->tanggal_16, $val->tanggal_17, $val->tanggal_18, $val->tanggal_19, $val->tanggal_20, $val->tanggal_21, $val->tanggal_22, $val->tanggal_23, $val->tanggal_24, $val->tanggal_25, $val->tanggal_26, $val->tanggal_27, $val->tanggal_28, $val->tanggal_29, $val->tanggal_30, $val->tanggal_31);
-			
+
 			//? dynamical status last transaction
 			$status   = '<span class = "badge badge-pill badge-primary text-uppercase">urgent</span>';
 			if ($val->last_transaksi) {
-				$lasTrans  = date("d-m-Y", strtotime($val->last_transaksi));
-				$nexTrans  = date("d-m-Y", strtotime($lasTrans . "+1 days"));
-				$status   = '<span class = "badge badge-pill badge-primary text-uppercase">complete</span>';
+				$lasTrans = date("d-m-Y", strtotime($val->last_transaksi));
+				$nexTrans = date("d-m-Y", strtotime($lasTrans . "+1 days"));
+				if ($yesteday !== $lasTrans) {
+					$status   = '<span class = "badge badge-pill badge-danger text-uppercase">urgent</span>';
+				} else {
+					$status   = '<span class = "badge badge-pill badge-primary text-uppercase">complete</span>';
+				}
 			} else {
 				$nexTrans = date("01-$monthPOST-$yearPOST");
 				$lasTrans = '<p style = "text-align: center;">-</p>';
@@ -143,13 +147,18 @@ class MonitoringControllers extends MY_Controller
 
 	public function test()
 	{
+		$tomorrow = new DateTime('yesterday');
+		$tomorrow = $tomorrow->format('d-m-Y');
+		$yesteday = date('d-m-Y',strtotime("-1 days"));
+		echo $yesteday;
+		die();
 		$x = "00";
-		for ($i=1; $i <31 ; $i++) {
+		for ($i = 1; $i < 31; $i++) {
 			$x++;
-			$x = str_pad($x,2,"0",STR_PAD_LEFT);
+			$x = str_pad($x, 2, "0", STR_PAD_LEFT);
 			// echo "<pre>";
 			// echo '$val->tanggal_'.$i.', $val->penjualan_'.$i.', $val->retur_'.$i.', ';
-			echo '&$tgl'.$i.', &$penjualan'.$i.', &$retur'.$i.', ';
+			echo '&$tgl' . $i . ', &$penjualan' . $i . ', &$retur' . $i . ', ';
 			// echo '$row[]  = number_format(empty($val->penjualan_'.$i.') ? "0" : $val->penjualan_'.$i.');';
 			// echo '$row[]  = number_format(empty($val->retur_'.$i.') ? "0" : $val->retur_'.$i.');';
 
@@ -159,8 +168,7 @@ class MonitoringControllers extends MY_Controller
 			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN a.sales END),'') as penjualan_$i,";
 			// echo "<br>";
 			// echo "COALESCE(MAX(CASE WHEN a.tgl = '$x' AND a.bulan = '06' AND a.tahun ='2019' THEN a.retur END),'') as retur_$i,";
-			
+
 		}
-		
 	}
 }
