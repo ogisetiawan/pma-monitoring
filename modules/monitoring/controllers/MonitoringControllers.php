@@ -74,7 +74,7 @@ class MonitoringControllers extends MY_Controller
 			if ($val->last_transaksi) {
 				$lasTrans = date("d-m-Y", strtotime($val->last_transaksi));
 				$nexTrans = date("d-m-Y", strtotime($lasTrans . "+1 days"));
-				if ($yesteday !== $lasTrans) {
+				if ($lasTrans !== $yesteday && $lasTrans !== $today) {
 					$status   = '<span class = "badge badge-pill badge-danger text-uppercase">urgent</span>';
 				} else {
 					$status   = '<span class = "badge badge-pill badge-primary text-uppercase">complete</span>';
