@@ -32,9 +32,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            //! Login Form
             $("#form-login").submit(function(e) {
-                var serializedData = $(this).serialize();
                 e.preventDefault();
+                var serializedData = $(this).serialize();
                 $.ajax({
                     type: "POST",
                     url: "<?= site_url('checkLogin') ?>",
@@ -51,6 +52,9 @@
                     },
                 });
             });
+            $('#modalLogin').on('shown.bs.modal', function() {
+                $('input:visible:enabled:first', this).focus()
+            })
         });
     </script>
 </head>

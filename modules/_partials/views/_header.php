@@ -70,7 +70,7 @@
                       <p class="h4 mb-4"><i class="fas fa-sign-in-alt animated rotateIn mr-2"></i>Login Form</p>
                       <div class="md-form md-outline">
                           <i class="fas fa-users prefix grey-text"></i>
-                          <input type="text" name="username" id="inputIconEx1" class="form-control">
+                          <input type="text" name="username" id="inputIconEx1" class="form-control" >
                           <label for="inputIconEx1" data-error="wrong" data-success="right">Username</label>
                       </div>
                       <div class="md-form md-outline">
@@ -92,8 +92,8 @@
                           </div>
                       </div>
                       <div class="text-center mt-4">
-                          <button class="btn btn-sm btn-cyan text-uppercase" data-dismiss="modal">Cancel</button>
                           <button class="btn btn-sm btn-danger text-uppercase" type="submit">Login</button>
+                          <button class="btn btn-sm btn-cyan text-uppercase" data-dismiss="modal">Cancel</button>
                       </div>
                   </form>
                   <!-- Material form register -->
@@ -119,9 +119,9 @@
                   <!-- Material form register -->
                   <form>
                       <p class="h4 mb-4"><i class="fas fa-users animated rotateIn mr-2"></i>Hi, Admin</p>
-                      <label for="select-depo" class="text-uppercase">Depo</label>
+                      <label for="select-depo" class="text-uppercase"><i class="fas fa-warehouse grey-text"></i> Depo</label>
                       <div class="form-group">
-                          <select class="tail-select-multiple" id="select-depo" name="lblDepo" multiple placeholder="Select an reason">
+                          <select class="tail-select-multiple" id="select-depo" name="lblDepo" multiple placeholder="Select an depo">
                               <?php
                                 foreach ($get_depo as $value) {
                                     echo "<option value='" . $value->KD_DEPO . "'>" . $value->KD_DEPO  . " - " . $value->NM_DEPO  . "</option>";
@@ -129,7 +129,7 @@
                                 ?>
                           </select>
                       </div>
-                      <label for="select-reason" class="text-uppercase">Reason</label>
+                      <label for="select-reason" class="text-uppercase"><i class="fas fa-bookmark grey-text"></i> Reason</label>
                       <div class="form-group">
                           <select class="tail-select-single" id="select-reason" name="lblReason" multiple placeholder="Select an reason">
                               <option value="NOSALES">NOSALES</option>
@@ -137,7 +137,7 @@
                               <option value="HOLIDAY">HOLIDAY</option>
                           </select>
                       </div>
-                      <label for="select-modul" class="text-uppercase">Modul</label>
+                      <label for="select-modul" class="text-uppercase"><i class="fas fa-swatchbook grey-text"></i> Modul</label>
                       <div class="form-group">
                           <select class="tail-select-single" id="select-modul" name="lblModul" multiple placeholder="Select an modul">
                               <option value="LBP">LBP</option>
@@ -147,11 +147,11 @@
                           </select>
                       </div>
                       <div class="form-group">
-                          <label for="inputAddress" class="text-uppercase">TRANSACTION DATE</label>
+                          <label for="inputAddress" class="text-uppercase"><i class="fas fa-calendar-check grey-text"></i> Transaction Date</label>
                           <input type="date" id="inputMDEx" class="form-control form-control-sm">
                       </div>
                       <div class="form-group">
-                          <label for="inputAddress" class="text-uppercase">Form No Sales </label>
+                          <label for="inputAddress" class="text-uppercase"><i class="fas fa-cloud-upload-alt grey-text"></i> Form No Sales </label>
                           <div class="input-group input-group-sm">
                               <div class="custom-file">
                                   <input type="file" class="custom-file-input input-xs" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
@@ -160,7 +160,7 @@
                           </div>
                       </div>
                       <div class="text-center mt-4">
-                          <button type="button" class="btn btn-sm btn-danger btn-block">SUBMIT</button>
+                          <button type="submit" class="btn btn-sm btn-danger btn-block text-uppercase">Submit</button>
                       </div>
                   </form>
                   <!-- Material form register -->
