@@ -4,109 +4,115 @@ $tahun = date('Y') + 1;
 $month = date('m');
 ?>
 <!-- Header Title -->
-    <div class="d-flex justify-content-between shadow-sm p-2">
-        <div>
-            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                <button type="button" onClick="fnExcelReport()" class="btn btn-outline"><i class="fas fa-file-excel pr-2"></i>XLSX</button>
-                <button type="button" class="btn btn-outline"><i class="far fa-file-pdf pr-2"></i>PDF</button>
-                <button type="button" class="btn btn-outline"><i class="fas fa-print pr-2"></i>PRINT</button>
-            </div>
+<div class="d-flex justify-content-between shadow-sm p-2">
+    <div>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+            <button type="button" onClick="fnExcelReport()" class="btn btn-outline"><i class="fas fa-file-excel pr-2"></i>XLSX</button>
+            <button type="button" class="btn btn-outline"><i class="far fa-file-pdf pr-2"></i>PDF</button>
+            <button type="button" class="btn btn-outline"><i class="fas fa-print pr-2"></i>PRINT</button>
         </div>
-        <div class="">
-            <div class="form-row">
-                <div class="col-auto col-xs-12">
-                    <select id="selected-modul" class="form-control custom-select-sm" title=" Group Region">
-                        <option value="LBP">LBP</option>
-                        <option value="SAPKASBANK">KASBANK</option>
-                        <option value="SAPINV">INVENTORY</option>
-                        <option value="PTPR">TPR PROMO</option>
-                    </select>
-                </div>
-                <div class="col-auto col-xs-12">
-                    <select id="selected-bulan" class="form-control custom-select-sm" title=" Bulan">
-                        <option <?php if ($month == '01') {
-                                    echo "selected ";
-                                } ?>value="01"> January</option>
-                        <option <?php if ($month == '02') {
-                                    echo "selected ";
-                                } ?>value="02"> Febuary</option>
-                        <option <?php if ($month == '03') {
-                                    echo "selected ";
-                                } ?>value="03"> March</option>
-                        <option <?php if ($month == '04') {
-                                    echo "selected ";
-                                } ?>value="04"> April</option>
-                        <option <?php if ($month == '05') {
-                                    echo "selected ";
-                                } ?>value="05"> May</option>
-                        <option <?php if ($month == '06') {
-                                    echo "selected ";
-                                } ?>value="06"> June</option>
-                        <option <?php if ($month == '07') {
-                                    echo "selected ";
-                                } ?>value="07"> July</option>
-                        <option <?php if ($month == '08') {
-                                    echo "selected ";
-                                } ?>value="08"> August</option>
-                        <option <?php if ($month == '09') {
-                                    echo "selected ";
-                                } ?>value="09"> September</option>
-                        <option <?php if ($month == '10') {
-                                    echo "selected ";
-                                } ?>value="10"> October</option>
-                        <option <?php if ($month == '11') {
-                                    echo "selected ";
-                                } ?>value="11"> November</option>
-                        <option <?php if ($month == '12') {
-                                    echo "selected ";
-                                } ?>value="12"> December</option>
-                    </select>
-                </div>
-                <div class="col-auto col-xs-12">
-                    <select class="form-control custom-select-sm" id="selected-tahun" title="Tahun">
-                        <?php
-                        for ($i = 2016; $i <= $tahun; $i++) { ?>
-                            <option value="<?php echo $i ?>" <?php if (date('Y') == $i) {
-                                                                    echo "selected ";
-                                                                } ?>><?php echo $i ?></option>
-                        <?php } ?>
-                    </select>
-                </div>
+    </div>
+    <div class="">
+        <div class="form-row">
+            <div class="col-auto col-xs-12">
+                <select id="selected-system" class="form-control custom-select-sm" title=" Status System">
+                    <option value="SCYLLA">SYCLLA</option>
+                    <option value="SAP">SAP</option>
+                </select>
+            </div>
+            <div class="col-auto col-xs-12">
+                <select id="selected-modul" class="form-control custom-select-sm" title=" Module">
+                    <option value="LBP">LBP</option>
+                    <option value="SAPKASBANK">KASBANK</option>
+                    <option value="SAPINV">INVENTORY</option>
+                    <option value="PTPR">TPR PROMO</option>
+                </select>
+            </div>
+            <div class="col-auto col-xs-12">
+                <select id="selected-bulan" class="form-control custom-select-sm" title=" Bulan">
+                    <option <?php if ($month == '01') {
+                                echo "selected ";
+                            } ?>value="01"> January</option>
+                    <option <?php if ($month == '02') {
+                                echo "selected ";
+                            } ?>value="02"> Febuary</option>
+                    <option <?php if ($month == '03') {
+                                echo "selected ";
+                            } ?>value="03"> March</option>
+                    <option <?php if ($month == '04') {
+                                echo "selected ";
+                            } ?>value="04"> April</option>
+                    <option <?php if ($month == '05') {
+                                echo "selected ";
+                            } ?>value="05"> May</option>
+                    <option <?php if ($month == '06') {
+                                echo "selected ";
+                            } ?>value="06"> June</option>
+                    <option <?php if ($month == '07') {
+                                echo "selected ";
+                            } ?>value="07"> July</option>
+                    <option <?php if ($month == '08') {
+                                echo "selected ";
+                            } ?>value="08"> August</option>
+                    <option <?php if ($month == '09') {
+                                echo "selected ";
+                            } ?>value="09"> September</option>
+                    <option <?php if ($month == '10') {
+                                echo "selected ";
+                            } ?>value="10"> October</option>
+                    <option <?php if ($month == '11') {
+                                echo "selected ";
+                            } ?>value="11"> November</option>
+                    <option <?php if ($month == '12') {
+                                echo "selected ";
+                            } ?>value="12"> December</option>
+                </select>
+            </div>
+            <div class="col-auto col-xs-12">
+                <select class="form-control custom-select-sm" id="selected-tahun" title="Tahun">
+                    <?php
+                    for ($i = 2016; $i <= $tahun; $i++) { ?>
+                        <option value="<?php echo $i ?>" <?php if (date('Y') == $i) {
+                                                                echo "selected ";
+                                                            } ?>><?php echo $i ?></option>
+                    <?php } ?>
+                </select>
+            </div>
 
-                <div class="col-auto col-xs-12">
-                    <select id="selected-group-region" class="form-control custom-select-sm" title=" Group Region">
-                        <option value="" selected>-- SELECT GROUP REGION --</option>
-                        <option value="1">West</option>
-                        <option value="2">Central</option>
-                        <option value="3">East</option>
-                    </select>
-                </div>
-                <div class="col-auto col-xs-12">
-                    <select id="selected-region" class="form-control custom-select-sm" title=" Region" data-style="btn-sm btn-default" data-width="100px">
-                        <option value="">-- SELECT REGION --</option>
-                    </select>
-                </div>
+            <div class="col-auto col-xs-12">
+                <select id="selected-group-region" class="form-control custom-select-sm" title=" Group Region">
+                    <option value="" selected>-- SELECT GROUP REGION --</option>
+                    <option value="1">West</option>
+                    <option value="2">Central</option>
+                    <option value="3">East</option>
+                </select>
+            </div>
+            <div class="col-auto col-xs-12">
+                <select id="selected-region" class="form-control custom-select-sm" title=" Region" data-style="btn-sm btn-default" data-width="100px">
+                    <option value="">-- SELECT REGION --</option>
+                </select>
             </div>
         </div>
     </div>
-    <section class="text-center mt-4">
-        <h4 class="font-medium font-weight-light text-uppercase">
-            <span class="bq-reds pl-1 test2 title">
-            </span>
-        </h4>
-    </section>
+</div>
+<section class="text-center mt-4">
+    <h4 class="font-medium font-weight-light text-uppercase">
+        <span class="bq-reds pl-1 test2 title">
+        </span>
+    </h4>
+</section>
 <!-- Header Title -->
 
 <!-- Loader SpinKit -->
-    <div id="overlay" class="overlay">
-        <div class="spinner show">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
-        </div>
+<div id="overlay" class="overlay">
+    <div class="spinner show">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
     </div>
+</div>
 <!-- Loader SpinKit -->
 
 <main class="container-fluid mt-2 pt-2 mb-5 pb-3">
@@ -184,6 +190,7 @@ $month = date('m');
                 "url": "<?= site_url('table_monitoring') ?>",
                 "type": "POST",
                 "data": function(data) {
+                    data.system = $("#selected-system").val();
                     data.tahun = $("#selected-tahun").val();
                     data.bulan = $("#selected-bulan").val();
                     data.grup_region = $("#selected-group-region").val();
@@ -271,25 +278,25 @@ $month = date('m');
         }
     }
     // ! passByRefrencee titleDisplay
-    function changeTitle(modules, month, year, bln) {
+    function changeTitle(modules, month, year, bln, system) {
         if (modules == 'LBP') {
             modules = 'LBP';
-            $('.title').html("Monitoring " + modules + " " + month + " " + year);
+            $('.title').html("Monitoring " + system + " " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
         } else if (modules == 'SAPKASBANK') {
             modules = 'KASBANK';
-            $('.title').html("Monitoring " + modules + " " + month + " " + year);
+            $('.title').html("Monitoring " + system + " " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
         } else if (modules == 'SAPINV') {
             modules = 'INVENTORY';
-            $('.title').html("Monitoring " + modules + " " + month + " " + year);
+            $('.title').html("Monitoring " + system + " " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
         } else {
             modules = 'TPR PROMO';
-            $('.title').html("Monitoring " + modules + " " + month + " " + year);
+            $('.title').html("Monitoring " + system + " " + modules + " " + month + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
         }
@@ -340,42 +347,56 @@ $month = date('m');
         const montNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         const d = new Date();
         const y = new Date().getFullYear();
-        $('.title').html("Monitoring LBP " + monthNames[d.getMonth()] + " " + y);
+        $('.title').html("Monitoring LBP Syclla " + monthNames[d.getMonth()] + " " + y);
         // ! callFunct DatatablesRetive and DynamicColoumn
         initTable();
         dynamicColoumnTable(montNumber[d.getMonth()]);
 
         //! SelectedEventDropdown ChangeTitle
+        $('#selected-system').on('change', function() {
+            let system = $(this).val();
+            let modules = $('#selected-modul').val();
+            let bln = $('#selected-bulan').val();
+            const d = new Date(bln);
+            let year = $('#selected-tahun').val();
+
+            changeTitle(modules, monthNames[d.getMonth()], year, bln, system);
+            dynamicColoumnTable(montNumber[d.getMonth()]);
+        });
         $('#selected-modul').on('change', function() {
+            let system = $('#selected-system').val();
             let modules = $(this).val();
             let bln = $('#selected-bulan').val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln, system);
             dynamicColoumnTable(montNumber[d.getMonth()]);
         });
         $('#selected-bulan').on('change', function() {
-            let modules = $('#selected-modul').val();
+            let system = $('#selected-system').val();
+            let modules = $(this).val();
             let bln = $(this).val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln, system);
             dynamicColoumnTable(montNumber[d.getMonth()]);
         });
         $('#selected-tahun').on('change', function() {
+            let system = $('#selected-system').val();
             let modules = $('#selected-modul').val();
             let bln = $('#selected-bulan').val();
             const d = new Date(bln);
             let year = $(this).val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln, system);
             dynamicColoumnTable(montNumber[d.getMonth()])
 
         });
 
         $('#selected-group-region').on('change', function() {
+            let system = $('#selected-system').val();
             let modules = $('#selected-modul').val();
             let bln = $('#selected-bulan').val();
             const d = new Date(bln);
@@ -383,7 +404,7 @@ $month = date('m');
             let greg = $("#selected-group-region option:selected").text();
             let select_gregion = $(this).val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln, system);
             dynamicColoumnTable(montNumber[d.getMonth()]);
             //! getDataRegion by groupRegion
             $.ajax({
@@ -397,12 +418,13 @@ $month = date('m');
 
         });
         $('#selected-region').on('change', function() {
+            let system = $('#selected-system').val();
             let modules = $('#selected-modul').val();
             let bln = $('#selected-bulan').val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            changeTitle(modules, monthNames[d.getMonth()], year, bln);
+            changeTitle(modules, monthNames[d.getMonth()], year, bln, system);
             dynamicColoumnTable(montNumber[d.getMonth()]);
         });
     });
