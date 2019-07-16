@@ -284,6 +284,7 @@ $month = date('m');
         tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
         tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
         tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+        tab_text = tab_text.replace(/•/g, "&#149");
 
         var ua = window.navigator.userAgent;
         var msie = ua.indexOf("MSIE ");

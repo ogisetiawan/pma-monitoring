@@ -296,6 +296,9 @@ $month = date('m');
     }
     // ! eventReport
     function fnExcelReport() {
+        // thn = $('#selected-tahun').val();
+        // bln = $('#selected-bulan').val();
+        // window.location = "http://192.168.35.160/portal/monitoring_old/export/export_excel_LBP_all.php"+"?thn="+thn+"&bln="+bln;
         var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
         var textRange;
         var j = 0;
@@ -310,7 +313,9 @@ $month = date('m');
         tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
         tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
         tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
-
+        tab_text = tab_text.replace(/•/g, "<p style='font-size:15px'>&#149</p>");
+        tab_text = tab_text.replace(/urgent/g, "<p style='color:red'>URGENT</p>");
+        tab_text = tab_text.replace(/complete/g, "<p style='color:red'>COMPLETE</p>");
         var ua = window.navigator.userAgent;
         var msie = ua.indexOf("MSIE ");
 
