@@ -317,7 +317,7 @@ $month = date('m');
         const montNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         const d = new Date();
         const y = new Date().getFullYear();
-        $('.title').html("Monitoring Sales Dailly SYCLLA " + monthNames[d.getMonth()] + " " + y);
+        $('.title').html("Monitoring SYCLLA Sales Dailly " + monthNames[d.getMonth()] + " " + y);
         // ! callFunct DatatablesRetive and DynamicColoumn
         initTable();
         dynamicColoumnTable(montNumber[d.getMonth()]);
@@ -329,7 +329,7 @@ $month = date('m');
             const d    = new Date(bln);
             let year   = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring "+ system +" Sales Dailly "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
@@ -342,7 +342,7 @@ $month = date('m');
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring "+ system +" Sales Dailly "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
@@ -355,7 +355,7 @@ $month = date('m');
             const d = new Date(bln);
             let year = $(this).val();
 
-            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring "+ system +" Sales Dailly "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
@@ -369,7 +369,7 @@ $month = date('m');
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring "+ system +" Sales Dailly "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
@@ -391,7 +391,7 @@ $month = date('m');
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring "+ system +" Sales Dailly "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
