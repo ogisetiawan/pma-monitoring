@@ -15,6 +15,12 @@ $month = date('m');
     <div class="">
         <div class="form-row">
             <div class="col-auto col-xs-12">
+                <select id="selected-system" class="form-control custom-select-sm" title=" Status System">
+                    <option value="SCYLLA">SYCLLA</option>
+                    <option value="SAP">SAP</option>
+                </select>
+            </div>
+            <div class="col-auto col-xs-12">
                 <select id="selected-bulan" class="form-control custom-select-sm" title=" Bulan">
                     <option <?php if ($month == '01') {
                                 echo "selected ";
@@ -172,6 +178,7 @@ $month = date('m');
                 "url": "<?= site_url('table_monitoring_sales') ?>",
                 "type": "POST",
                 "data": function(data) {
+                    data.system = $("#selected-system").val();
                     data.tahun = $("#selected-tahun").val();
                     data.bulan = $("#selected-bulan").val();
                     data.grup_region = $("#selected-group-region").val();
@@ -316,6 +323,18 @@ $month = date('m');
         dynamicColoumnTable(montNumber[d.getMonth()]);
 
         // ! onEventChange
+        $('#selected-system').on('change', function() {
+            let bln = $('#selected-bulan').val();
+            const d = new Date(bln);
+            let year = $('#selected-tahun').val();
+
+            $('.title').html("Monitoring Sales Dailly " +  + monthNames[d.getMonth()] + " " + year);
+            $('#table-monitoring').DataTable().clear().destroy();
+            initTable(bln);
+            dynamicHeaderText(bln, year);
+            dynamicColoumnTable(montNumber[d.getMonth()]);
+        });
+
         $('#selected-bulan').on('change', function() {
             let bln = $(this).val();
             const d = new Date(bln);
