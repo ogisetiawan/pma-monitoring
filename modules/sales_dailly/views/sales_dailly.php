@@ -317,18 +317,19 @@ $month = date('m');
         const montNumber = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         const d = new Date();
         const y = new Date().getFullYear();
-        $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + y);
+        $('.title').html("Monitoring Sales Dailly SYCLLA " + monthNames[d.getMonth()] + " " + y);
         // ! callFunct DatatablesRetive and DynamicColoumn
         initTable();
         dynamicColoumnTable(montNumber[d.getMonth()]);
 
         // ! onEventChange
         $('#selected-system').on('change', function() {
-            let bln = $('#selected-bulan').val();
-            const d = new Date(bln);
-            let year = $('#selected-tahun').val();
+            let system = $(this).val();
+            let bln    = $('#selected-bulan').val();
+            const d    = new Date(bln);
+            let year   = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring Sales Dailly " +  + monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
@@ -336,11 +337,12 @@ $month = date('m');
         });
 
         $('#selected-bulan').on('change', function() {
+            let system = $('#selected-system').val();
             let bln = $(this).val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
@@ -348,11 +350,12 @@ $month = date('m');
         });
 
         $('#selected-tahun').on('change', function() {
-            let bln = $('#selected-bulan').val();
+            let system = $('#selected-system').val();
+            let bln = $(this).val();
             const d = new Date(bln);
             let year = $(this).val();
 
-            $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
@@ -361,11 +364,12 @@ $month = date('m');
 
         $('#selected-group-region').on('change', function() {
             let select_gregion = $(this).val();
+            let system = $('#selected-system').val();
             let bln = $('#selected-bulan').val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
@@ -382,12 +386,12 @@ $month = date('m');
 
         });
         $('#selected-region').on('change', function() {
-            let modules = $('#selected-modul').val();
+            let system = $('#selected-system').val();
             let bln = $('#selected-bulan').val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
 
-            $('.title').html("Monitoring Sales Dailly " + monthNames[d.getMonth()] + " " + year);
+            $('.title').html("Monitoring Sales Dailly " + system +" "+ monthNames[d.getMonth()] + " " + year);
             $('#table-monitoring').DataTable().clear().destroy();
             initTable(bln);
             dynamicHeaderText(bln, year);
