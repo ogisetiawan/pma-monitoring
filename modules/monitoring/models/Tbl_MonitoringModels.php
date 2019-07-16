@@ -14,6 +14,7 @@ class Tbl_MonitoringModels extends CI_Model
     }
     private function _get_datatables_query()
     {
+        $system      = $this->input->post('system');
         $bln         = $this->input->post('bulan');
         $thn         = $this->input->post('tahun');
         $grup_region = $this->input->post('grup_region');
@@ -85,7 +86,7 @@ class Tbl_MonitoringModels extends CI_Model
                 ) AS a", "on a.kode_site = d.KD_DEPO", "LEFT")
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.status", "A")
-                ->where("d.status_system", "SCYLLA")
+                ->where("d.status_system", "$system")
                 ->where("d.STA01", "PMA")
                 ->group_by("d.KD_DEPO")
                 ->group_by("a.bulan")
@@ -103,7 +104,7 @@ class Tbl_MonitoringModels extends CI_Model
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.KD_GREG", "$grup_region")
                 ->where("d.status", "A")
-                ->where("d.status_system", "SCYLLA")
+                ->where("d.status_system", "$system")
                 ->where("d.STA01", "PMA")
                 ->group_by("d.KD_DEPO")
                 ->order_by("a.kode_site");
@@ -120,7 +121,7 @@ class Tbl_MonitoringModels extends CI_Model
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.KD_REG", "$region")
                 ->where("d.status", "A")
-                ->where("d.status_system", "SCYLLA")
+                ->where("d.status_system", "$system")
                 ->where("d.STA01", "PMA")
                 ->group_by("d.KD_DEPO")
                 ->order_by("a.kode_site");
