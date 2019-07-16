@@ -86,6 +86,7 @@ class Tbl_MonitoringModels extends CI_Model
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.status", "A")
                 ->where("d.status_system", "SCYLLA")
+                ->where("d.STA01", "PMA")
                 ->group_by("d.KD_DEPO")
                 ->group_by("a.bulan")
                 ->group_by("a.tahun");
@@ -103,6 +104,7 @@ class Tbl_MonitoringModels extends CI_Model
                 ->where("d.KD_GREG", "$grup_region")
                 ->where("d.status", "A")
                 ->where("d.status_system", "SCYLLA")
+                ->where("d.STA01", "PMA")
                 ->group_by("d.KD_DEPO")
                 ->order_by("a.kode_site");
         }else {
@@ -119,6 +121,7 @@ class Tbl_MonitoringModels extends CI_Model
                 ->where("d.KD_REG", "$region")
                 ->where("d.status", "A")
                 ->where("d.status_system", "SCYLLA")
+                ->where("d.STA01", "PMA")
                 ->group_by("d.KD_DEPO")
                 ->order_by("a.kode_site");
         }
