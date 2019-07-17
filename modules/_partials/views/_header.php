@@ -70,12 +70,12 @@
                       <p class="h4 mb-4"><i class="fas fa-sign-in-alt animated rotateIn mr-2"></i>Login Form</p>
                       <div class="md-form md-outline">
                           <i class="fas fa-users prefix grey-text"></i>
-                          <input type="text" name="username" id="inputIconEx1" class="form-control" >
+                          <input type="text" name="username" id="inputIconEx1" class="form-control validate" required >
                           <label for="inputIconEx1" data-error="wrong" data-success="right">Username</label>
                       </div>
                       <div class="md-form md-outline">
                           <i class="fas fa-lock prefix grey-text"></i>
-                          <input type="password" name="pass" id="inputValidationEx2" class="form-control validate">
+                          <input type="password" name="pass" id="inputValidationEx2" class="form-control validate" required>
                           <label for="inputValidationEx2" data-error="wrong" data-success="right">Password</label>
                       </div>
                       <div class="d-flex justify-content-around">
@@ -117,11 +117,11 @@
               <!--Body-->
               <div class="modal-body">
                   <!-- Material form register -->
-                  <form>
+                  <form id="form-input">
                       <p class="h4 mb-4"><i class="fas fa-users animated rotateIn mr-2"></i>Hi, Admin</p>
                       <label for="select-depo" class="text-uppercase"><i class="fas fa-warehouse grey-text"></i> Depo</label>
                       <div class="form-group">
-                          <select class="tail-select-multiple" id="select-depo" name="lblDepo" multiple placeholder="Select an depo">
+                          <select class="tail-select-multiple" id="select-depo" name="lblDepo" placeholder="Select an depo" required>
                               <?php
                                 foreach ($get_depo as $value) {
                                     echo "<option value='" . $value->KD_DEPO . "'>" . $value->KD_DEPO  . " - " . $value->NM_DEPO  . "</option>";
@@ -131,7 +131,7 @@
                       </div>
                       <label for="select-reason" class="text-uppercase"><i class="fas fa-bookmark grey-text"></i> Reason</label>
                       <div class="form-group">
-                          <select class="tail-select-single" id="select-reason" name="lblReason" multiple placeholder="Select an reason">
+                          <select class="tail-select-single" id="select-reason" name="lblReason"  placeholder="Select an reason" required>
                               <option value="NOSALES">NOSALES</option>
                               <option value="DONE">DONE</option>
                               <option value="HOLIDAY">HOLIDAY</option>
@@ -139,7 +139,7 @@
                       </div>
                       <label for="select-modul" class="text-uppercase"><i class="fas fa-swatchbook grey-text"></i> Modul</label>
                       <div class="form-group">
-                          <select class="tail-select-single" id="select-modul" name="lblModul" multiple placeholder="Select an modul">
+                          <select class="tail-select-single" id="select-modul" name="lblModul"  placeholder="Select an modul" required>
                               <option value="LBP">LBP</option>
                               <option value="SAPKASBANK">KASBANK</option>
                               <option value="SAPINV">INVENTORY</option>
@@ -148,9 +148,9 @@
                       </div>
                       <div class="form-group">
                           <label for="inputAddress" class="text-uppercase"><i class="fas fa-calendar-check grey-text"></i> Transaction Date</label>
-                          <input type="date" id="inputMDEx" class="form-control form-control-sm">
+                          <input type="date" id="inputMDEx" class="form-control form-control-sm" name="lblDate" required>
                       </div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                           <label for="inputAddress" class="text-uppercase"><i class="fas fa-cloud-upload-alt grey-text"></i> Form No Sales </label>
                           <div class="input-group input-group-sm">
                               <div class="custom-file">
@@ -158,7 +158,7 @@
                                   <label class="custom-file-label" for="inputGroupFile01">Choose file..</label>
                               </div>
                           </div>
-                      </div>
+                      </div> -->
                       <div class="text-center mt-4">
                           <button type="submit" class="btn btn-sm btn-danger btn-block text-uppercase">Submit</button>
                       </div>

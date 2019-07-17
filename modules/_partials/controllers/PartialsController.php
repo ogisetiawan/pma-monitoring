@@ -45,4 +45,31 @@ class PartialsController extends MY_Controller
 		$this->session->sess_destroy();
 		redirect('', 'refresh');
 	}
+	public function form_nosales(){
+		$depo   = $this->input->post('lblDepo');
+		$reason = $this->input->post('lblReason');
+		$modul  = $this->input->post('lblModul');
+		$date   = $this->input->post('lblDate');
+
+		if($modul == 'LBP'){
+			$id = '01';
+		}else if($modul == 'SAPKASBANK'){
+			$id = '02';
+		}else if($modul == 'SAPINV'){
+			$id = '03';
+		}else{
+			$id = '04';
+		}
+
+		$insertArray = array(
+			'module_id'                  => "$id-$date-$depo",
+			'module_name'                => $modul,
+			'module_site'                => $depo,
+			'module_date'                => $date,
+			'module_flag'                => $reason,
+			'module_timestamp'	         => date('Y-m-d H:i:s'),
+		);   
+		// $this->db->insert('rmodule_monitor',$insertArray);
+		echo json_encode($depo);
+	}
 }

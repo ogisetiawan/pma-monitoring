@@ -15,6 +15,7 @@
     <!-- Plugins -->
     <link href="<?= base_url('assets/css/addons/datatables.min.css') ?>" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/1.2.5/spinkit.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/notie/dist/notie.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
     <!-- Style CSS -->
@@ -28,8 +29,21 @@
     <!-- Plugin -->
     <script type="text/javascript" src="<?= base_url('assets/js/addons/datatables.min.js') ?>"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/js/tail.select.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
+    <script src="https://unpkg.com/notie"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            tail.select(".tail-select-multiple", {
+                search: true,
+                width: "100%",
+                multiLimit: 10,
+                multiple: true,
+            });
+            tail.select(".tail-select-single", {
+                search: true,
+                width: "100%",
+            });
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             //! Login Form
@@ -55,6 +69,33 @@
             $('#modalLogin').on('shown.bs.modal', function() {
                 $('input:visible:enabled:first', this).focus()
             })
+            //! Login Form
+            $("#form-input").submit(function(e) {
+                e.preventDefault();
+                // var serializedData = $(this).serialize();
+                // console.log(serializedData);
+                notie.alert({
+                    type: 'error', // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
+                    text: '<i class="fa fa-close"></i> Wrong Password..!!',
+                    stay: true,
+                    position: 'bottom' // optional, default = 'top', enum: ['top', 'bottom']
+                });
+                // $.ajax({
+                //     type: "POST",
+                //     url: "<?= site_url('checkLogin') ?>",
+                //     data: serializedData,
+                //     dataType: "JSON",
+                //     cache: false,
+                //     success: function(respone) {
+                //         if (respone == 1) {
+                //             alert('Berhasil Login.. Mengarahkan');
+                //             window.location.href = "<?= site_url('') ?>";
+                //         } else {
+                //             alert('User tidak ditemukan');
+                //         }
+                //     },
+                // });
+            });
         });
     </script>
 </head>
