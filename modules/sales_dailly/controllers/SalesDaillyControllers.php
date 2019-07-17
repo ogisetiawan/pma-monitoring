@@ -34,14 +34,14 @@ class SalesDaillyControllers extends MY_Controller
 						${"penjualan$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
 						${"retur$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
 					}
-				//? bulan dan tahun sudah berlalu
+					//? bulan dan tahun sudah berlalu
 				} else {
 					//? bulan skrg kurang dari bulan post
 					if ($month <= $monthPOST) {
 						${"penjualan$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
 						${"retur$i"} = '<p style="text-align:center; font-size:14px;">-</p>';
 					} else {
-					//? periode sekarang						
+						//? periode sekarang						
 						if (${"tgl$i"}) {
 							${"penjualan$i"} = number_format(empty(${"penjualan$i"}) ? "0" : ${"penjualan$i"});
 							${"retur$i"} = number_format(empty(${"retur$i"}) ? "0" : ${"retur$i"});
@@ -115,18 +115,26 @@ class SalesDaillyControllers extends MY_Controller
 		//! get count status dots /date
 		$this->load->database();
 		$tgl    = $this->uri->segment('2');
-		$bulan  = $this->uri->segment('3');
+		$bulan = $this->uri->segment('3');
 		$tahun  = $this->uri->segment('4');
+		
 		$query  = $this->db->query("SELECT KD_DEPO NM_DEPO, INV_DATE,
-		(SELECT count(*)
+		(SELECT COUNT(*)
 		FROM Sum_SLS_BYDEPO_DAILY
-		WHERE DATE_FORMAT(INV_DATE, '%Y %m %d') =  DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m %d')) as data_done, 
-		(select COUNT(*) from rdepo where status_system = 'SCYLLA' AND status ='A')-(SELECT count(*)
+		WHERE KD_DEPO IN (
+		SELECT KD_DEPO
+		FROM rdepo
+		WHERE status_system = 'SCYLLA' AND STATUS ='A' AND STA01 = 'PMA') AND DATE_FORMAT(INV_DATE, '%Y %m %d') =  DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m %d')) AS data_done, 
+		(SELECT COUNT(*)
 		FROM Sum_SLS_BYDEPO_DAILY
-		WHERE DATE_FORMAT(INV_DATE, '%Y %m %d') =  DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m %d')) as data_undone
-		FROM Sum_SLS_BYDEPO_DAILY
-		WHERE DATE_FORMAT(INV_DATE, '%Y %m') =  DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m')
-		")->result();
+		WHERE KD_DEPO IN (
+		SELECT KD_DEPO
+		FROM rdepo
+		WHERE status_system = 'SCYLLA' AND STATUS ='A' AND STA01 = 'PMA') AND DATE_FORMAT(INV_DATE, '%Y %m %d') =  DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m %d'))-(
+		SELECT COUNT(*)
+		FROM rdepo
+		WHERE status_system = 'SCYLLA' AND STATUS ='A' AND STA01 = 'PMA') AS data_undone
+		FROM Sum_SLS_BYDEPO_DAILY where DATE_FORMAT(INV_DATE, '%Y %m') =DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m')")->result();
 		echo json_encode($query);
 	}
 }

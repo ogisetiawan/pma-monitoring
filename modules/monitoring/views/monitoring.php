@@ -355,7 +355,7 @@ $month = date('m');
         });
         $('#selected-bulan').on('change', function() {
             let system = $('#selected-system').val();
-            let modules = $(this).val();
+            let modules = $('#selected-modul').val();
             let bln = $(this).val();
             const d = new Date(bln);
             let year = $('#selected-tahun').val();
