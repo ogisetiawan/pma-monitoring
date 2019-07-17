@@ -121,7 +121,7 @@
                       <p class="h4 mb-4"><i class="fas fa-users animated rotateIn mr-2"></i>Hi, Admin</p>
                       <label for="select-depo" class="text-uppercase"><i class="fas fa-warehouse grey-text"></i> Depo</label>
                       <div class="form-group">
-                          <select class="tail-select-multiple" id="select-depo" name="lblDepo" placeholder="Select an depo" required>
+                          <select class="tail-select-multiple" id="select-depo" name="lblDepo" multiple placeholder="Select an depo" required>
                               <?php
                                 foreach ($get_depo as $value) {
                                     echo "<option value='" . $value->KD_DEPO . "'>" . $value->KD_DEPO  . " - " . $value->NM_DEPO  . "</option>";

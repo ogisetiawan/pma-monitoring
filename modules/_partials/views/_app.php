@@ -12,26 +12,26 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Plugins -->
+    <!-- Plugins CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/css/addons/datatables.min.css') ?>" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/1.2.5/spinkit.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/notie/dist/notie.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"> -->
-    <!-- Style CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/css/default/tail.select-light.css" rel="stylesheet">
+    <!-- <link href="https://unpkg.com/pnotify@4.0.0/dist/PNotifyBrightTheme.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.6/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
     <!-- Main JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- Plugin -->
+    <!-- Plugin JS-->
     <script type="text/javascript" src="<?= base_url('assets/js/addons/datatables.min.js') ?>"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/js/tail.select.js"></script>
-    <script src="https://unpkg.com/notie"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.6/dist/sweetalert2.all.min.js"></script>
+    <!-- <script src="https://unpkg.com/pnotify@4.0.0/dist/umd/PNotify.js"></script> -->
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", function() {
+            //! initTailSelect
             tail.select(".tail-select-multiple", {
                 search: true,
                 width: "100%",
@@ -46,7 +46,18 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            //! Login Form
+            //! sweetAlert
+            function sweetAlert(type, title, text, btn) {
+                Swal.fire({
+                    type: type,
+                    title: title,
+                    text: text,
+                    confirmButtonClass: btn,
+                    // footer: '<a href>Why do I have this issue?</a>',
+                    timer: 2000
+                })
+            }
+            //! LoginForm
             $("#form-login").submit(function(e) {
                 e.preventDefault();
                 var serializedData = $(this).serialize();
@@ -58,10 +69,10 @@
                     cache: false,
                     success: function(respone) {
                         if (respone == 1) {
-                            alert('Berhasil Login.. Mengarahkan');
+                            sweetAlert('success', 'Success...', 'Login processed..!!', 'btn-success');
                             window.location.href = "<?= site_url('') ?>";
                         } else {
-                            alert('User tidak ditemukan');
+                            sweetAlert('error', 'Oops...', 'Invalid Username or password..!!', 'btn-danger');
                         }
                     },
                 });
@@ -69,17 +80,11 @@
             $('#modalLogin').on('shown.bs.modal', function() {
                 $('input:visible:enabled:first', this).focus()
             })
-            //! Login Form
+            //! InputForm
             $("#form-input").submit(function(e) {
                 e.preventDefault();
-                // var serializedData = $(this).serialize();
-                // console.log(serializedData);
-                notie.alert({
-                    type: 'error', // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
-                    text: '<i class="fa fa-close"></i> Wrong Password..!!',
-                    stay: true,
-                    position: 'bottom' // optional, default = 'top', enum: ['top', 'bottom']
-                });
+                var serializedData = $(this).serialize();
+                console.log(serializedData);
                 // $.ajax({
                 //     type: "POST",
                 //     url: "<?= site_url('checkLogin') ?>",
