@@ -19,6 +19,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/css/default/tail.select-light.css" rel="stylesheet">
     <!-- <link href="https://unpkg.com/pnotify@4.0.0/dist/PNotifyBrightTheme.css" rel="stylesheet"> -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.6/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
     <!-- Main JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -84,22 +85,53 @@
             $("#form-input").submit(function(e) {
                 e.preventDefault();
                 var serializedData = $(this).serialize();
-                console.log(serializedData);
-                // $.ajax({
-                //     type: "POST",
-                //     url: "<?= site_url('checkLogin') ?>",
-                //     data: serializedData,
-                //     dataType: "JSON",
-                //     cache: false,
-                //     success: function(respone) {
-                //         if (respone == 1) {
-                //             alert('Berhasil Login.. Mengarahkan');
-                //             window.location.href = "<?= site_url('') ?>";
-                //         } else {
-                //             alert('User tidak ditemukan');
-                //         }
-                //     },
-                // });
+                    $status = '';
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn-success',
+                        cancelButton: 'btn-danger'
+                    },
+                })
+                $.post('<?= site_url('check_form_nosales') ?>', serializedData, function(respone) {
+                    if (respone == 1) {
+                        $status = 'Updated';
+                    } else {
+                        $status = 'Insert';
+                    }
+
+                    swalWithBootstrapButtons.fire({
+                        title: 'Are you sure ' + $status + ' ?',
+                        text: "Form request",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, ' + $status + ' it!',
+                        cancelButtonText: 'No, cancel!',
+                        animation: false,
+                        customClass: {
+                            popup: 'animated bounceInDown'
+                        },
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.value) {
+                            $.post('<?= site_url('insertUpdate_form_nosales') ?>', serializedData + "&status=" + $status, function(data) {
+                                console.log(data);
+                                swalWithBootstrapButtons.fire(
+                                    $status + '!',
+                                    'Your data has been ' + data + '',
+                                    'success'
+                                )
+                            });
+                        } else if (
+                            result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire(
+                                'Cancelled',
+                                'Your form request is safe :)',
+                                'error'
+                            )
+                        }
+                    });
+                });
             });
         });
     </script>
