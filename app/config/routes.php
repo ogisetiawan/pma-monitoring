@@ -18,3 +18,5 @@ $route['get_status_dots_sales/(:num)/(:any)/(:any)']         = 'sales_dailly/Sal
 
 $route['checkLogin']                                         = '_partials/PartialsController/checkLogin';
 $route['logout']                                             = '_partials/PartialsController/logout';
+$route['check_form_nosales']                                 = '_partials/PartialsController/check_form_nosales';
+$route['insertUpdate_form_nosales']                          = '_partials/PartialsController/insertUpdate_form_nosales';

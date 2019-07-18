@@ -6,6 +6,7 @@ class PartialsController extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		date_default_timezone_set("Asia/Bangkok");
 		$this->load->database();
 	}
 	public function app($data)
@@ -27,11 +28,12 @@ class PartialsController extends MY_Controller
 		$this->load->view('master', $data);
 	}
 
-	public function checkLogin(){
+	public function checkLogin()
+	{
 		$username = $this->input->post('username');
 		$password = $this->input->post('pass');
 		$respone = "";
-		if($username == 'admin' && $password == 'admin'){
+		if ($username == 'admin' && $password == 'admin') {
 			$session = array(
 				'username'   => $username,
 				'logged_monitoring' => TRUE,
@@ -41,35 +43,60 @@ class PartialsController extends MY_Controller
 		}
 		echo json_encode($respone);
 	}
-	public function logout(){
+	public function logout()
+	{
 		$this->session->sess_destroy();
 		redirect('', 'refresh');
 	}
-	public function form_nosales(){
-		$depo   = $this->input->post('lblDepo');
-		$reason = $this->input->post('lblReason');
-		$modul  = $this->input->post('lblModul');
-		$date   = $this->input->post('lblDate');
-
-		if($modul == 'LBP'){
+	private function form_(&$module_id, &$insertArray)
+	{
+		$depo    = $this->input->post('lblDepo');
+		$reason  = $this->input->post('lblReason');
+		$modul   = $this->input->post('lblModul');
+		$date    = $this->input->post('lblDate');
+		$newDate = date("dmY", strtotime($date));
+		if ($modul == 'LBP') {
 			$id = '01';
-		}else if($modul == 'SAPKASBANK'){
+		} else if ($modul == 'SAPKASBANK') {
 			$id = '02';
-		}else if($modul == 'SAPINV'){
+		} else if ($modul == 'SAPINV') {
 			$id = '03';
-		}else{
+		} else {
 			$id = '04';
 		}
-
 		$insertArray = array(
-			'module_id'                  => "$id-$date-$depo",
+			'module_id'                  => "$id-$newDate-$depo",
 			'module_name'                => $modul,
 			'module_site'                => $depo,
 			'module_date'                => $date,
 			'module_flag'                => $reason,
 			'module_timestamp'	         => date('Y-m-d H:i:s'),
-		);   
-		// $this->db->insert('rmodule_monitor',$insertArray);
-		echo json_encode($depo);
+		);
+		$module_id = $insertArray['module_id'];
+	}
+	public function check_form_nosales()
+	{
+		$this->form_($module_id, $insertArray);
+		$check = $this->db->query("SELECT * FROM rmodule_monitor WHERE module_id = '$module_id'");
+		if ($check->num_rows() > 0) {
+			$status = 1;
+		} else {
+			$status = 2;
+		}
+		echo json_encode($status);
+	}
+	public function insertUpdate_form_nosales()
+	{
+		$this->form_($module_id, $insertArray);
+		$status = $this->input->post('status');
+		if ($status == 'Updated') {
+			$this->db->where('module_id', $module_id);
+			$this->db->update('rmodule_monitor', $insertArray);
+			$respone = 'update';
+		} else {
+			$this->db->insert('rmodule_monitor', $insertArray);
+			$respone = 'insert';
+		}
+		echo json_encode($status);
 	}
 }
