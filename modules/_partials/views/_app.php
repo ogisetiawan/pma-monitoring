@@ -31,7 +31,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.6/dist/sweetalert2.all.min.js"></script>
     <!-- <script src="https://unpkg.com/pnotify@4.0.0/dist/umd/PNotify.js"></script> -->
     <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function() {
+        $(document).ready(function() {
             //! initTailSelect
             tail.select(".tail-select-multiple", {
                 search: true,
@@ -43,10 +43,6 @@
                 search: true,
                 width: "100%",
             });
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
             //! sweetAlert
             function sweetAlert(type, title, text, btn) {
                 Swal.fire({
@@ -54,7 +50,6 @@
                     title: title,
                     text: text,
                     confirmButtonClass: btn,
-                    // footer: '<a href>Why do I have this issue?</a>',
                     timer: 2000
                 })
             }
@@ -85,7 +80,7 @@
             $("#form-input").submit(function(e) {
                 e.preventDefault();
                 var serializedData = $(this).serialize();
-                    $status = '';
+                $status = '';
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
                         confirmButton: 'btn-success',

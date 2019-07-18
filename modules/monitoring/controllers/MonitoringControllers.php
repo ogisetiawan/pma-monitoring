@@ -146,10 +146,10 @@ class MonitoringControllers extends MY_Controller
 
 	public function test()
 	{
-		$tomorrow = new DateTime('yesterday');
-		$tomorrow = $tomorrow->format('d-m-Y');
+		$tomorrow = new DateTime('2019-01-11');
+		$tomorrow = $tomorrow->format('dmY');
 		$yesteday = date('d-m-Y',strtotime("-1 days"));
-		echo $yesteday;
+		echo $tomorrow;
 		die();
 		$x = "00";
 		for ($i = 1; $i < 31; $i++) {
