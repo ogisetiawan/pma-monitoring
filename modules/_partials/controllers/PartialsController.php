@@ -16,7 +16,7 @@ class PartialsController extends MY_Controller
 	}
 	public function header()
 	{
-		$data['get_depo']   = $this->db->query("SELECT KD_DEPO,NM_DEPO FROM rdepo ORDER BY KD_DEPO")->result();
+		$data['get_depo'] = $this->db->query("SELECT KD_DEPO,NM_DEPO FROM rdepo where status = 'A' and status_system = 'SCYLLA' and STA01 = 'PMA' ORDER BY KD_DEPO ASC")->result();
 		$this->load->view('_header', $data);
 	}
 	public function footer()
