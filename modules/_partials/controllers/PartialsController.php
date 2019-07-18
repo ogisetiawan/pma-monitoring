@@ -48,7 +48,7 @@ class PartialsController extends MY_Controller
 		$this->session->sess_destroy();
 		redirect('', 'refresh');
 	}
-	private function form_(&$module_id, &$insertArray)
+	private function form_(&$module_id, &$module_name = NULL, &$insertArray)
 	{
 		$depo    = $this->input->post('lblDepo');
 		$reason  = $this->input->post('lblReason');
@@ -73,11 +73,12 @@ class PartialsController extends MY_Controller
 			'module_timestamp'	         => date('Y-m-d H:i:s'),
 		);
 		$module_id = $insertArray['module_id'];
+		$module_name = $insertArray['module_name'];
 	}
 	public function check_form_nosales()
 	{
-		$this->form_($module_id, $insertArray);
-		$check = $this->db->query("SELECT * FROM rmodule_monitor WHERE module_id = '$module_id'");
+		$this->form_($module_id, $module_name, $insertArray);
+		$check = $this->db->query("SELECT * FROM rmodule_monitor WHERE module_id = '$module_id' AND module_name = '$module_name' ");
 		if ($check->num_rows() > 0) {
 			$status = 1;
 		} else {
@@ -87,7 +88,7 @@ class PartialsController extends MY_Controller
 	}
 	public function insertUpdate_form_nosales()
 	{
-		$this->form_($module_id, $insertArray);
+		$this->form_($module_id, $module_name, $insertArray);
 		$status = $this->input->post('status');
 		if ($status == 'Updated') {
 			$this->db->where('module_id', $module_id);

@@ -96,7 +96,7 @@
 
                     swalWithBootstrapButtons.fire({
                         title: 'Are you sure ' + $status + ' ?',
-                        text: "Form request",
+                        text: "Form request..!!",
                         type: 'warning',
                         showCancelButton: true,
                         confirmButtonText: 'Yes, ' + $status + ' it!',
