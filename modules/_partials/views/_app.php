@@ -37,21 +37,22 @@
     <script type="text/javascript">
         $(document).ready(function() {
             console.log($.browser);
-            $.amaran({
-                'theme': 'awesome error',
-                'content': {
-                    title: 'Browser not supported!',
-                    message: 'Use Google Chrome Browser',
-                    info: 'Your browser '+$.browser.name+' '+$.browser.version,
-                    icon: 'fa fa-ban'
-                },
-                'position': 'bottom left',
-                'sticky': true,
-                'closeOnClick': true,
-                'cssanimationIn'    :'flipInX',
-                'cssanimationOut'   :'flipOutX'
-            });
-
+            if ($.browser.name !== 'chrome') {
+                $.amaran({
+                    'theme': 'awesome error',
+                    'content': {
+                        title: 'Browser not supported!',
+                        message: 'Use Google Chrome Browser',
+                        info: 'Your browser ' + $.browser.name + ' ' + $.browser.version,
+                        icon: 'fa fa-ban'
+                    },
+                    'position': 'bottom left',
+                    'sticky': true,
+                    'closeOnClick': true,
+                    'cssanimationIn': 'flipInX',
+                    'cssanimationOut': 'flipOutX'
+                });
+            }
             //! initTailSelect
             tail.select(".tail-select-multiple", {
                 search: true,
