@@ -36,8 +36,8 @@
             tail.select(".tail-select-multiple", {
                 search: true,
                 width: "100%",
-                multiLimit: 10,
-                multiple: true,
+                // multiLimit: 10,
+                // multiple: true,
             });
             tail.select(".tail-select-single", {
                 search: true,
