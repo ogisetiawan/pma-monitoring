@@ -48,7 +48,8 @@
                 'position': 'bottom left',
                 'sticky': true,
                 'closeOnClick': true,
-                'outEffect': 'slideBottom',
+                'cssanimationIn'    :'flipInX',
+                'cssanimationOut'   :'flipOutX'
             });
 
             //! initTailSelect
