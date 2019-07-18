@@ -20,6 +20,8 @@
     <!-- <link href="https://unpkg.com/pnotify@4.0.0/dist/PNotifyBrightTheme.css" rel="stylesheet"> -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.6/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/amaranjs@0.5.5/dist/css/amaran.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/amaranjs@0.5.5/dist/css/animate.min.css" rel="stylesheet">
     <link href="<?= base_url('assets/css/style.css') ?>" rel="stylesheet">
     <!-- Main JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -29,9 +31,26 @@
     <script type="text/javascript" src="<?= base_url('assets/js/addons/datatables.min.js') ?>"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tail.select@0.5.14/js/tail.select.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8.13.6/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-browser/0.1.0/jquery.browser.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amaranjs@0.5.5/dist/js/jquery.amaran.min.js"></script>
     <!-- <script src="https://unpkg.com/pnotify@4.0.0/dist/umd/PNotify.js"></script> -->
     <script type="text/javascript">
         $(document).ready(function() {
+            console.log($.browser);
+            $.amaran({
+                'theme': 'awesome error',
+                'content': {
+                    title: 'Browser not supported!',
+                    message: 'Use Google Chrome Browser',
+                    info: 'Your browser '+$.browser.name+' '+$.browser.version,
+                    icon: 'fa fa-ban'
+                },
+                'position': 'bottom left',
+                'sticky': true,
+                'closeOnClick': true,
+                'outEffect': 'slideBottom',
+            });
+
             //! initTailSelect
             tail.select(".tail-select-multiple", {
                 search: true,
