@@ -33,7 +33,7 @@ class PartialsController extends MY_Controller
 		$username = $this->input->post('username');
 		$password = $this->input->post('pass');
 		$respone = "";
-		if ($username == 'admin' && $password == 'admin') {
+		if ($username == 'admin' && $password == 'pma123') {
 			$session = array(
 				'username'   => $username,
 				'logged_monitoring' => TRUE,
