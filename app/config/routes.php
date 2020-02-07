@@ -9,7 +9,6 @@ $route['translate_uri_dashes']                               = FALSE;
 $route['table_monitoring']                                   = 'monitoring/MonitoringControllers/table_monitoring';
 $route['search_region']                                      = 'monitoring/MonitoringControllers/search_region';
 $route['get_status_dots/(:num)/(:any)/(:any)/(:any)']        = 'monitoring/MonitoringControllers/get_status_dots';
-$route['test']                                               = 'monitoring/MonitoringControllers/test';
 
 // ! SALES_DAILLY
 $route['sales_dailly']                                       = 'sales_dailly/SalesDaillyControllers';
@@ -20,3 +19,7 @@ $route['checkLogin']                                         = '_partials/Partia
 $route['logout']                                             = '_partials/PartialsController/logout';
 $route['check_form_nosales']                                 = '_partials/PartialsController/check_form_nosales';
 $route['insertUpdate_form_nosales']                          = '_partials/PartialsController/insertUpdate_form_nosales';
+
+// ! REST SERVER
+$route['middleware/os/client-rest/get-all'] = '_rest_server/RestClientController/index_get';
+$route['middleware/os/client-rest/post']    = '_rest_server/RestClientController/index_post';
