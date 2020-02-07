@@ -38,8 +38,7 @@ table.table-hover tbody tr:hover {
   cursor: pointer;
   background: none;
   transition: 0.3s;
-  box-shadow: 0px -15px 15px -15px rgba(0, 0, 0, 0.2) inset,
-    0px 15px 15px -15px rgba(0, 0, 0, 0.2) inset;
+  box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
 }
 
 .custom-ogi {
@@ -88,7 +87,7 @@ table.table-hover tbody tr:hover {
   left: 50%;
 }
 
-.spinner > div {
+.spinner>div {
   background-color: #ffffff;
   height: 100%;
   width: 6px;
@@ -119,6 +118,7 @@ table.table-hover tbody tr:hover {
 }
 
 @-webkit-keyframes sk-stretchdelay {
+
   0%,
   40%,
   100% {
@@ -131,6 +131,7 @@ table.table-hover tbody tr:hover {
 }
 
 @keyframes sk-stretchdelay {
+
   0%,
   40%,
   100% {
@@ -154,35 +155,34 @@ table.table-hover tbody tr:hover {
   background-color: #cc240f;
 }
 
-div.dataTables_wrapper
-  div.dataTables_paginate
-  ul.pagination
-  .page-item.active
-  .page-link:focus {
+div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
   background-color: #cc240f;
 }
 
 .pagination .page-item.active .page-link {
   background-color: #d02813;
 }
+
 .tail-select .select-dropdown {
   position: relative;
 }
+
 @media (max-width: 767px) {
   .navbar-nav .dropdown-menu {
-      position: static !important;
-      float: none;
-      background: transparent;
-      border-color: transparent;
+    position: static !important;
+    float: none;
+    background: transparent;
+    border-color: transparent;
   }
 
   .navbar .dropdown-menu a {
-      padding: 0;
-      padding-left: 30px;
-      color: #fff;
-      font-size: 12px;
-      -webkit-transition: .35s;
-      -o-transition: .35s;
-      transition: .35s;
+    padding: 0;
+    padding-left: 30px;
+    color: #fff;
+    font-size: 12px;
+    -webkit-transition: .35s;
+    -o-transition: .35s;
+    transition: .35s;
   }
+
 }
