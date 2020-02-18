@@ -137,4 +137,42 @@ class SalesDaillyControllers extends MY_Controller
 		FROM Sum_SLS_BYDEPO_DAILY where DATE_FORMAT(INV_DATE, '%Y %m') =DATE_FORMAT('" . $tahun . "-" . $bulan . "-" . $tgl . "', '%Y %m')")->result();
 		echo json_encode($query);
 	}
+	public function test(){
+		$data = array(
+            'KD_DEPO'    => 'KD_DEPO',
+            'INV_DATE'   => 'INV_DATE',
+            'SLSNO'      => 'SLSNO',
+            'OPRTYPE'    => 'OPRTYPE',
+            'KG'         => 'KG',
+            'TYPEOUT'    => 'TYPEOUT',
+            'CUSTNO'     => 'CUSTNO',
+            'CUSTNAME'   => 'CUSTNAME',
+            'GRUP'       => 'GRUP',
+            'BRUTAMOUNT' => 'BRUTAMOUNT',
+            'CASHDISCT'  => 'CASHDISCT',
+            'PROAMOUNT'  => 'PROAMOUNT',
+            'DISC1'      => 'DISC1',
+            'DISC2'      => 'DISC2',
+            'PPN'        => 'PPN',
+            'PCODE'      => 'PCODE',
+            'QTY'        => 'QTY',
+            'AMOUNT'     => 'AMOUNT',
+            'NAMAPC'     => 'NAMAPC',
+            'SATUAN'     => 'SATUAN',
+            'CONVUNIT3'  => 'CONVUNIT3',
+            'CONVUNIT2'  => 'CONVUNIT2',
+            'NAMAFILE'   => 'NAMAFILE',
+            'AREA'       => 'AREA',
+            'KDRTR'      => 'KDRTR',
+            'NMRTR'      => 'NMRTR',
+            'TYPERTR'    => 'TYPERTR',
+            'TRANSTYPE'  => 'TRANSTYPE',
+            'ORDERNO'    => 'ORDERNO',
+            'SLSNAME'    => 'SLSNAME',
+            'TGL_TEMPO'  => 'TGL_TEMPO',
+		);
+		echo "<pre>";
+		echo json_encode($data);
+		echo "</pre>";
+	}
 }

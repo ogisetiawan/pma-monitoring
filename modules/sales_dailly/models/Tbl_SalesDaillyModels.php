@@ -129,7 +129,7 @@ class Tbl_SalesDaillyModels extends CI_Model
             $this->db->select("$select_table_coloumn")
                 ->from($this->table)
                 ->join("(SELECT a.KD_DEPO as kode_site, a.NM_DEPO, (PENJ-POT_PENJ) AS sales, (RETUR+POT_RET) AS retur, DAY(a.INV_DATE) AS tgl, MONTH(a.INV_DATE) AS bulan, YEAR(a.INV_DATE) AS tahun 
-                    FROM Sum_SLS_BYDEPO_DAILY AS a
+                    FROM sum_sls_bydepo_daily AS a
                     WHERE MONTH(a.INV_DATE) = '$bln' AND YEAR(a.INV_DATE) = '$thn') AS a", "on a.kode_site = d.KD_DEPO", "LEFT")
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.status", "A")
@@ -142,7 +142,7 @@ class Tbl_SalesDaillyModels extends CI_Model
             $this->db->select("$select_table_coloumn")
                 ->from($this->table)
                 ->join("(SELECT a.KD_DEPO as kode_site, a.NM_DEPO, (PENJ-POT_PENJ) AS sales, (RETUR+POT_RET) AS retur, DAY(a.INV_DATE) AS tgl, MONTH(a.INV_DATE) AS bulan, YEAR(a.INV_DATE) AS tahun 
-                    FROM Sum_SLS_BYDEPO_DAILY AS a
+                    FROM sum_sls_bydepo_daily AS a
                     WHERE MONTH(a.INV_DATE) = '$bln' AND YEAR(a.INV_DATE) = '$thn') AS a", "on a.kode_site = d.KD_DEPO", "LEFT")
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.KD_GREG", "$grup_region")
@@ -155,7 +155,7 @@ class Tbl_SalesDaillyModels extends CI_Model
             $this->db->select("$select_table_coloumn")
                 ->from($this->table)
                 ->join("(SELECT a.KD_DEPO as kode_site, a.NM_DEPO, (PENJ-POT_PENJ) AS sales, (RETUR+POT_RET) AS retur, DAY(a.INV_DATE) AS tgl, MONTH(a.INV_DATE) AS bulan, YEAR(a.INV_DATE) AS tahun 
-                    FROM Sum_SLS_BYDEPO_DAILY AS a
+                    FROM sum_sls_bydepo_daily AS a
                     WHERE MONTH(a.INV_DATE) = '$bln' AND YEAR(a.INV_DATE) = '$thn') AS a", "on a.kode_site = d.KD_DEPO", "LEFT")
                 ->join("rops_date as odate", "on odate.depo = d.KD_DEPO", "LEFT")
                 ->where("d.KD_REG", "$region")

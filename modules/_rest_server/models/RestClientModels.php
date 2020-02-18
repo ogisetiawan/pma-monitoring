@@ -20,7 +20,6 @@ class RestClientModels extends CI_Model
     }
     public function get_all($table)
     {
-        // return $this->db->get($table)->result();
         return $this->db->get($table);
     }
     public function update($id, $data, $table)
